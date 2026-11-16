@@ -1,7 +1,7 @@
 // Cloudflare Workers, static assets only (plans/00 Deploy). Build first: npm run build.
 {
   "$schema": "https://unpkg.com/wrangler/config-schema.json",
-  "name": "centro-cambiario-cashier-webapp",
+  "name": "centro-cambario-demo-shell-cashier",
   "compatibility_date": "2026-11-01",
   "assets": {
     "directory": "./dist/cashier-webapp/browser",
