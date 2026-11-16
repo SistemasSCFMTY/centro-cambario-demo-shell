@@ -1,0 +1,27 @@
+<button
+  type="button"
+  [hlmDropdownMenuTrigger]="menuModo"
+  align="end"
+  class="inline-flex size-11 items-center justify-center rounded-full text-chrome-muted -outline-offset-2 hover:bg-chrome-hover hover:text-chrome-text"
+>
+  <ng-icon [name]="actual().icono" size="18" aria-hidden="true" />
+  <span class="sr-only">Tema: {{ actual().etiqueta }}</span>
+</button>
+
+<ng-template #menuModo>
+  <hlm-dropdown-menu class="w-44">
+    <hlm-dropdown-menu-label>Tema</hlm-dropdown-menu-label>
+    @for (opcion of opciones; track opcion.valor) {
+      <button
+        hlmDropdownMenuRadio
+        [checked]="modo() === opcion.valor"
+        [keepOpen]="false"
+        (triggered)="establecer(opcion.valor)"
+      >
+        <ng-icon [name]="opcion.icono" size="16" aria-hidden="true" />
+        {{ opcion.etiqueta }}
+        <hlm-dropdown-menu-radio-indicator />
+      </button>
+    }
+  </hlm-dropdown-menu>
+</ng-template>

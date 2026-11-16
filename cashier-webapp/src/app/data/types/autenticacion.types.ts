@@ -1,0 +1,2 @@
+export type CodigoErrorAutenticacion =
+  'CREDENCIALES_INVALIDAS' | 'CODIGO_INVALIDO' | 'RETO_EXPIRADO' | 'REENVIO_ANTICIPADO';

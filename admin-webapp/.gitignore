@@ -45,3 +45,6 @@ Thumbs.db
 
 # Nx cache (spartan-ng CLI)
 /.nx
+
+# Cloudflare Wrangler
+/.wrangler

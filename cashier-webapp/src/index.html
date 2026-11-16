@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="es-MX">
+  <head>
+    <meta charset="utf-8" />
+    <title>Ventanilla</title>
+    <base href="/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <script>
+      // Applies the stored mode before first paint (TemaState takes over after bootstrap).
+      // Same key as CLAVE_ALMACEN_MODO; the NGXS storage plugin stores it as JSON.
+      (function () {
+        try {
+          var modo = JSON.parse(localStorage.getItem('tema.modo') || '"sistema"');
+          var oscuro =
+            modo === 'oscuro' ||
+            (modo === 'sistema' && matchMedia('(prefers-color-scheme: dark)').matches);
+          if (oscuro) document.documentElement.classList.add('dark');
+        } catch (e) {}
+      })();
+    </script>
+  </head>
+  <body>
+    <app-root></app-root>
+  </body>
+</html>

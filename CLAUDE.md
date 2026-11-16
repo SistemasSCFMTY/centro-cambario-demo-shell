@@ -1,6 +1,10 @@
 # Centro cambiario: demo shell
 
-Whitelabel demo for Mexican centros cambiarios (currency exchange houses). The only app so far is `admin-webapp/`, the admin console. A cashier app comes later.
+Whitelabel demo for Mexican centros cambiarios (currency exchange houses). Two Angular apps, with **no shared code** (each owns its UI kit, theme pipeline and data layer):
+- `admin-webapp/`: the admin console. Neuro sidebar plus silver pane.
+- `cashier-webapp/`: the cashier app (ventanilla). Neuro top bar plus a full-width silver pane, with touch-sized controls (44 px).
+
+A change that applies to both apps is made in both.
 
 ## Who decides
 - **The tech lead decides project direction.** The product manager builds features under the lead's guidance, and the lead polishes them afterwards.
@@ -31,12 +35,15 @@ Items marked **OPEN** in a plan are waiting on the lead. Don't resolve them on y
 - Path aliases: `@data/*`, `@components/*`, `@interceptors/*`, `@layout/*`, `@modules/*`, `@services/*`, `@store/*`, `@utils/*`.
 
 ```bash
-cd admin-webapp
+cd admin-webapp    # or cashier-webapp
 npm install
-npm start          # dev server, http://localhost:4200
+npm start          # dev server: admin http://localhost:4200, cashier http://localhost:4201
 npm run build      # production build (a 500 kB budget warning is known)
 npm test           # unit tests (Vitest)
+npm run deploy     # build + wrangler deploy (Cloudflare Workers, static assets)
 ```
+
+Each app has a `wrangler.jsonc`: it serves `dist/<app>/browser` and falls back to `index.html` for deep links. With Cloudflare's Git integration, set the root directory to the app folder, the build command to `npm run build`, and the deploy command to `npx wrangler deploy`.
 
 Before saying something is done, run `npm run build` and `npm test`. Check the screen in the browser in both light and dark mode.
 
@@ -45,7 +52,10 @@ Before saying something is done, run `npm run build` and `npm test`. Check the s
 - **Persistence:** NGXS plus localStorage only. No IndexedDB, no SQLite, no other store.
 - **No route guards** until Supabase is set up.
 - **Devices:** the admin console is desktop only, at least 1366×768. The cashier app will be desktop plus tablet. No phone layouts, and no phone screenshots.
-- **Test logins** (superadmin): `eduardo@testing.com` or `fernando@testing.com`, password `Password123#!`, verification code `0000`. There are no cashier accounts yet.
+- **Test logins:** the password is always `Password123#!` and the verification code is always `0000`.
+  - admin-webapp: `eduardo@testing.com` or `fernando@testing.com` (SUPERADMIN).
+  - cashier-webapp: `cajero@testing.com` (CAJERO).
+  - Each app accepts only its own accounts.
 
 ## Code rules (summary; details in `plans/05-reglas-onp.md`)
 - Services only wrap HTTP. State and side effects live in NGXS states. Components read with `select()` and write with `dispatch`.

@@ -13,7 +13,7 @@ This repo is a clean rebuild ("facewash") of `../../demos/centro-cambiario-demo/
 | Backend | `backend-api/`: **Hono on Cloudflare Workers + Supabase**. It holds **branding, all domain data, users and OTP (including resend)**. Both apps call it. |
 | Auth | **Our own auth** in `backend-api` (own users table + OTP, **not** Supabase Auth). **No login/OTP guards** in the webapps until the Supabase project is provided. Login and OTP screens are built, but routes stay open. |
 | Rendering | **Pure CSR.** Static Angular builds, which is fine for a demo. No SSR/Express. Branding loads from the API at startup. |
-| Deploy | **Cloudflare Workers** for the API and both webapps (static assets). Testing and demo instances only. |
+| Deploy | **Cloudflare Workers** for the API and both webapps (static assets). Testing and demo instances only. Each webapp has a `wrangler.jsonc` (SPA fallback to `index.html`) and `npm run deploy` (lead, 2026-11-16). |
 | State | **NGXS**, onp style: `store/<modulo>/{actions,state,types}`, storage plugin for persistence, and components use `select()` / `dispatch()`. |
 | UI kit | **Spartan UI** (`@spartan-ng/brain` 1.9.0, Angular 22 OK). Helm components are generated into each app. |
 | Charts | **ECharts** through an Angular wrapper. |
@@ -25,7 +25,7 @@ This repo is a clean rebuild ("facewash") of `../../demos/centro-cambiario-demo/
 | onp rules | (lead, 2026-11-16) onp admin-webapp's code rules plus its semantic tokens, flat empty state and one-panel-per-page are adopted; PrimeNG, `@lucide/angular`, warm surfaces and its fonts are not. See [`05-reglas-onp.md`](05-reglas-onp.md). |
 | Roles (seed) | **SUPERADMIN** (all privileges) and **CAJERO**. No cajero test account for now. **Interim access rule:** OFICIAL_CUMPLIMIENTO and ADMIN see the whole admin app; CAJERO is limited to the cashier app. The full role mapping is still OPEN (`03` O-0.1). |
 | Copy terms | "**Usuario**" means internal staff and "**Cliente**" means customers, everywhere. |
-| Test users | `eduardo@testing.com` and `fernando@testing.com`, SUPERADMIN, password `Password123#!`, OTP always `0000`. |
+| Test users | `eduardo@testing.com` and `fernando@testing.com`, SUPERADMIN, admin-webapp only. `cajero@testing.com`, CAJERO, cashier-webapp only (lead, 2026-11-16). Password `Password123#!`, OTP always `0000`. |
 | Currencies | **MXN is the base.** USD, EUR, JPY, CNY (renminbi) and KRW are quoted against it. Keys are **ISO 4217** (`03` D-18). |
 | First build | **The admin-webapp shell for the superadmin.** |
 | Phase 1 data | **Mock data for the dashboard** (typed fixtures behind the service layer). Phase 2 replaces them with API calls. |
@@ -66,6 +66,8 @@ This repo is a clean rebuild ("facewash") of `../../demos/centro-cambiario-demo/
 | apariencia | Branding editor: name, logo, favicon, primary + accent with a live preview |
 
 ### cashier-webapp
+**Shell** (lead, 2026-11-16): a **Neuro top bar** instead of the sidebar: brand, the four modules as tabs, the theme menu and the user menu. The silver/dark pane takes the full width below it. Every control on the bar is 44 px (touch). Below `md`, tab labels hide and the icons stay.
+
 | Module | Screens |
 |---|---|
 | auth | Login, OTP (with resend), logout |
@@ -116,6 +118,11 @@ This repo is a clean rebuild ("facewash") of `../../demos/centro-cambiario-demo/
   - one-screen shell (only the content pane scrolls), chrome glow removed, flat empty states, one panel per page
   - services are thin HTTP; Phase 1 answers them from `interceptors/simulacion-api/`
   - constants, interfaces and state defaults moved to `data/`; member order fixed; no arbitrary Tailwind values
+- **2026-11-16, cashier-webapp scaffold:**
+  - copied from admin-webapp's foundation (tooling, tokens, Zain, Spartan helm, NGXS, theme pipeline, simulated API, login + OTP); admin modules removed
+  - Neuro top-bar shell, placeholder pages for inicio, operaciones, caja and clientes; dev server on port 4201
+  - test cajero `cajero@testing.com`; superadmins are refused here
+  - `wrangler.jsonc` + `npm run deploy` in both webapps
 - **2026-11-16, sidebar pass (impeccable distill):**
   - nav groups (Operación, Control, Administración) collapse in place; the group holding the current page opens on its own; closed groups are `inert`
   - theme switch moved out of the sidebar into a dropdown in the pane's top bar; greeting and date removed; brand on one line

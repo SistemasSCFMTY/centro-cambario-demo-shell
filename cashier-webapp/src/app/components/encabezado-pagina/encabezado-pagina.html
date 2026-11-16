@@ -1,0 +1,11 @@
+<header class="flex flex-wrap items-end justify-between gap-4 px-8 pt-8 pb-6">
+  <div class="min-w-0">
+    <h1>{{ titulo() }}</h1>
+    @if (descripcion()) {
+      <p class="max-w-prose text-callout text-ink-muted">{{ descripcion() }}</p>
+    }
+  </div>
+  <div class="flex flex-wrap items-center gap-2 empty:hidden">
+    <ng-content />
+  </div>
+</header>

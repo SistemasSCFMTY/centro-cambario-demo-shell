@@ -1,0 +1,82 @@
+@if (reto(); as reto) {
+  <article class="panel animate-page-in p-6 sm:p-8">
+    <a routerLink="/acceso" (click)="cancelar()" class="link-action">
+      <ng-icon name="lucideArrowLeft" size="16" aria-hidden="true" />
+      Usar otra cuenta
+    </a>
+
+    <h1 class="mt-5">Verifique su identidad</h1>
+    <p class="mt-1 text-callout text-ink-muted">
+      Enviamos un código de {{ reto.longitudCodigo }} dígitos a
+      <span class="font-bold text-ink">{{ reto.correoEnmascarado }}</span>.
+    </p>
+
+    <form
+      [formGroup]="formulario"
+      (ngSubmit)="verificar()"
+      novalidate
+      class="mt-7 flex flex-col gap-5"
+    >
+      <div class="flex flex-col gap-2.5">
+        <label for="codigo" class="text-subheadline font-bold">Código de verificación</label>
+        <hlm-input-otp
+          inputId="codigo"
+          formControlName="codigo"
+          [length]="reto.longitudCodigo"
+          [autofocus]="true"
+          (completed)="verificar()"
+        >
+          <div hlmInputOtpGroup>
+            @for (i of ranuras(); track i) {
+              <hlm-input-otp-slot [index]="i" class="size-14 bg-panel text-title-2" />
+            }
+          </div>
+        </hlm-input-otp>
+      </div>
+
+      @if (error(); as mensaje) {
+        <div class="callout callout-danger" role="alert">{{ mensaje }}</div>
+      }
+
+      <button
+        hlmBtn
+        type="submit"
+        size="lg"
+        class="h-11 w-full text-body font-bold"
+        [disabled]="enviando()"
+      >
+        @if (enviando()) {
+          <hlm-spinner class="size-4" aria-hidden="true" />
+          Verificando…
+        } @else {
+          Verificar
+        }
+      </button>
+    </form>
+
+    <p class="mt-5 text-subheadline text-ink-muted" aria-live="polite">
+      @if (segundosParaReenviar() > 0) {
+        Puede pedir otro código en
+        <span class="font-data font-bold text-ink">{{ cuentaRegresiva() }}</span>.
+      } @else {
+        ¿No le llegó?
+        <button
+          type="button"
+          class="link-action align-baseline"
+          [disabled]="reenviando()"
+          (click)="reenviar()"
+        >
+          {{ reenviando() ? 'Enviando…' : 'Reenviar código' }}
+        </button>
+      }
+    </p>
+  </article>
+} @else {
+  <article class="panel animate-page-in p-6 sm:p-8">
+    <h1>No hay una verificación en curso</h1>
+    <p class="mt-1 text-callout text-ink-muted">Inicie sesión para recibir un código.</p>
+    <a hlmBtn routerLink="/acceso" size="lg" class="mt-6 h-11 w-full text-body font-bold"
+      >Ir a iniciar sesión</a
+    >
+  </article>
+}

@@ -1,0 +1,72 @@
+<article class="panel animate-page-in p-6 sm:p-8">
+  <h1>Iniciar sesión</h1>
+  <p class="mt-1 text-callout text-ink-muted">Entre con su correo y contraseña de usuario.</p>
+
+  <form [formGroup]="formulario" (ngSubmit)="enviar()" novalidate class="mt-7 flex flex-col gap-5">
+    @if (error(); as mensaje) {
+      <div class="callout callout-danger" role="alert">{{ mensaje }}</div>
+    }
+
+    <div hlmField>
+      <label hlmFieldLabel for="correo">Correo electrónico</label>
+      <input
+        hlmInput
+        id="correo"
+        type="email"
+        formControlName="correo"
+        autocomplete="username"
+        inputmode="email"
+        spellcheck="false"
+        class="h-11 bg-panel text-body"
+      />
+      <hlm-field-error validator="required">Escriba su correo electrónico.</hlm-field-error>
+      <hlm-field-error validator="email">Revise el formato del correo.</hlm-field-error>
+    </div>
+
+    <div hlmField>
+      <label hlmFieldLabel for="contrasena">Contraseña</label>
+      <div class="relative">
+        <input
+          hlmInput
+          id="contrasena"
+          [type]="mostrarContrasena() ? 'text' : 'password'"
+          formControlName="contrasena"
+          autocomplete="current-password"
+          class="h-11 w-full bg-panel pe-11 text-body"
+        />
+        <button
+          type="button"
+          hlmBtn
+          variant="ghost"
+          size="icon-sm"
+          class="absolute end-1.5 top-1/2 -translate-y-1/2 text-ink-muted"
+          [attr.aria-pressed]="mostrarContrasena()"
+          (click)="alternarContrasena()"
+        >
+          <ng-icon
+            [name]="mostrarContrasena() ? 'lucideEyeOff' : 'lucideEye'"
+            size="16"
+            aria-hidden="true"
+          />
+          <span class="sr-only">Mostrar contraseña</span>
+        </button>
+      </div>
+      <hlm-field-error validator="required">Escriba su contraseña.</hlm-field-error>
+    </div>
+
+    <button
+      hlmBtn
+      type="submit"
+      size="lg"
+      class="mt-1 h-11 w-full text-body font-bold"
+      [disabled]="enviando()"
+    >
+      @if (enviando()) {
+        <hlm-spinner class="size-4" aria-hidden="true" />
+        Verificando…
+      } @else {
+        Continuar
+      }
+    </button>
+  </form>
+</article>

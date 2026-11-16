@@ -1,0 +1,26 @@
+<a
+  href="#contenido"
+  class="sr-only z-50 rounded-full bg-primary px-4 py-2 font-bold text-primary-foreground focus:not-sr-only focus:fixed focus:top-4 focus:left-4"
+>
+  Saltar al contenido
+</a>
+
+<div class="flex h-dvh flex-col gap-2.5 overflow-hidden p-2.5 sm:gap-3 sm:p-3 lg:gap-4 lg:p-4">
+  <header class="dark shrink-0">
+    <app-barra-superior />
+  </header>
+
+  <!-- The pane stays put (its silver and grain don't scroll); only the content inside it scrolls. -->
+  <main class="panel-principal flex min-h-0 min-w-0 flex-1 flex-col overflow-hidden rounded-2xl">
+    <div
+      #contenido
+      id="contenido"
+      tabindex="-1"
+      class="scrollbar-thin min-h-0 flex-1 overflow-y-auto outline-none"
+    >
+      <div class="p-4 sm:p-6">
+        <router-outlet />
+      </div>
+    </div>
+  </main>
+</div>
