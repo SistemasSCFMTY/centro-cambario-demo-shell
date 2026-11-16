@@ -1,0 +1,55 @@
+{
+  "fuente": {
+    "organismo": "Comisión Nacional Bancaria y de Valores (CNBV), por cuenta de la UIF/SHCP",
+    "documento": "Catálogos para reportes PLD/FT de centros cambiarios: archivo \"CATALOGOS RIPS F41.xlsx\", hoja \"INSTRUMENTO_MONETARIO\"",
+    "url": "https://www.cnbv.gob.mx/PrevencionDeLavadoDeDinero/Documents/CATALOGO_CENTROSCAMBIARIOS_2019.zip",
+    "version": "Catálogos centros cambiarios 2019 (ZIP Last-Modified 2019-07-15; vigente en la página de la CNBV al 2026-11-13)",
+    "consultado": "2026-11-13",
+    "paginaPublicacion": "https://www.gob.mx/cnbv/acciones-y-programas/disposiciones-legales-centros-cambiarios",
+    "reporte": "Resolución por la que se expide el formato oficial para el reporte de operaciones relevantes, inusuales y preocupantes (DOF 14-12-2004; reformas DOF 18-05-2005, 25-10-2010, 08-06-2012, 01-08-2013) (columna 9 INSTRUMENTO MONETARIO)",
+    "licencia": "No indicada en los archivos ni en la página de descarga",
+    "notas": "Se eliminaron solo espacios al inicio/fin de clave y descripción; el resto es literal (incluidos errores tipográficos del original)."
+  },
+  "registros": [
+    {
+      "clave": "01",
+      "descripcion": "EFECTIVO"
+    },
+    {
+      "clave": "02",
+      "descripcion": "DOCUMENTOS O VALORES"
+    },
+    {
+      "clave": "03",
+      "descripcion": "TRANSFERENCIA"
+    },
+    {
+      "clave": "04",
+      "descripcion": "CHEQUES DE VIAJERO"
+    },
+    {
+      "clave": "05",
+      "descripcion": "ORO O PLATINO AMONEDADOS"
+    },
+    {
+      "clave": "06",
+      "descripcion": "PLATA AMONEDADA"
+    },
+    {
+      "clave": "07",
+      "descripcion": "DIVISAS"
+    },
+    {
+      "clave": "08",
+      "descripcion": "DERECHOS"
+    },
+    {
+      "clave": "09",
+      "descripcion": "BIENES O MERCANCÍAS"
+    },
+    {
+      "clave": "00",
+      "descripcion": "SE DESCONOCE (TENTATIVA)"
+    }
+  ]
+}

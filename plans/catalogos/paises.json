@@ -1,0 +1,1527 @@
+{
+  "fuente": {
+    "organismo": "Comisión Nacional Bancaria y de Valores (CNBV), por cuenta de la UIF/SHCP",
+    "documento": "Catálogos para reportes PLD/FT de centros cambiarios: archivo \"CATALOGOS RIPS F41.xlsx + CATALOGOS FDE-FD1 (Dвlares Efectivo).xlsx\", hoja \"PAIS\"",
+    "url": "https://www.cnbv.gob.mx/PrevencionDeLavadoDeDinero/Documents/CATALOGO_CENTROSCAMBIARIOS_2019.zip",
+    "version": "Catálogos centros cambiarios 2019 (ZIP Last-Modified 2019-07-15; vigente en la página de la CNBV al 2026-11-13)",
+    "consultado": "2026-11-13",
+    "paginaPublicacion": "https://www.gob.mx/cnbv/acciones-y-programas/disposiciones-legales-centros-cambiarios",
+    "reporte": "Resolución por la que se expide el formato oficial para el reporte de operaciones relevantes, inusuales y preocupantes (DOF 14-12-2004; reformas DOF 18-05-2005, 25-10-2010, 08-06-2012, 01-08-2013) (columna 15 PAÍS DE NACIONALIDAD) y Resolución por la que se expide el Formato oficial para el reporte de operaciones con dólares en efectivo de los Estados Unidos de América (DOF 06-02-2015) (pais_nacimiento, pais_nacionalidad, domicilio extranjero <pais>)",
+    "licencia": "No indicada en los archivos ni en la página de descarga",
+    "notas": "Se eliminaron solo espacios al inicio/fin de clave y descripción; el resto es literal (incluidos errores tipográficos del original). Unión de las dos hojas PAIS (RIPS F41: 245 claves; FDE-FD1: 251). enReporteOperaciones/enReporteDolares indican en qué hoja aparece cada clave. Las descripciones coinciden en las claves comunes."
+  },
+  "registros": [
+    {
+      "clave": "AD",
+      "descripcion": "ANDORRA",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "AE",
+      "descripcion": "EMIRATOS ARABES UNIDOS",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "AF",
+      "descripcion": "AFGANISTAN",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "AG",
+      "descripcion": "ANTIGUA Y BARBUDA",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "AI",
+      "descripcion": "ANGUILA",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "AL",
+      "descripcion": "ALBANIA",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "AM",
+      "descripcion": "ARMENIA",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "AN",
+      "descripcion": "ANTILLAS NEERLANDESAS",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "AO",
+      "descripcion": "ANGOLA",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "AQ",
+      "descripcion": "ANTARTIDA",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "AR",
+      "descripcion": "ARGENTINA",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "AS",
+      "descripcion": "SAMOA AMERICANA",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "AT",
+      "descripcion": "AUSTRIA",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "AU",
+      "descripcion": "AUSTRALIA",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "AW",
+      "descripcion": "ARUBA",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "AX",
+      "descripcion": "ISLAS ÅLAND",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "AZ",
+      "descripcion": "AZERBAIYAN",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "BA",
+      "descripcion": "BOSNIA Y HERZEGOVINA",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "BB",
+      "descripcion": "BARBADOS",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "BD",
+      "descripcion": "BANGLADESH",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "BE",
+      "descripcion": "BELGICA",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "BF",
+      "descripcion": "BURKINA FASO",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "BG",
+      "descripcion": "BULGARIA",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "BH",
+      "descripcion": "BAHREIN",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "BI",
+      "descripcion": "BURUNDI",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "BJ",
+      "descripcion": "BENIN",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "BL",
+      "descripcion": "SAN BARTOLOME",
+      "enReporteOperaciones": false,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "BM",
+      "descripcion": "BERMUDAS",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "BN",
+      "descripcion": "BRUNEI",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "BO",
+      "descripcion": "BOLIVIA",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "BR",
+      "descripcion": "BRASIL",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "BS",
+      "descripcion": "BAHAMAS",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "BT",
+      "descripcion": "BHUTAN",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "BV",
+      "descripcion": "ISLA BOUVET",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "BW",
+      "descripcion": "BOTSUANA",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "BY",
+      "descripcion": "BELARUS",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "BZ",
+      "descripcion": "BELICE",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "CA",
+      "descripcion": "CANADA",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "CC",
+      "descripcion": "ISLAS COCOS",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "CD",
+      "descripcion": "REPUBLICA DEMOCRATICA DEL CONGO",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "CF",
+      "descripcion": "REPUBLICA CENTROAFRICANA",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "CG",
+      "descripcion": "CONGO",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "CH",
+      "descripcion": "SUIZA",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "CI",
+      "descripcion": "COSTA DE MARFIL",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "CK",
+      "descripcion": "ISLAS COOK",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "CL",
+      "descripcion": "CHILE",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "CM",
+      "descripcion": "CAMERUN",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "CN",
+      "descripcion": "CHINA",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "CO",
+      "descripcion": "COLOMBIA",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "CP",
+      "descripcion": "CLIPPERTON",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "CR",
+      "descripcion": "COSTA RICA",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "CU",
+      "descripcion": "CUBA",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "CV",
+      "descripcion": "CABO VERDE",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "CW",
+      "descripcion": "CURAZAO",
+      "enReporteOperaciones": false,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "CX",
+      "descripcion": "ISLA CHRISTMAS",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "CY",
+      "descripcion": "CHIPRE",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "CZ",
+      "descripcion": "CHEQUIA",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "DE",
+      "descripcion": "ALEMANIA",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "DJ",
+      "descripcion": "YIBUTI",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "DK",
+      "descripcion": "DINAMARCA",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "DM",
+      "descripcion": "DOMINICA",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "DO",
+      "descripcion": "REPUBLICA DOMINICANA",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "DZ",
+      "descripcion": "ARGELIA",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "EC",
+      "descripcion": "ECUADOR",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "EE",
+      "descripcion": "ESTONIA",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "EG",
+      "descripcion": "EGIPTO",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "EH",
+      "descripcion": "SAHARA OCCIDENTAL",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "EL",
+      "descripcion": "GRECIA",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "ER",
+      "descripcion": "ERITREA",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "ES",
+      "descripcion": "ESPAÑA",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "ET",
+      "descripcion": "ETIOPIA",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "FI",
+      "descripcion": "FINLANDIA",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "FJ",
+      "descripcion": "FIYI",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "FK",
+      "descripcion": "ISLAS MALVINAS",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "FM",
+      "descripcion": "MICRONESIA",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "FO",
+      "descripcion": "ISLAS FEROE",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "FR",
+      "descripcion": "FRANCIA",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "GA",
+      "descripcion": "GABON",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "GD",
+      "descripcion": "GRANADA",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "GE",
+      "descripcion": "GEORGIA",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "GF",
+      "descripcion": "GUAYANA FRANCESA",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "GG",
+      "descripcion": "GUERNESEY",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "GH",
+      "descripcion": "GHANA",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "GI",
+      "descripcion": "GIBRALTAR",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "GL",
+      "descripcion": "GROENLANDIA",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "GM",
+      "descripcion": "GAMBIA",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "GN",
+      "descripcion": "GUINEA",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "GP",
+      "descripcion": "GUADALUPE",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "GQ",
+      "descripcion": "GUINEA ECUATORIAL",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "GS",
+      "descripcion": "GEORGIA DEL SUR E ISLAS SANDWICH DEL SUR",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "GT",
+      "descripcion": "GUATEMALA",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "GU",
+      "descripcion": "GUAM",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "GW",
+      "descripcion": "GUINEA-BISSAU",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "GY",
+      "descripcion": "GUYANA",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "HK",
+      "descripcion": "HONG KONG",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "HM",
+      "descripcion": "ISLAS HEARD Y MCDONALD",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "HN",
+      "descripcion": "HONDURAS",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "HR",
+      "descripcion": "CROACIA",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "HT",
+      "descripcion": "HAITI",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "HU",
+      "descripcion": "HUNGRIA",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "IC",
+      "descripcion": "ISLAS CANARIAS",
+      "enReporteOperaciones": false,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "ID",
+      "descripcion": "INDONESIA",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "IE",
+      "descripcion": "IRLANDA",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "IL",
+      "descripcion": "ISRAEL",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "IM",
+      "descripcion": "ISLA DE MAN",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "IN",
+      "descripcion": "INDIA",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "IO",
+      "descripcion": "TERRITORIO BRITANICO DEL OCEANO INDICO",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "IQ",
+      "descripcion": "IRAQ",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "IR",
+      "descripcion": "IRAN",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "IS",
+      "descripcion": "ISLANDIA",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "IT",
+      "descripcion": "ITALIA",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "JE",
+      "descripcion": "JERSEY",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "JM",
+      "descripcion": "JAMAICA",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "JO",
+      "descripcion": "JORDANIA",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "JP",
+      "descripcion": "JAPON",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "KE",
+      "descripcion": "KENIA",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "KG",
+      "descripcion": "KIRGUISTAN",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "KH",
+      "descripcion": "CAMBOYA",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "KI",
+      "descripcion": "KIRIBATI",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "KM",
+      "descripcion": "COMORAS",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "KN",
+      "descripcion": "SAN CRISTOBAL Y NIEVES",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "KP",
+      "descripcion": "COREA DEL NORTE",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "KR",
+      "descripcion": "COREA DEL SUR",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "KW",
+      "descripcion": "KUWAIT",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "KY",
+      "descripcion": "ISLAS CAIMAN",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "KZ",
+      "descripcion": "KAZAJSTAN",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "LA",
+      "descripcion": "LAOS",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "LB",
+      "descripcion": "LIBANO",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "LC",
+      "descripcion": "SANTA LUCIA",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "LI",
+      "descripcion": "LIECHTENSTEIN",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "LK",
+      "descripcion": "SRI LANKA",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "LR",
+      "descripcion": "LIBERIA",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "LS",
+      "descripcion": "LESOTHO",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "LT",
+      "descripcion": "LITUANIA",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "LU",
+      "descripcion": "LUXEMBURGO",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "LV",
+      "descripcion": "LETONIA",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "LY",
+      "descripcion": "LIBIA",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "MA",
+      "descripcion": "MARRUECOS",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "MC",
+      "descripcion": "MONACO",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "MD",
+      "descripcion": "MOLDOVA",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "ME",
+      "descripcion": "MONTENEGRO",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "MG",
+      "descripcion": "MADAGASCAR",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "MH",
+      "descripcion": "ISLAS MARSHALL",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "MK",
+      "descripcion": "MACEDONIA",
+      "enReporteOperaciones": false,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "ML",
+      "descripcion": "MALI",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "MM",
+      "descripcion": "MYANMAR",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "MN",
+      "descripcion": "MONGOLIA",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "MO",
+      "descripcion": "MACAO",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "MP",
+      "descripcion": "ISLAS MARIANAS DEL NORTE",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "MQ",
+      "descripcion": "MARTINICA",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "MR",
+      "descripcion": "MAURITANIA",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "MS",
+      "descripcion": "MONTSERRAT",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "MT",
+      "descripcion": "MALTA",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "MU",
+      "descripcion": "MAURICIO",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "MV",
+      "descripcion": "MALDIVAS",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "MW",
+      "descripcion": "MALAWI",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "MX",
+      "descripcion": "MEXICO",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "MY",
+      "descripcion": "MALASIA",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "MZ",
+      "descripcion": "MOZAMBIQUE",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "NA",
+      "descripcion": "NAMIBIA",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "NC",
+      "descripcion": "NUEVA CALEDONIA",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "ND",
+      "descripcion": "SE DESCONOCE",
+      "enReporteOperaciones": true,
+      "enReporteDolares": false
+    },
+    {
+      "clave": "NE",
+      "descripcion": "NIGER",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "NF",
+      "descripcion": "ISLA NORFOLK",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "NG",
+      "descripcion": "NIGERIA",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "NI",
+      "descripcion": "NICARAGUA",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "NL",
+      "descripcion": "PAISES BAJOS",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "NO",
+      "descripcion": "NORUEGA",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "NP",
+      "descripcion": "NEPAL",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "NR",
+      "descripcion": "NAURU",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "NU",
+      "descripcion": "NIUE",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "NZ",
+      "descripcion": "NUEVA ZELANDA",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "OM",
+      "descripcion": "OMAN",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "PA",
+      "descripcion": "PANAMA",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "PE",
+      "descripcion": "PERU",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "PF",
+      "descripcion": "POLINESIA FRANCESA",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "PG",
+      "descripcion": "PAPUA NUEVA GUINEA",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "PH",
+      "descripcion": "FILIPINAS",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "PK",
+      "descripcion": "PAKISTAN",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "PL",
+      "descripcion": "POLONIA",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "PM",
+      "descripcion": "SAN PEDRO Y MIQUELON",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "PN",
+      "descripcion": "ISLAS PITCAIRN",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "PR",
+      "descripcion": "PUERTO RICO",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "PS",
+      "descripcion": "TERRITORIOS PALESTINOS",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "PT",
+      "descripcion": "PORTUGAL",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "PW",
+      "descripcion": "PALAOS",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "PY",
+      "descripcion": "PARAGUAY",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "QA",
+      "descripcion": "QATAR",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "RE",
+      "descripcion": "REUNION",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "RO",
+      "descripcion": "RUMANIA",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "RS",
+      "descripcion": "SERBIA",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "RU",
+      "descripcion": "RUSIA",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "RW",
+      "descripcion": "RUANDA",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "SA",
+      "descripcion": "ARABIA SAUDI",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "SB",
+      "descripcion": "ISLAS SALOMON",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "SC",
+      "descripcion": "SEYCHELLES",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "SD",
+      "descripcion": "SUDAN",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "SE",
+      "descripcion": "SUECIA",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "SG",
+      "descripcion": "SINGAPUR",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "SH",
+      "descripcion": "SANTA ELENA",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "SI",
+      "descripcion": "ESLOVENIA",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "SJ",
+      "descripcion": "SVALBARD Y JAN MAYEN",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "SK",
+      "descripcion": "ESLOVAQUIA",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "SL",
+      "descripcion": "SIERRA LEONA",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "SM",
+      "descripcion": "SAN MARINO",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "SN",
+      "descripcion": "SENEGAL",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "SO",
+      "descripcion": "SOMALIA",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "SR",
+      "descripcion": "SURINAM",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "SS",
+      "descripcion": "SUDAN DEL SUR",
+      "enReporteOperaciones": false,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "ST",
+      "descripcion": "SANTO TOME Y PRINCIPE",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "SV",
+      "descripcion": "EL SALVADOR",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "SX",
+      "descripcion": "SAN MARTIN",
+      "enReporteOperaciones": false,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "SY",
+      "descripcion": "SIRIA",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "SZ",
+      "descripcion": "SUAZILANDIA",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "TC",
+      "descripcion": "ISLAS TURCAS Y CAICOS",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "TD",
+      "descripcion": "CHAD",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "TF",
+      "descripcion": "TERRITORIOS AUSTRALES FRANCESES",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "TG",
+      "descripcion": "TOGO",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "TH",
+      "descripcion": "TAILANDIA",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "TJ",
+      "descripcion": "TAYIKISTAN",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "TK",
+      "descripcion": "TOKELAU",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "TL",
+      "descripcion": "TIMOR ORIENTAL",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "TM",
+      "descripcion": "TURKMENISTAN",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "TN",
+      "descripcion": "TUNEZ",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "TO",
+      "descripcion": "TONGA",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "TR",
+      "descripcion": "TURQUIA",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "TT",
+      "descripcion": "TRINIDAD Y TOBAGO",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "TV",
+      "descripcion": "TUVALU",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "TW",
+      "descripcion": "TAIWAN",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "TZ",
+      "descripcion": "TANZANIA",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "UA",
+      "descripcion": "UCRANIA",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "UG",
+      "descripcion": "UGANDA",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "UK",
+      "descripcion": "REINO UNIDO",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "UM",
+      "descripcion": "ISLAS MENORES ALEJADAS DE LOS ESTADOS UNIDOS",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "US",
+      "descripcion": "ESTADOS UNIDOS",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "UY",
+      "descripcion": "URUGUAY",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "UZ",
+      "descripcion": "UZBEKISTAN",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "VA",
+      "descripcion": "SANTA SEDE / ESTADO DE LA CIUDAD DEL VATICANO",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "VC",
+      "descripcion": "SAN VICENTE Y LAS GRANADINAS",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "VE",
+      "descripcion": "VENEZUELA",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "VG",
+      "descripcion": "ISLAS VIRGENES BRITANICAS",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "VI",
+      "descripcion": "ISLAS VIRGENES DE LOS ESTADOS UNIDOS",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "VN",
+      "descripcion": "VIETNAM",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "VU",
+      "descripcion": "VANUATU",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "WF",
+      "descripcion": "WALLIS Y FUTUNA",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "WS",
+      "descripcion": "SAMOA",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "XK",
+      "descripcion": "KOSOVO",
+      "enReporteOperaciones": false,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "YE",
+      "descripcion": "YEMEN",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "YT",
+      "descripcion": "MAYOTTE",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "ZA",
+      "descripcion": "SUDAFRICA",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "ZM",
+      "descripcion": "ZAMBIA",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    },
+    {
+      "clave": "ZW",
+      "descripcion": "ZIMBABUE",
+      "enReporteOperaciones": true,
+      "enReporteDolares": true
+    }
+  ]
+}

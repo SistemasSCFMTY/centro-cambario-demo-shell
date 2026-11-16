@@ -1,0 +1,21 @@
+{
+  "fuente": {
+    "organismo": "Banxico",
+    "documento": "Formulario ACLME-PDCC \"Relativo al Régimen de Posición de Riesgo Cambiario para las Casas de Cambio\", Ayudas genéricas, XI \"CLAVE\" de cada una de las cifras del formulario (\"Los últimos tres caracteres: relativos a la moneda en la cual estén denominadas las operaciones\") y Estructura de las secciones I a IV, campo 6 Moneda, Carácter (3)",
+    "url": "https://www.banxico.org.mx/waFormularios/WEB/ACLMEPDCCAyudasGenericasCompleto.pdf",
+    "version": "Documento fechado \"Enero 2026\" (PDF Last-Modified 2026-07-21); SHA-256 7a1a8ceb5561452b6c7d9bf5c41d9d215069aba2c0045e582b027f4bd629d280",
+    "consultado": "2026-11-13",
+    "reporte": "Reporte de casas de cambio a Banxico (numeral 8.7 de las \"Reglas a las que deberán sujetarse las casas de cambio en sus operaciones\", DOF 22-01-2007; art. 36 Ley del Banco de México). Los centros cambiarios no presentan este formulario.",
+    "notas": "Literal. No es un catálogo de divisas: solo distingue moneda nacional y moneda extranjera (montos en miles de pesos o de dólares). La posición por divisa se reporta con claves de concepto, no de moneda: 12001/12101 dólares de los EE.UU.A., 12201/12301 dólares canadienses, 12401/12501 euros, 12601/12701 yen japonés, 12801/12901 libra esterlina, 13001/13101 franco suizo, 13201/13301 otras divisas (larga/corta)."
+  },
+  "registros": [
+    {
+      "clave": "MXP",
+      "descripcion": "Operaciones en Moneda Nacional."
+    },
+    {
+      "clave": "FEX",
+      "descripcion": "Operaciones en Moneda Extranjera."
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+<div
+  role="radiogroup"
+  aria-label="Tema"
+  class="grid grid-cols-3 gap-1 rounded-full bg-chrome-canvas p-1 ring-1 ring-chrome-line"
+>
+  @for (opcion of opciones; track opcion.valor; let i = $index) {
+    <button
+      type="button"
+      role="radio"
+      [attr.aria-checked]="modo() === opcion.valor"
+      [tabindex]="modo() === opcion.valor ? 0 : -1"
+      (click)="establecer(opcion.valor)"
+      (keydown)="mover($event, i)"
+      class="flex h-8 items-center justify-center gap-1.5 rounded-full text-subheadline text-chrome-muted hover:text-chrome-text aria-checked:bg-chrome-raised aria-checked:text-chrome-text"
+    >
+      <ng-icon [name]="opcion.icono" size="14" aria-hidden="true" />
+      <span>{{ opcion.etiqueta }}</span>
+    </button>
+  }
+</div>

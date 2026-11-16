@@ -1,0 +1,51 @@
+{
+  "fuente": {
+    "organismo": "Comisión Nacional Bancaria y de Valores (CNBV), por cuenta de la UIF/SHCP",
+    "documento": "Catálogos para reportes PLD/FT de centros cambiarios: archivo \"CATALOGOS FDE-FD1 (Dвlares Efectivo).xlsx\", hoja \"INSTRUMENTO_MONETARIO\"",
+    "url": "https://www.cnbv.gob.mx/PrevencionDeLavadoDeDinero/Documents/CATALOGO_CENTROSCAMBIARIOS_2019.zip",
+    "version": "Catálogos centros cambiarios 2019 (ZIP Last-Modified 2019-07-15; vigente en la página de la CNBV al 2026-11-13)",
+    "consultado": "2026-11-13",
+    "paginaPublicacion": "https://www.gob.mx/cnbv/acciones-y-programas/disposiciones-legales-centros-cambiarios",
+    "reporte": "Resolución por la que se expide el Formato oficial para el reporte de operaciones con dólares en efectivo de los Estados Unidos de América (DOF 06-02-2015) (<instrumento_monetario> = 1 EFECTIVO; <instrumento_monetario_liquidacion>)",
+    "licencia": "No indicada en los archivos ni en la página de descarga",
+    "notas": "Se eliminaron solo espacios al inicio/fin de clave y descripción; el resto es literal (incluidos errores tipográficos del original). Claves numéricas sin ceros a la izquierda, como en el archivo y en el instructivo."
+  },
+  "registros": [
+    {
+      "clave": "1",
+      "descripcion": "EFECTIVO"
+    },
+    {
+      "clave": "2",
+      "descripcion": "CHEQUES DE VIAJERO"
+    },
+    {
+      "clave": "3",
+      "descripcion": "ORO O PLATINO AMONEDADOS"
+    },
+    {
+      "clave": "4",
+      "descripcion": "PLATA AMONEDADA"
+    },
+    {
+      "clave": "5",
+      "descripcion": "CHEQUES"
+    },
+    {
+      "clave": "6",
+      "descripcion": "OBLIGACIONES DE PAGO ASUMIDAS MEDIANTE EL USO DE TARJETA DE CREDITO"
+    },
+    {
+      "clave": "8",
+      "descripcion": "TARJETAS EMITIDAS POR UNA ENTIDAD NO VINCULADAS A UNA CUENTA BANCARIA"
+    },
+    {
+      "clave": "9",
+      "descripcion": "VALORES"
+    },
+    {
+      "clave": "10",
+      "descripcion": "TRANSFERENCIA"
+    }
+  ]
+}

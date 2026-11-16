@@ -1,0 +1,58 @@
+{
+  "fuente": {
+    "organismo": "Banxico",
+    "documento": "\"CATÁLOGO DE DIVISAS DE LA SECCIÓN VIII DEL FORMULARIO ACLME-PD\" (Banca Múltiple, pág. 101), idéntico al \"CATÁLOGO DE DIVISAS DE LA SECCIÓN V DEL FORMULARIO ACLME-PDBD\" (Banca de Desarrollo, pág. 44)",
+    "url": "https://www.banxico.org.mx/waFormularios/WEB/ACLMEPDAyudasGenericasCompleto.pdf",
+    "urlAlterna": "https://www.banxico.org.mx/waFormularios/WEB/ACLMEPDBDAyudasGenericasCompleto.pdf",
+    "version": "ACLME-PD \"Agosto 2023\" (SHA-256 1168cd83…b768a); ACLME-PDBD \"Enero 2026\" (SHA-256 adab4991…cb382b); ambos PDF Last-Modified 2026-07-21",
+    "consultado": "2026-11-13",
+    "reporte": "Campo 6 \"Divisa a la que se refiere la operación\", Carácter (3), de las operaciones cambiarias peso-dólar y peso-divisa reportadas operación por operación (Sección VIII ACLME-PD / Sección V ACLME-PDBD).",
+    "notas": "Literal y en el orden del original. 10 divisas más OTD \"OTRAS DIVISAS\" (clave propia de Banxico, no ISO). No hay CNY, KRW ni MXN: el yuan y el won se reportarían como OTD."
+  },
+  "registros": [
+    {
+      "clave": "CAD",
+      "descripcion": "DÓLAR CANADIENSE"
+    },
+    {
+      "clave": "USD",
+      "descripcion": "DÓLAR DE LOS EE.UU.A."
+    },
+    {
+      "clave": "EUR",
+      "descripcion": "EURO"
+    },
+    {
+      "clave": "CHF",
+      "descripcion": "FRANCO SUIZO"
+    },
+    {
+      "clave": "GBP",
+      "descripcion": "LIBRA ESTERLINA"
+    },
+    {
+      "clave": "BRL",
+      "descripcion": "REAL BRASILEÑO"
+    },
+    {
+      "clave": "JPY",
+      "descripcion": "YEN JAPONÉS"
+    },
+    {
+      "clave": "AUD",
+      "descripcion": "DÓLAR AUSTRALIANO"
+    },
+    {
+      "clave": "NZD",
+      "descripcion": "DÓLAR DE NUEVA ZELANDIA"
+    },
+    {
+      "clave": "SEK",
+      "descripcion": "CORONA SUECA"
+    },
+    {
+      "clave": "OTD",
+      "descripcion": "OTRAS DIVISAS"
+    }
+  ]
+}

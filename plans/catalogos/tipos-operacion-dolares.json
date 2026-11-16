@@ -1,0 +1,55 @@
+{
+  "fuente": {
+    "organismo": "Comisión Nacional Bancaria y de Valores (CNBV), por cuenta de la UIF/SHCP",
+    "documento": "Catálogos para reportes PLD/FT de centros cambiarios: archivo \"CATALOGOS FDE-FD1 (Dвlares Efectivo).xlsx\", hoja \"TIPO_OPERACION\"",
+    "url": "https://www.cnbv.gob.mx/PrevencionDeLavadoDeDinero/Documents/CATALOGO_CENTROSCAMBIARIOS_2019.zip",
+    "version": "Catálogos centros cambiarios 2019 (ZIP Last-Modified 2019-07-15; vigente en la página de la CNBV al 2026-11-13)",
+    "consultado": "2026-11-13",
+    "paginaPublicacion": "https://www.gob.mx/cnbv/acciones-y-programas/disposiciones-legales-centros-cambiarios",
+    "reporte": "Resolución por la que se expide el Formato oficial para el reporte de operaciones con dólares en efectivo de los Estados Unidos de América (DOF 06-02-2015) (<tipo_operacion>)",
+    "licencia": "No indicada en los archivos ni en la página de descarga",
+    "notas": "Se eliminaron solo espacios al inicio/fin de clave y descripción; el resto es literal (incluidos errores tipográficos del original). Claves numéricas sin ceros a la izquierda."
+  },
+  "registros": [
+    {
+      "clave": "1",
+      "descripcion": "DEPOSITO"
+    },
+    {
+      "clave": "5",
+      "descripcion": "DEPOSITOS CON CONVERSION DE MONEDA"
+    },
+    {
+      "clave": "13",
+      "descripcion": "COMPRA DIVISAS"
+    },
+    {
+      "clave": "20",
+      "descripcion": "TRANSFERENCIA DE FONDOS NACIONAL ENVIO"
+    },
+    {
+      "clave": "21",
+      "descripcion": "TRANSFERENCIA DE FONDOS INTERNACIONAL ENVIO"
+    },
+    {
+      "clave": "22",
+      "descripcion": "TRANSFERENCIA DE FONDOS NACIONAL RECEPCION"
+    },
+    {
+      "clave": "23",
+      "descripcion": "TRANSFERENCIA DE FONDOS INTERNACIONAL RECEPCION"
+    },
+    {
+      "clave": "24",
+      "descripcion": "SITUACION DE FONDOS"
+    },
+    {
+      "clave": "28",
+      "descripcion": "PAGO DE CREDITO"
+    },
+    {
+      "clave": "75",
+      "descripcion": "PAGO DE SERVICIOS"
+    }
+  ]
+}

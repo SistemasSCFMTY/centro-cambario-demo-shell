@@ -1,0 +1,985 @@
+{
+  "fuente": {
+    "organismo": "Comisión Nacional Bancaria y de Valores (CNBV), por cuenta de la UIF/SHCP",
+    "documento": "Catálogos para reportes PLD/FT de centros cambiarios: archivo \"CATALOGOS DE1 (Montos Totales).xlsx (idéntica a la hoja MONEDA de CATALOGOS FDE-FD1 (Dвlares Efectivo).xlsx)\", hoja \"MONEDA\"",
+    "url": "https://www.cnbv.gob.mx/PrevencionDeLavadoDeDinero/Documents/CATALOGO_CENTROSCAMBIARIOS_2019.zip",
+    "version": "Catálogos centros cambiarios 2019 (ZIP Last-Modified 2019-07-15; vigente en la página de la CNBV al 2026-11-13)",
+    "consultado": "2026-11-13",
+    "paginaPublicacion": "https://www.gob.mx/cnbv/acciones-y-programas/disposiciones-legales-centros-cambiarios",
+    "reporte": "Resolución por la que se expide el formato oficial para el reporte de los montos totales de divisas de centros cambiarios (DOF 16-07-2014) (<moneda>, <moneda_operada>) y Resolución por la que se expide el Formato oficial para el reporte de operaciones con dólares en efectivo de los Estados Unidos de América (DOF 06-02-2015) (<moneda>, <moneda_liquidacion>)",
+    "licencia": "No indicada en los archivos ni en la página de descarga",
+    "notas": "Se eliminaron solo espacios al inicio/fin de clave y descripción; el resto es literal (incluidos errores tipográficos del original). La hoja MONEDA de DE1 y la de FDE-FD1 son idénticas (194 claves, mismas descripciones). La columna \"pais\" NO viene en los archivos 2019: se tomó de \"CatalogoMonedaMT.xlsx\" del catálogo anterior (https://www.cnbv.gob.mx/PrevencionDeLavadoDeDinero/Documents/CATALOGO_CENTROS%20CAMBIARIOS.zip), que tiene las mismas 194 claves y descripciones. Claves ISO 4217 más claves propias para monedas metálicas mexicanas (MXA, MXC, MXH, MXZ...)."
+  },
+  "registros": [
+    {
+      "clave": "AED",
+      "descripcion": "UAE DIRHAM",
+      "pais": "UNITED ARAB EMIRATES"
+    },
+    {
+      "clave": "AFN",
+      "descripcion": "AFGHANI",
+      "pais": "AFGHANISTAN"
+    },
+    {
+      "clave": "ALL",
+      "descripcion": "LEK",
+      "pais": "ALBANIA"
+    },
+    {
+      "clave": "AMD",
+      "descripcion": "ARMENIAN DRAM",
+      "pais": "ARMENIA"
+    },
+    {
+      "clave": "ANG",
+      "descripcion": "NETHERLANDS ANTILLIAN GUILDER",
+      "pais": "NETHERLANDS ANTILLES"
+    },
+    {
+      "clave": "AOA",
+      "descripcion": "KWANZA",
+      "pais": "ANGOLA"
+    },
+    {
+      "clave": "ARS",
+      "descripcion": "ARGENTINE PESO",
+      "pais": "ARGENTINA"
+    },
+    {
+      "clave": "AUD",
+      "descripcion": "AUSTRALIAN DOLLAR",
+      "pais": "AUSTRALIA"
+    },
+    {
+      "clave": "AWG",
+      "descripcion": "ARUBAN GUILDER",
+      "pais": "ARUBA"
+    },
+    {
+      "clave": "AZN",
+      "descripcion": "AZERBAIJANIAN MANAT",
+      "pais": "AZERBAIJAN"
+    },
+    {
+      "clave": "BAM",
+      "descripcion": "CONVERTIBLE MARKS",
+      "pais": "BOSNIA AND HERZEGOVINA"
+    },
+    {
+      "clave": "BBD",
+      "descripcion": "BARBADOS DOLLAR",
+      "pais": "BARBADOS"
+    },
+    {
+      "clave": "BDT",
+      "descripcion": "TAKA",
+      "pais": "BANGLADESH"
+    },
+    {
+      "clave": "BGN",
+      "descripcion": "BULGARIAN LEV",
+      "pais": "BULGARIA"
+    },
+    {
+      "clave": "BHD",
+      "descripcion": "BAHRAINI DINAR",
+      "pais": "BAHRAIN"
+    },
+    {
+      "clave": "BIF",
+      "descripcion": "BURUNDI FRANC",
+      "pais": "BURUNDI"
+    },
+    {
+      "clave": "BMD",
+      "descripcion": "BERMUDIAN DOLLAR (CUSTOMARILY KNOWN AS BERMUDA DOLLAR)",
+      "pais": "BERMUDA"
+    },
+    {
+      "clave": "BND",
+      "descripcion": "BRUNEI DOLLAR",
+      "pais": "BRUNEI DARUSSALAM"
+    },
+    {
+      "clave": "BOB",
+      "descripcion": "BOLIVIANO",
+      "pais": "BOLIVIA"
+    },
+    {
+      "clave": "BRL",
+      "descripcion": "BRAZILIAN REAL",
+      "pais": "BRAZIL"
+    },
+    {
+      "clave": "BSD",
+      "descripcion": "BAHAMIAN DOLLAR",
+      "pais": "BAHAMAS"
+    },
+    {
+      "clave": "BTN",
+      "descripcion": "NGULTRUM",
+      "pais": "NGULTRUM"
+    },
+    {
+      "clave": "BWP",
+      "descripcion": "PULA",
+      "pais": "BOTSWANA"
+    },
+    {
+      "clave": "BYR",
+      "descripcion": "BELARUSSIAN RUBLE",
+      "pais": "BELARUS"
+    },
+    {
+      "clave": "BZD",
+      "descripcion": "BELIZE DOLLAR",
+      "pais": "BELIZE"
+    },
+    {
+      "clave": "CAD",
+      "descripcion": "CANADIAN DOLLAR",
+      "pais": "CANADA"
+    },
+    {
+      "clave": "CDF",
+      "descripcion": "CONGOLESE FRANC",
+      "pais": "CONGO, THE DEMOCRATIC REPUBLIC OF"
+    },
+    {
+      "clave": "CHE",
+      "descripcion": "WIR EURO",
+      "pais": "EUROPEAN MONETARY UNIT"
+    },
+    {
+      "clave": "CHF",
+      "descripcion": "SWISS FRANC",
+      "pais": "SWITZERLAND"
+    },
+    {
+      "clave": "CHW",
+      "descripcion": "WIR FRANC",
+      "pais": "EUROPEAN MONETARY UNIT"
+    },
+    {
+      "clave": "CLF",
+      "descripcion": "UNIDADES DE FOMENTO",
+      "pais": "CHILE"
+    },
+    {
+      "clave": "CLP",
+      "descripcion": "CHILEAN PESO",
+      "pais": "CHILE"
+    },
+    {
+      "clave": "CNY",
+      "descripcion": "YUAN RENMINBI",
+      "pais": "CHINA"
+    },
+    {
+      "clave": "COP",
+      "descripcion": "COLOMBIAN PESO",
+      "pais": "COLOMBIA"
+    },
+    {
+      "clave": "COU",
+      "descripcion": "UNIDAD DE VALOR REAL",
+      "pais": "COLOMBIA"
+    },
+    {
+      "clave": "CRC",
+      "descripcion": "COSTA RICAN COLON",
+      "pais": "COSTA RICA"
+    },
+    {
+      "clave": "CUC",
+      "descripcion": "PESO CONVERTIBLE",
+      "pais": "CUBA"
+    },
+    {
+      "clave": "CUP",
+      "descripcion": "CUBAN PESO",
+      "pais": "CUBA"
+    },
+    {
+      "clave": "CVE",
+      "descripcion": "CAPE VERDE ESCUDO",
+      "pais": "CAPE VERDE"
+    },
+    {
+      "clave": "CZK",
+      "descripcion": "CZECH KORUNA",
+      "pais": "CZECH REPUBLIC"
+    },
+    {
+      "clave": "DJF",
+      "descripcion": "DJIBOUTI FRANC",
+      "pais": "DJIBOUTI"
+    },
+    {
+      "clave": "DKK",
+      "descripcion": "DANISH KRONE",
+      "pais": "DENMARK"
+    },
+    {
+      "clave": "DOP",
+      "descripcion": "DOMINICAN PESO",
+      "pais": "DOMINICAN REPUBLIC"
+    },
+    {
+      "clave": "DZD",
+      "descripcion": "ALGERIAN DINAR",
+      "pais": "ALGERIA"
+    },
+    {
+      "clave": "EEK",
+      "descripcion": "KROON",
+      "pais": "ESTONIA"
+    },
+    {
+      "clave": "EGP",
+      "descripcion": "EGYPTIAN POUND",
+      "pais": "EGYPT"
+    },
+    {
+      "clave": "ERN",
+      "descripcion": "NAKFA",
+      "pais": "ERITREA"
+    },
+    {
+      "clave": "ETB",
+      "descripcion": "ETHIOPIAN BIRR",
+      "pais": "ETHIOPIA"
+    },
+    {
+      "clave": "EUR",
+      "descripcion": "EURO (EUROPEAN MONETARY UNIT)",
+      "pais": "EURO ZONE"
+    },
+    {
+      "clave": "FJD",
+      "descripcion": "FIJI DOLLAR",
+      "pais": "FIJI"
+    },
+    {
+      "clave": "FKP",
+      "descripcion": "FALKLAND ISLANDS POUND",
+      "pais": "FALKLAND ISLANDS (MALVINAS)"
+    },
+    {
+      "clave": "GBP",
+      "descripcion": "POUND STERLING",
+      "pais": "UNITED KINGDOM"
+    },
+    {
+      "clave": "GEL",
+      "descripcion": "LARI",
+      "pais": "GEORGIA"
+    },
+    {
+      "clave": "GHS",
+      "descripcion": "CEDI",
+      "pais": "GHANA"
+    },
+    {
+      "clave": "GIP",
+      "descripcion": "GIBRALTAR POUND",
+      "pais": "GIBRALTAR"
+    },
+    {
+      "clave": "GMD",
+      "descripcion": "DALASI",
+      "pais": "GAMBIA"
+    },
+    {
+      "clave": "GNF",
+      "descripcion": "GUINEA FRANC",
+      "pais": "GUINEA"
+    },
+    {
+      "clave": "GTQ",
+      "descripcion": "QUETZAL",
+      "pais": "GUATEMALA"
+    },
+    {
+      "clave": "GYD",
+      "descripcion": "GUYANA DOLLAR",
+      "pais": "GUYANA"
+    },
+    {
+      "clave": "HKD",
+      "descripcion": "HONG KONG DOLLAR",
+      "pais": "HONG KONG"
+    },
+    {
+      "clave": "HNL",
+      "descripcion": "LEMPIRA",
+      "pais": "HONDURAS"
+    },
+    {
+      "clave": "HRK",
+      "descripcion": "CROATIAN KUNA",
+      "pais": "CROATIA"
+    },
+    {
+      "clave": "HTG",
+      "descripcion": "GOURDE",
+      "pais": "HAITI"
+    },
+    {
+      "clave": "HUF",
+      "descripcion": "FORINT",
+      "pais": "HUNGARY"
+    },
+    {
+      "clave": "IDR",
+      "descripcion": "RUPIAH",
+      "pais": "INDONESIA"
+    },
+    {
+      "clave": "ILS",
+      "descripcion": "NEW ISRAELI SHEQEL",
+      "pais": "ISRAEL"
+    },
+    {
+      "clave": "INR",
+      "descripcion": "INDIAN RUPEE",
+      "pais": "INDIA"
+    },
+    {
+      "clave": "IQD",
+      "descripcion": "IRAQI DINAR",
+      "pais": "IRAQ"
+    },
+    {
+      "clave": "IRR",
+      "descripcion": "IRANIAN RIAL",
+      "pais": "IRAN, ISLAMIC REPUBLIC OF"
+    },
+    {
+      "clave": "ISK",
+      "descripcion": "ICELAND KRONA",
+      "pais": "ICELAND"
+    },
+    {
+      "clave": "JMD",
+      "descripcion": "JAMAICAN DOLLAR",
+      "pais": "JAMAICA"
+    },
+    {
+      "clave": "JOD",
+      "descripcion": "JORDANIAN DINAR",
+      "pais": "JORDAN"
+    },
+    {
+      "clave": "JPY",
+      "descripcion": "YEN",
+      "pais": "JAPAN"
+    },
+    {
+      "clave": "KES",
+      "descripcion": "KENYAN SHILLING",
+      "pais": "KENYA"
+    },
+    {
+      "clave": "KGS",
+      "descripcion": "SOM",
+      "pais": "KYRGYZSTAN"
+    },
+    {
+      "clave": "KHR",
+      "descripcion": "RIEL",
+      "pais": "CAMBODIA"
+    },
+    {
+      "clave": "KMF",
+      "descripcion": "COMORO FRANC",
+      "pais": "COMOROS"
+    },
+    {
+      "clave": "KPW",
+      "descripcion": "NORTH KOREAN WON",
+      "pais": "KOREA, DEMOCRATIC PEOPLE'S REPUBLIC OF"
+    },
+    {
+      "clave": "KRW",
+      "descripcion": "WON",
+      "pais": "KOREA, REPUBLIC OF"
+    },
+    {
+      "clave": "KWD",
+      "descripcion": "KUWAITI DINAR",
+      "pais": "KUWAIT"
+    },
+    {
+      "clave": "KYD",
+      "descripcion": "CAYMAN ISLANDS DOLLAR",
+      "pais": "CAYMAN ISLANDS"
+    },
+    {
+      "clave": "KZT",
+      "descripcion": "TENGE",
+      "pais": "KAZAKHSTAN"
+    },
+    {
+      "clave": "LAK",
+      "descripcion": "KIP",
+      "pais": "LAO PEOPLE'S DEMOCRATIC REPUBLIC"
+    },
+    {
+      "clave": "LBP",
+      "descripcion": "LEBANESE POUND",
+      "pais": "LEBANON"
+    },
+    {
+      "clave": "LKR",
+      "descripcion": "SRI LANKA RUPEE",
+      "pais": "SRI LANKA"
+    },
+    {
+      "clave": "LRD",
+      "descripcion": "LIBERIAN DOLLAR",
+      "pais": "LIBERIA"
+    },
+    {
+      "clave": "LSL",
+      "descripcion": "LOTI",
+      "pais": "LESOTHO"
+    },
+    {
+      "clave": "LTL",
+      "descripcion": "LITHUANIAN LITAS",
+      "pais": "LITHUANIA"
+    },
+    {
+      "clave": "LVL",
+      "descripcion": "LATVIAN LATS",
+      "pais": "LATVIA"
+    },
+    {
+      "clave": "LYD",
+      "descripcion": "LIBYAN DINAR",
+      "pais": "LIBYAN ARAB JAMAHIRIYA"
+    },
+    {
+      "clave": "MAD",
+      "descripcion": "MOROCCAN DIRHAM",
+      "pais": "MOROCCO"
+    },
+    {
+      "clave": "MDL",
+      "descripcion": "MOLDOVAN LEU",
+      "pais": "MOLDOVA, REPUBLIC OF"
+    },
+    {
+      "clave": "MGA",
+      "descripcion": "MALAGASY ARIARY",
+      "pais": "MADAGASCAR"
+    },
+    {
+      "clave": "MKD",
+      "descripcion": "DENAR",
+      "pais": "MACEDONIA, THE FORMER YUGOSLAV REPUBLIC OF"
+    },
+    {
+      "clave": "MMK",
+      "descripcion": "KYAT",
+      "pais": "MYANMAR"
+    },
+    {
+      "clave": "MNT",
+      "descripcion": "TUGRIK",
+      "pais": "MONGOLIA"
+    },
+    {
+      "clave": "MOP",
+      "descripcion": "PATACA",
+      "pais": "MACAO"
+    },
+    {
+      "clave": "MRO",
+      "descripcion": "OUGUIYA",
+      "pais": "MAURITANIA"
+    },
+    {
+      "clave": "MUR",
+      "descripcion": "MAURITIUS RUPEE",
+      "pais": "MAURITIUS"
+    },
+    {
+      "clave": "MVR",
+      "descripcion": "RUFIYAA",
+      "pais": "MALDIVES"
+    },
+    {
+      "clave": "MWK",
+      "descripcion": "KWACHA",
+      "pais": "MALAWI"
+    },
+    {
+      "clave": "MXA",
+      "descripcion": "AZTECA",
+      "pais": "MEXICO"
+    },
+    {
+      "clave": "MXB",
+      "descripcion": "1/2 HIDALGO",
+      "pais": "MEXICO"
+    },
+    {
+      "clave": "MXC",
+      "descripcion": "CENTENARIO",
+      "pais": "MEXICO"
+    },
+    {
+      "clave": "MXD",
+      "descripcion": "1/4 HIDALGO",
+      "pais": "MEXICO"
+    },
+    {
+      "clave": "MXE",
+      "descripcion": "1/5 HIDALGO",
+      "pais": "MEXICO"
+    },
+    {
+      "clave": "MXF",
+      "descripcion": "1/2 OZ LIBERTAD",
+      "pais": "MEXICO"
+    },
+    {
+      "clave": "MXG",
+      "descripcion": "1/4 OZ LIBERTAD",
+      "pais": "MEXICO"
+    },
+    {
+      "clave": "MXH",
+      "descripcion": "HIDALGO",
+      "pais": "MEXICO"
+    },
+    {
+      "clave": "MXI",
+      "descripcion": "1/10 OZ LIBERTAD",
+      "pais": "MEXICO"
+    },
+    {
+      "clave": "MXJ",
+      "descripcion": "1/20 OZ LIBERTAD",
+      "pais": "MEXICO"
+    },
+    {
+      "clave": "MXK",
+      "descripcion": "1/20 OZ LIBERTAD DE ORO",
+      "pais": "MEXICO"
+    },
+    {
+      "clave": "MXL",
+      "descripcion": "1 OZ LIBERTAD DE ORO",
+      "pais": "MEXICO"
+    },
+    {
+      "clave": "MXM",
+      "descripcion": "1/2 OZ LIBERTAD DE ORO",
+      "pais": "MEXICO"
+    },
+    {
+      "clave": "MXN",
+      "descripcion": "MEXICAN PESO",
+      "pais": "MEXICO"
+    },
+    {
+      "clave": "MXQ",
+      "descripcion": "1/10 OZ LIBERTAD DE ORO",
+      "pais": "MEXICO"
+    },
+    {
+      "clave": "MXR",
+      "descripcion": "1/4 OZ LIBERTAD DE ORO",
+      "pais": "MEXICO"
+    },
+    {
+      "clave": "MXU",
+      "descripcion": "UDIS GUBERNAMENTALES",
+      "pais": "MEXICO"
+    },
+    {
+      "clave": "MXV",
+      "descripcion": "MEXICAN UNIDAD DE INVERSION (UDI)",
+      "pais": "MEXICO"
+    },
+    {
+      "clave": "MXZ",
+      "descripcion": "1 OZ LIBERTAD",
+      "pais": "MEXICO"
+    },
+    {
+      "clave": "MYR",
+      "descripcion": "MALAYSIAN RINGGIT",
+      "pais": "MALAYSIA"
+    },
+    {
+      "clave": "MZN",
+      "descripcion": "METICAL",
+      "pais": "MOZAMBIQUE"
+    },
+    {
+      "clave": "NAD",
+      "descripcion": "NAMIBIA DOLLAR",
+      "pais": "NAMIBIA"
+    },
+    {
+      "clave": "NGN",
+      "descripcion": "NAIRA",
+      "pais": "NIGERIA"
+    },
+    {
+      "clave": "NIO",
+      "descripcion": "CORDOBA ORO",
+      "pais": "NICARAGUA"
+    },
+    {
+      "clave": "NOK",
+      "descripcion": "NORWEGIAN KRONE",
+      "pais": "NORWAY"
+    },
+    {
+      "clave": "NPR",
+      "descripcion": "NEPALESE RUPEE",
+      "pais": "NEPAL"
+    },
+    {
+      "clave": "NZD",
+      "descripcion": "NEW ZEALAND DOLLAR",
+      "pais": "NEW ZEALAND"
+    },
+    {
+      "clave": "OMR",
+      "descripcion": "RIAL OMANI",
+      "pais": "OMAN"
+    },
+    {
+      "clave": "PAB",
+      "descripcion": "BALBOA",
+      "pais": "PANAMA"
+    },
+    {
+      "clave": "PEN",
+      "descripcion": "NUEVO SOL",
+      "pais": "PERU"
+    },
+    {
+      "clave": "PGK",
+      "descripcion": "KINA",
+      "pais": "PAPUA NEW GUINEA"
+    },
+    {
+      "clave": "PHP",
+      "descripcion": "PHILIPPINE PESO",
+      "pais": "PHILIPPINES"
+    },
+    {
+      "clave": "PKR",
+      "descripcion": "PAKISTAN RUPEE",
+      "pais": "PAKISTAN"
+    },
+    {
+      "clave": "PLN",
+      "descripcion": "ZLOTY",
+      "pais": "POLAND"
+    },
+    {
+      "clave": "PYG",
+      "descripcion": "GUARANI",
+      "pais": "PARAGUAY"
+    },
+    {
+      "clave": "QAR",
+      "descripcion": "QATARI RIAL",
+      "pais": "QATAR"
+    },
+    {
+      "clave": "RON",
+      "descripcion": "NEW LEU",
+      "pais": "ROMANIA"
+    },
+    {
+      "clave": "RSD",
+      "descripcion": "SERBIAN DINAR",
+      "pais": "SERBIA"
+    },
+    {
+      "clave": "RUB",
+      "descripcion": "RUSSIAN RUBLE",
+      "pais": "RUSSIAN FEDERATION"
+    },
+    {
+      "clave": "RWF",
+      "descripcion": "RWANDA FRANC",
+      "pais": "RWANDA"
+    },
+    {
+      "clave": "SAR",
+      "descripcion": "SAUDI RIYAL",
+      "pais": "SAUDI ARABIA"
+    },
+    {
+      "clave": "SBD",
+      "descripcion": "SOLOMON ISLANDS DOLLAR",
+      "pais": "SOLOMON ISLANDS"
+    },
+    {
+      "clave": "SCR",
+      "descripcion": "SEYCHELLES RUPEE",
+      "pais": "SEYCHELLES"
+    },
+    {
+      "clave": "SDG",
+      "descripcion": "SUDANESE POUND",
+      "pais": "SUDAN"
+    },
+    {
+      "clave": "SEK",
+      "descripcion": "SWEDISH KRONA",
+      "pais": "SWEDEN"
+    },
+    {
+      "clave": "SGD",
+      "descripcion": "SINGAPORE DOLLAR",
+      "pais": "SINGAPORE"
+    },
+    {
+      "clave": "SHP",
+      "descripcion": "SAINT HELENA POUND",
+      "pais": "SAINT HELENA, ASCENSION AND TRISTAN DA CUNHA"
+    },
+    {
+      "clave": "SLL",
+      "descripcion": "LEONE",
+      "pais": "SIERRA LEONE"
+    },
+    {
+      "clave": "SOS",
+      "descripcion": "SOMALI SHILLING",
+      "pais": "SOMALIA"
+    },
+    {
+      "clave": "SRD",
+      "descripcion": "SURINAM DOLLAR",
+      "pais": "SURINAME"
+    },
+    {
+      "clave": "STD",
+      "descripcion": "DOBRA",
+      "pais": "SÃO TOME AND PRINCIPE"
+    },
+    {
+      "clave": "SVC",
+      "descripcion": "EL SALVADOR COLON",
+      "pais": "EL SALVADOR"
+    },
+    {
+      "clave": "SYP",
+      "descripcion": "SYRIAN POUND",
+      "pais": "SYRIAN ARAB REPUBLIC"
+    },
+    {
+      "clave": "SZL",
+      "descripcion": "LILANGENI",
+      "pais": "SWAZILAND"
+    },
+    {
+      "clave": "THB",
+      "descripcion": "BAHT",
+      "pais": "THAILAND"
+    },
+    {
+      "clave": "TJS",
+      "descripcion": "SOMONI",
+      "pais": "TAJIKISTAN"
+    },
+    {
+      "clave": "TMT",
+      "descripcion": "MANAT",
+      "pais": "TURKMENISTAN"
+    },
+    {
+      "clave": "TND",
+      "descripcion": "TUNISIAN DINAR",
+      "pais": "TUNISIA"
+    },
+    {
+      "clave": "TOP",
+      "descripcion": "PA'ANGA",
+      "pais": "TONGA"
+    },
+    {
+      "clave": "TRY",
+      "descripcion": "TURKISH LIRA",
+      "pais": "TURKEY"
+    },
+    {
+      "clave": "TTD",
+      "descripcion": "TRINIDAD AND TOBAGO DOLLAR",
+      "pais": "TRINIDAD AND TOBAGO"
+    },
+    {
+      "clave": "TWD",
+      "descripcion": "NEW TAIWAN DOLLAR",
+      "pais": "TAIWAN, PROVINCE OF CHINA"
+    },
+    {
+      "clave": "TZS",
+      "descripcion": "TANZANIAN SHILLING",
+      "pais": "TANZANIA, UNITED REPUBLIC OF"
+    },
+    {
+      "clave": "UAH",
+      "descripcion": "HRYVNIA",
+      "pais": "UKRAINE"
+    },
+    {
+      "clave": "UGX",
+      "descripcion": "UGANDA SHILLING",
+      "pais": "UGANDA"
+    },
+    {
+      "clave": "USD",
+      "descripcion": "US DOLLAR",
+      "pais": "UNITED STATES OF AMERICA"
+    },
+    {
+      "clave": "USN",
+      "descripcion": "US DOLLAR (NEXT DAY)",
+      "pais": "UNITED STATES OF AMERICA"
+    },
+    {
+      "clave": "USS",
+      "descripcion": "US DOLLAR (SAME DAY)",
+      "pais": "UNITED STATES OF AMERICA"
+    },
+    {
+      "clave": "UYI",
+      "descripcion": "URUGUAY PESO EN UNIDADES INDEXADAS",
+      "pais": "URUGUAY"
+    },
+    {
+      "clave": "UYU",
+      "descripcion": "PESO URUGUAYO",
+      "pais": "URUGUAY"
+    },
+    {
+      "clave": "UZS",
+      "descripcion": "UZBEKISTAN SUM",
+      "pais": "UZBEKISTAN"
+    },
+    {
+      "clave": "VEF",
+      "descripcion": "BOLIVAR FUERTE",
+      "pais": "VENEZUELA"
+    },
+    {
+      "clave": "VND",
+      "descripcion": "DONG",
+      "pais": "VIET NAM"
+    },
+    {
+      "clave": "VUV",
+      "descripcion": "VATU",
+      "pais": "VANUATU"
+    },
+    {
+      "clave": "WST",
+      "descripcion": "TALA",
+      "pais": "SAMOA"
+    },
+    {
+      "clave": "XAF",
+      "descripcion": "CFA FRANC BEAC",
+      "pais": "CENTRAL AFRICAN REPUBLIC"
+    },
+    {
+      "clave": "XAG",
+      "descripcion": "SILVER",
+      "pais": "INTERNATIONAL UNIT"
+    },
+    {
+      "clave": "XAU",
+      "descripcion": "GOLD",
+      "pais": "INTERNATIONAL UNIT"
+    },
+    {
+      "clave": "XBA",
+      "descripcion": "BOND MARKETS UNITS EUROPEAN COMPOSITE UNIT (EURCO)",
+      "pais": "EUROPEAN MONETARY UNIT"
+    },
+    {
+      "clave": "XBB",
+      "descripcion": "EUROPEAN MONETARY UNIT (E.M.U.-6)",
+      "pais": "EUROPEAN MONETARY UNIT"
+    },
+    {
+      "clave": "XBC",
+      "descripcion": "EUROPEAN UNIT OF ACCOUNT 9(E.U.A.-9)",
+      "pais": "EUROPEAN MONETARY UNIT"
+    },
+    {
+      "clave": "XBD",
+      "descripcion": "EUROPEAN UNIT OF ACCOUNT 17(E.U.A.-17)",
+      "pais": "EUROPEAN MONETARY UNIT"
+    },
+    {
+      "clave": "XCD",
+      "descripcion": "EAST CARIBBEAN DOLLAR",
+      "pais": "CARIBBEAN"
+    },
+    {
+      "clave": "XDR",
+      "descripcion": "SDR",
+      "pais": "INTERNATIONAL MONETARY FUND (I.M.F)"
+    },
+    {
+      "clave": "XFU",
+      "descripcion": "UIC-FRANC",
+      "pais": "EUROPEAN MONETARY UNIT"
+    },
+    {
+      "clave": "XOF",
+      "descripcion": "CFA FRANC BCEAO",
+      "pais": "CENTRAL AFRICAN REPUBLIC"
+    },
+    {
+      "clave": "XPD",
+      "descripcion": "PALLADIUM",
+      "pais": "INTERNATIONAL UNIT"
+    },
+    {
+      "clave": "XPF",
+      "descripcion": "CFP FRANC",
+      "pais": "FRENCH POLYNESIA"
+    },
+    {
+      "clave": "XPT",
+      "descripcion": "PLATINUM",
+      "pais": "INTERNATIONAL UNIT"
+    },
+    {
+      "clave": "YER",
+      "descripcion": "YEMENI RIAL",
+      "pais": "YEMEN"
+    },
+    {
+      "clave": "ZAR",
+      "descripcion": "RAND",
+      "pais": "SOUTH AFRICA"
+    },
+    {
+      "clave": "ZMK",
+      "descripcion": "ZAMBIAN KWACHA",
+      "pais": "ZAMBIA"
+    },
+    {
+      "clave": "ZWL",
+      "descripcion": "ZIMBABWE DOLLAR",
+      "pais": "ZIMBABWE"
+    }
+  ]
+}

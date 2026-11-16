@@ -1,0 +1,630 @@
+{
+  "fuente": {
+    "organismo": "Comisión Nacional Bancaria y de Valores (CNBV), por cuenta de la UIF/SHCP",
+    "documento": "Catálogos para reportes PLD/FT de centros cambiarios: archivo \"CATALOGOS RIPS F41.xlsx\", hoja \"MONEDA\"",
+    "url": "https://www.cnbv.gob.mx/PrevencionDeLavadoDeDinero/Documents/CATALOGO_CENTROSCAMBIARIOS_2019.zip",
+    "version": "Catálogos centros cambiarios 2019 (ZIP Last-Modified 2019-07-15; vigente en la página de la CNBV al 2026-11-13)",
+    "consultado": "2026-11-13",
+    "paginaPublicacion": "https://www.gob.mx/cnbv/acciones-y-programas/disposiciones-legales-centros-cambiarios",
+    "reporte": "Resolución por la que se expide el formato oficial para el reporte de operaciones relevantes, inusuales y preocupantes (DOF 14-12-2004; reformas DOF 18-05-2005, 25-10-2010, 08-06-2012, 01-08-2013) (columna 12 MONEDA)",
+    "licencia": "No indicada en los archivos ni en la página de descarga",
+    "notas": "Se eliminaron solo espacios al inicio/fin de clave y descripción; el resto es literal (incluidos errores tipográficos del original). La columna \"pais\" NO viene en el archivo 2019: se tomó de la hoja MONEDA del catálogo anterior (https://www.cnbv.gob.mx/PrevencionDeLavadoDeDinero/Documents/CATALOGO_CENTROS%20CAMBIARIOS.zip, \"Copia de Catalogos Formato 41 CC TD.xlsx\"), cruzando por clave. Claves heredadas (no todas ISO 4217): el dólar de EE.UU. es la clave \"2\", no \"USD\"; no hay \"GBP\" (la libra esterlina aparece como \"STG\")."
+  },
+  "registros": [
+    {
+      "clave": "AED",
+      "descripcion": "DIRHAM",
+      "pais": "EMIRATOS ARABES UNIDOS"
+    },
+    {
+      "clave": "ALL",
+      "descripcion": "LEK",
+      "pais": "ALBANIA"
+    },
+    {
+      "clave": "ANG",
+      "descripcion": "FLORIN",
+      "pais": "ANTILLAS HOLANDESAS"
+    },
+    {
+      "clave": "ARP",
+      "descripcion": "PESO",
+      "pais": "ARGENTINA"
+    },
+    {
+      "clave": "ATS",
+      "descripcion": "CHELIN",
+      "pais": "AUSTRIA"
+    },
+    {
+      "clave": "AUD",
+      "descripcion": "DOLAR",
+      "pais": "AUSTRALIA"
+    },
+    {
+      "clave": "BBD",
+      "descripcion": "DOLAR",
+      "pais": "BARBADOS"
+    },
+    {
+      "clave": "BEC",
+      "descripcion": "FRANCO",
+      "pais": "LUXEMBURGO"
+    },
+    {
+      "clave": "BEF",
+      "descripcion": "FRANCO",
+      "pais": "BELGICA"
+    },
+    {
+      "clave": "BGL",
+      "descripcion": "LEV",
+      "pais": "BULGARIA"
+    },
+    {
+      "clave": "BHD",
+      "descripcion": "DINAR",
+      "pais": "BAHRAIN"
+    },
+    {
+      "clave": "BMD",
+      "descripcion": "DOLAR",
+      "pais": "BERMUDA"
+    },
+    {
+      "clave": "BOP",
+      "descripcion": "BOLIVIANO",
+      "pais": "BOLIVIA"
+    },
+    {
+      "clave": "BRC",
+      "descripcion": "REAL",
+      "pais": "BRASIL"
+    },
+    {
+      "clave": "BSD",
+      "descripcion": "DOLAR",
+      "pais": "BAHAMAS"
+    },
+    {
+      "clave": "BZD",
+      "descripcion": "DOLAR",
+      "pais": "BELICE"
+    },
+    {
+      "clave": "CAD",
+      "descripcion": "DOLAR",
+      "pais": "CANADA"
+    },
+    {
+      "clave": "CHF",
+      "descripcion": "FRANCO",
+      "pais": "SUIZA"
+    },
+    {
+      "clave": "CLP",
+      "descripcion": "PESO",
+      "pais": "CHILE"
+    },
+    {
+      "clave": "CNY",
+      "descripcion": "YUAN",
+      "pais": "CHINA"
+    },
+    {
+      "clave": "COP",
+      "descripcion": "PESO",
+      "pais": "COLOMBIA"
+    },
+    {
+      "clave": "CRC",
+      "descripcion": "COLON",
+      "pais": "COSTA RICA"
+    },
+    {
+      "clave": "CSK",
+      "descripcion": "CORONA",
+      "pais": "REP. CHECA"
+    },
+    {
+      "clave": "CUP",
+      "descripcion": "PESO",
+      "pais": "CUBA"
+    },
+    {
+      "clave": "DEM",
+      "descripcion": "MARCO",
+      "pais": "ALEMANIA"
+    },
+    {
+      "clave": "DKK",
+      "descripcion": "CORONA",
+      "pais": "DINAMARCA"
+    },
+    {
+      "clave": "DOP",
+      "descripcion": "PESO",
+      "pais": "REP. DOMINICANA"
+    },
+    {
+      "clave": "DZD",
+      "descripcion": "DINAR",
+      "pais": "ARGELIA"
+    },
+    {
+      "clave": "ECS",
+      "descripcion": "SUCRE",
+      "pais": "ECUADOR"
+    },
+    {
+      "clave": "EEK",
+      "descripcion": "CORONA",
+      "pais": "ESTONIA"
+    },
+    {
+      "clave": "EGP",
+      "descripcion": "LIBRA",
+      "pais": "EGIPTO"
+    },
+    {
+      "clave": "ESP",
+      "descripcion": "PESETA",
+      "pais": "ESPAÑA"
+    },
+    {
+      "clave": "ETB",
+      "descripcion": "BIRR",
+      "pais": "ETIOPIA"
+    },
+    {
+      "clave": "EUR",
+      "descripcion": "EURO",
+      "pais": "UNION MONETARIA EUROPEA"
+    },
+    {
+      "clave": "FIM",
+      "descripcion": "MARCO",
+      "pais": "FINLANDIA"
+    },
+    {
+      "clave": "FJD",
+      "descripcion": "DOLAR",
+      "pais": "FIDJI"
+    },
+    {
+      "clave": "FRF",
+      "descripcion": "FRANCO",
+      "pais": "FRANCIA"
+    },
+    {
+      "clave": "GHC",
+      "descripcion": "CEDI",
+      "pais": "GHANA"
+    },
+    {
+      "clave": "GRD",
+      "descripcion": "DRAKMA",
+      "pais": "GRECIA"
+    },
+    {
+      "clave": "GTO",
+      "descripcion": "QUETZAL",
+      "pais": "GUATEMALA"
+    },
+    {
+      "clave": "GYD",
+      "descripcion": "DOLAR",
+      "pais": "GUYANA"
+    },
+    {
+      "clave": "HKD",
+      "descripcion": "DOLAR",
+      "pais": "HONG KONG"
+    },
+    {
+      "clave": "HNL",
+      "descripcion": "LEMPIRA",
+      "pais": "HONDURAS"
+    },
+    {
+      "clave": "HTG",
+      "descripcion": "GOURDE",
+      "pais": "HAITI"
+    },
+    {
+      "clave": "HUF",
+      "descripcion": "FORINT",
+      "pais": "HUNGRIA"
+    },
+    {
+      "clave": "IDR",
+      "descripcion": "RUPIA",
+      "pais": "INDONESIA"
+    },
+    {
+      "clave": "IEP",
+      "descripcion": "PUNT",
+      "pais": "IRLANDA"
+    },
+    {
+      "clave": "ILS",
+      "descripcion": "SHEKEL",
+      "pais": "ISRAEL"
+    },
+    {
+      "clave": "INR",
+      "descripcion": "RUPIA",
+      "pais": "INDIA"
+    },
+    {
+      "clave": "IQD",
+      "descripcion": "DINAR",
+      "pais": "IRAK"
+    },
+    {
+      "clave": "IRR",
+      "descripcion": "RIYAL",
+      "pais": "IRAN"
+    },
+    {
+      "clave": "ISK",
+      "descripcion": "CORONA",
+      "pais": "ISLANDIA"
+    },
+    {
+      "clave": "ITL",
+      "descripcion": "LIRA",
+      "pais": "ITALIA"
+    },
+    {
+      "clave": "JMD",
+      "descripcion": "DOLAR",
+      "pais": "JAMAICA"
+    },
+    {
+      "clave": "JOD",
+      "descripcion": "DINAR",
+      "pais": "JORDANIA"
+    },
+    {
+      "clave": "JPY",
+      "descripcion": "YEN",
+      "pais": "JAPON"
+    },
+    {
+      "clave": "KES",
+      "descripcion": "CHELIN",
+      "pais": "KENYA"
+    },
+    {
+      "clave": "KPW",
+      "descripcion": "WON",
+      "pais": "COREA DEL NORTE"
+    },
+    {
+      "clave": "KRW",
+      "descripcion": "WON",
+      "pais": "COREA DEL SUR"
+    },
+    {
+      "clave": "KWD",
+      "descripcion": "DINAR",
+      "pais": "KUWAIT"
+    },
+    {
+      "clave": "LBP",
+      "descripcion": "LIBRA",
+      "pais": "LIBANO"
+    },
+    {
+      "clave": "LKR",
+      "descripcion": "RUPIA",
+      "pais": "SRI-LANKA"
+    },
+    {
+      "clave": "LTT",
+      "descripcion": "LITAS",
+      "pais": "LITUANIA"
+    },
+    {
+      "clave": "LYD",
+      "descripcion": "DINAR",
+      "pais": "LIBIA"
+    },
+    {
+      "clave": "MAD",
+      "descripcion": "DIRHAM",
+      "pais": "MARRUECOS"
+    },
+    {
+      "clave": "MAG",
+      "descripcion": "ONZA TROY DE PLATA",
+      "pais": "MÉXICO"
+    },
+    {
+      "clave": "MAU",
+      "descripcion": "ONZA TROY DE ORO",
+      "pais": "MÉXICO"
+    },
+    {
+      "clave": "MTL",
+      "descripcion": "LIRA",
+      "pais": "MALTA"
+    },
+    {
+      "clave": "MYR",
+      "descripcion": "RINGGIT",
+      "pais": "MALASIA"
+    },
+    {
+      "clave": "NGN",
+      "descripcion": "NAIRA",
+      "pais": "NIGERIA (FED)"
+    },
+    {
+      "clave": "NIC",
+      "descripcion": "CORDOBA",
+      "pais": "NICARAGUA"
+    },
+    {
+      "clave": "NLG",
+      "descripcion": "FLORIN",
+      "pais": "HOLANDA"
+    },
+    {
+      "clave": "NOK",
+      "descripcion": "CORONA",
+      "pais": "NORUEGA"
+    },
+    {
+      "clave": "NZD",
+      "descripcion": "DOLAR",
+      "pais": "NUEVA ZELANDA"
+    },
+    {
+      "clave": "PAB",
+      "descripcion": "BALBOA",
+      "pais": "PANAMA"
+    },
+    {
+      "clave": "PES",
+      "descripcion": "N. SOL",
+      "pais": "PERU"
+    },
+    {
+      "clave": "PHP",
+      "descripcion": "PESO",
+      "pais": "FILIPINAS"
+    },
+    {
+      "clave": "PKR",
+      "descripcion": "RUPIA",
+      "pais": "PAKISTAN"
+    },
+    {
+      "clave": "PLZ",
+      "descripcion": "ZLOTY",
+      "pais": "POLONIA"
+    },
+    {
+      "clave": "PTE",
+      "descripcion": "ESCUDO",
+      "pais": "PORTUGAL"
+    },
+    {
+      "clave": "PYG",
+      "descripcion": "GUARANI",
+      "pais": "PARAGUAY"
+    },
+    {
+      "clave": "ROL",
+      "descripcion": "LEU",
+      "pais": "RUMANIA"
+    },
+    {
+      "clave": "RUR",
+      "descripcion": "RUBLO",
+      "pais": "FEDERACIÓN RUSA"
+    },
+    {
+      "clave": "SAR",
+      "descripcion": "RIYAL",
+      "pais": "ARABIA SAUDITA"
+    },
+    {
+      "clave": "SEK",
+      "descripcion": "CORONA",
+      "pais": "SUECIA"
+    },
+    {
+      "clave": "SGD",
+      "descripcion": "DOLAR",
+      "pais": "SINGAPUR"
+    },
+    {
+      "clave": "SKK",
+      "descripcion": "CORONA",
+      "pais": "ESLOVAQUIA"
+    },
+    {
+      "clave": "SRG",
+      "descripcion": "FLORIN",
+      "pais": "SURINAM"
+    },
+    {
+      "clave": "STG",
+      "descripcion": "LIBRA",
+      "pais": "GRAN BRETAÑA"
+    },
+    {
+      "clave": "SVC",
+      "descripcion": "COLON",
+      "pais": "EL SALVADOR"
+    },
+    {
+      "clave": "SYP",
+      "descripcion": "LIBRA",
+      "pais": "SIRIA"
+    },
+    {
+      "clave": "THB",
+      "descripcion": "BAHT",
+      "pais": "TAILANDIA"
+    },
+    {
+      "clave": "TRL",
+      "descripcion": "LIRA",
+      "pais": "TURQUIA"
+    },
+    {
+      "clave": "TTD",
+      "descripcion": "DOLAR",
+      "pais": "TRINIDAD Y TOBAGO"
+    },
+    {
+      "clave": "TWD",
+      "descripcion": "DOLAR",
+      "pais": "TAIWAN"
+    },
+    {
+      "clave": "TZS",
+      "descripcion": "CHELIN",
+      "pais": "TANZANIA"
+    },
+    {
+      "clave": "UAK",
+      "descripcion": "HRYVNA",
+      "pais": "UCRANIA"
+    },
+    {
+      "clave": "UNB",
+      "descripcion": "UNIDAD DE CUENTA (NAFIN-BANXICO)",
+      "pais": "MÉXICO"
+    },
+    {
+      "clave": "UYP",
+      "descripcion": "PESO",
+      "pais": "URUGUAY"
+    },
+    {
+      "clave": "VEB",
+      "descripcion": "BOLIVAR",
+      "pais": "VENEZUELA"
+    },
+    {
+      "clave": "VND",
+      "descripcion": "DONG",
+      "pais": "VIETNAM"
+    },
+    {
+      "clave": "XDR",
+      "descripcion": "DEG",
+      "pais": "DERECHOS ESPECIALES DE GI"
+    },
+    {
+      "clave": "XOF",
+      "descripcion": "FRANCO",
+      "pais": "AFRICA CENTRAL"
+    },
+    {
+      "clave": "YDD",
+      "descripcion": "RIAL",
+      "pais": "YEMEN (DEM.POP.)"
+    },
+    {
+      "clave": "YUD",
+      "descripcion": "DINAR",
+      "pais": "YUGOSLAVIA"
+    },
+    {
+      "clave": "ZAR",
+      "descripcion": "RAND",
+      "pais": "UNION SUDAFRICANA"
+    },
+    {
+      "clave": "ZRZ",
+      "descripcion": "ZAIRE",
+      "pais": "ZAIRE"
+    },
+    {
+      "clave": "0",
+      "descripcion": "SE DESCONOCE (TENTATIVA)",
+      "pais": null
+    },
+    {
+      "clave": "1",
+      "descripcion": "MONEDA NACIONAL",
+      "pais": "MÉXICO"
+    },
+    {
+      "clave": "2",
+      "descripcion": "MONEDA EXTRANJERA (DOLAR EE.UU.A)",
+      "pais": "USA"
+    },
+    {
+      "clave": "3",
+      "descripcion": "UDIS",
+      "pais": "MÉXICO"
+    },
+    {
+      "clave": "8",
+      "descripcion": "UDIS GUBERNAMENTALES",
+      "pais": "MÉXICO"
+    },
+    {
+      "clave": "20",
+      "descripcion": "CENTENARIO",
+      "pais": "MÉXICO"
+    },
+    {
+      "clave": "21",
+      "descripcion": "AZTECA",
+      "pais": "MÉXICO"
+    },
+    {
+      "clave": "22",
+      "descripcion": "HIDALGO",
+      "pais": "MÉXICO"
+    },
+    {
+      "clave": "23",
+      "descripcion": "1/2 HIDALGO",
+      "pais": "MÉXICO"
+    },
+    {
+      "clave": "24",
+      "descripcion": "1/4 HIDALGO",
+      "pais": "MÉXICO"
+    },
+    {
+      "clave": "25",
+      "descripcion": "1/5 HIDALGO",
+      "pais": "MÉXICO"
+    },
+    {
+      "clave": "26",
+      "descripcion": "1 OZ LIBERTAD",
+      "pais": "MÉXICO"
+    },
+    {
+      "clave": "27",
+      "descripcion": "1/2 OZ LIBERTAD",
+      "pais": "MÉXICO"
+    },
+    {
+      "clave": "28",
+      "descripcion": "1/4 OZ LIBERTAD",
+      "pais": "MÉXICO"
+    },
+    {
+      "clave": "29",
+      "descripcion": "1/10 OZ LIBERTAD",
+      "pais": "MÉXICO"
+    },
+    {
+      "clave": "30",
+      "descripcion": "1/20 OZ LIBERTAD",
+      "pais": "MÉXICO"
+    }
+  ]
+}

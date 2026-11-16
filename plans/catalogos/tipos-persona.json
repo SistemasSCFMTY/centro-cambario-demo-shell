@@ -1,0 +1,17 @@
+{
+  "fuente": {
+    "organismo": "Secretaría de Hacienda y Crédito Público (UIF); publicado por la UIF y la CNBV",
+    "documento": "Resolución por la que se expide el formato oficial para el reporte de operaciones relevantes, inusuales y preocupantes (DOF 14-12-2004; reformas DOF 18-05-2005, 25-10-2010, 08-06-2012, 01-08-2013), Anexo 1, columna 16 TIPO DE PERSONA",
+    "url": "https://www.gob.mx/cms/uploads/attachment/file/618089/Formato_41_Campos_Compilado.pdf",
+    "version": "Compilado con reforma DOF 01-08-2013 (PDF creado 2021-02-24)",
+    "consultado": "2026-11-13",
+    "paginaPublicacion": "https://www.pld.hacienda.gob.mx/work/models/uif/librerias/documentos/formatos/Formato_41_Campos_Compilado.pdf",
+    "reporte": "Reporte de operaciones relevantes, inusuales y preocupantes (columna 16)",
+    "licencia": "No indicada",
+    "notas": "Transcrito del texto del PDF: \"Las claves son: 1 = Persona Física, 2 = Persona Moral.\" No hay hoja de Excel para este catálogo."
+  },
+  "registros": [
+    { "clave": "1", "descripcion": "Persona Física" },
+    { "clave": "2", "descripcion": "Persona Moral" }
+  ]
+}

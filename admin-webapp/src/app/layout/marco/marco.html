@@ -1,0 +1,51 @@
+<a
+  href="#contenido"
+  class="sr-only z-50 rounded-full bg-primary px-4 py-2 font-bold text-primary-foreground focus:not-sr-only focus:fixed focus:top-4 focus:left-4"
+>
+  Saltar al contenido
+</a>
+
+<div class="flex h-dvh gap-4 overflow-hidden p-2.5 sm:p-3 lg:p-4">
+  <aside class="dark hidden h-full w-72 shrink-0 lg:block">
+    <app-barra-lateral />
+  </aside>
+
+  <!-- The pane stays put (its silver and grain don't scroll); only the content inside it scrolls. -->
+  <main class="panel-principal flex min-h-0 min-w-0 flex-1 flex-col overflow-hidden rounded-2xl">
+    <div
+      #contenido
+      id="contenido"
+      tabindex="-1"
+      class="scrollbar-thin min-h-0 flex-1 overflow-y-auto outline-none"
+    >
+      <div class="flex items-center gap-3 px-4 pt-4 sm:px-6 lg:hidden">
+        <hlm-sheet #hoja side="left">
+          <button
+            hlmSheetTrigger
+            hlmBtn
+            variant="outline"
+            size="icon"
+            class="rounded-full bg-panel/70"
+          >
+            <ng-icon name="lucideMenu" size="18" aria-hidden="true" />
+            <span class="sr-only">Abrir menú</span>
+          </button>
+          <hlm-sheet-content
+            *hlmSheetPortal="let ctx"
+            [showCloseButton]="false"
+            class="dark w-80 max-w-full border-0 bg-transparent p-2 shadow-none"
+          >
+            <h2 hlmSheetTitle class="sr-only">Menú principal</h2>
+            <app-barra-lateral (navego)="hoja.close()" />
+          </hlm-sheet-content>
+        </hlm-sheet>
+        <app-logo-negocio tamano="sm" />
+        <span class="truncate text-headline">{{ nombreNegocio() }}</span>
+      </div>
+
+      <div class="p-4 sm:p-6">
+        <router-outlet />
+      </div>
+    </div>
+  </main>
+</div>

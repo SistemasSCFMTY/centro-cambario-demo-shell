@@ -1,0 +1,31 @@
+{
+  "fuente": {
+    "organismo": "Comisión Nacional Bancaria y de Valores (CNBV), por cuenta de la UIF/SHCP",
+    "documento": "Catálogos para reportes PLD/FT de centros cambiarios: archivo \"CATALOGOS FDE-FD1 (Dвlares Efectivo).xlsx\", hoja \"TIPO_IDENTIFICACION\"",
+    "url": "https://www.cnbv.gob.mx/PrevencionDeLavadoDeDinero/Documents/CATALOGO_CENTROSCAMBIARIOS_2019.zip",
+    "version": "Catálogos centros cambiarios 2019 (ZIP Last-Modified 2019-07-15; vigente en la página de la CNBV al 2026-11-13)",
+    "consultado": "2026-11-13",
+    "paginaPublicacion": "https://www.gob.mx/cnbv/acciones-y-programas/disposiciones-legales-centros-cambiarios",
+    "reporte": "Resolución por la que se expide el Formato oficial para el reporte de operaciones con dólares en efectivo de los Estados Unidos de América (DOF 06-02-2015) (ningún campo del layout publicado en DOF 06-02-2015 cita este catálogo; búsqueda de texto en el instructivo)",
+    "licencia": "No indicada en los archivos ni en la página de descarga",
+    "notas": "Se eliminaron solo espacios al inicio/fin de clave y descripción; el resto es literal (incluidos errores tipográficos del original). PARCIAL respecto a las identificaciones que admiten las Disposiciones: solo 4 claves (1, 2, 5, 13), con huecos en la numeración."
+  },
+  "registros": [
+    {
+      "clave": "1",
+      "descripcion": "CREDENCIAL PARA VOTAR"
+    },
+    {
+      "clave": "2",
+      "descripcion": "PASAPORTE"
+    },
+    {
+      "clave": "5",
+      "descripcion": "CERTIFICADO DE MATRÍCULA CONSULAR"
+    },
+    {
+      "clave": "13",
+      "descripcion": "DOCUMENTO EXPEDIDO POR EL INSTITUTO NACIONAL DE MIGRACIÓN QUE ACREDITE SU CALIDAD MIGRATORIA"
+    }
+  ]
+}

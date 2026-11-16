@@ -1,0 +1,175 @@
+{
+  "fuente": {
+    "organismo": "Comisión Nacional Bancaria y de Valores (CNBV), por cuenta de la UIF/SHCP",
+    "documento": "Catálogos para reportes PLD/FT de centros cambiarios: archivo \"CATALOGOS RIPS F41.xlsx\", hoja \"TIPO_OPERACION\"",
+    "url": "https://www.cnbv.gob.mx/PrevencionDeLavadoDeDinero/Documents/CATALOGO_CENTROSCAMBIARIOS_2019.zip",
+    "version": "Catálogos centros cambiarios 2019 (ZIP Last-Modified 2019-07-15; vigente en la página de la CNBV al 2026-11-13)",
+    "consultado": "2026-11-13",
+    "paginaPublicacion": "https://www.gob.mx/cnbv/acciones-y-programas/disposiciones-legales-centros-cambiarios",
+    "reporte": "Resolución por la que se expide el formato oficial para el reporte de operaciones relevantes, inusuales y preocupantes (DOF 14-12-2004; reformas DOF 18-05-2005, 25-10-2010, 08-06-2012, 01-08-2013) (columna 8 TIPO DE OPERACIÓN)",
+    "licencia": "No indicada en los archivos ni en la página de descarga",
+    "notas": "Se eliminaron solo espacios al inicio/fin de clave y descripción; el resto es literal (incluidos errores tipográficos del original)."
+  },
+  "registros": [
+    {
+      "clave": "00",
+      "descripcion": "TENTATIVA"
+    },
+    {
+      "clave": "01",
+      "descripcion": "DEPOSITO"
+    },
+    {
+      "clave": "02",
+      "descripcion": "RETIRO"
+    },
+    {
+      "clave": "03",
+      "descripcion": "COMPRA DIVISAS"
+    },
+    {
+      "clave": "04",
+      "descripcion": "VENTA DIVISAS"
+    },
+    {
+      "clave": "05",
+      "descripcion": "CHEQUES DE CAJA"
+    },
+    {
+      "clave": "06",
+      "descripcion": "GIROS"
+    },
+    {
+      "clave": "07",
+      "descripcion": "ORDENES DE PAGO"
+    },
+    {
+      "clave": "08",
+      "descripcion": "OTORGAMIENTO DE CREDITO"
+    },
+    {
+      "clave": "09",
+      "descripcion": "PAGO DE CREDITO"
+    },
+    {
+      "clave": "10",
+      "descripcion": "PAGO DE PRIMAS U OPERACION DE REASEGURO"
+    },
+    {
+      "clave": "11",
+      "descripcion": "APORTACIONES A UN CONTRATO/FIDEICOMISO"
+    },
+    {
+      "clave": "12",
+      "descripcion": "DEPOSITOS EN GARANTIA"
+    },
+    {
+      "clave": "13",
+      "descripcion": "SALVAMENTOS"
+    },
+    {
+      "clave": "14",
+      "descripcion": "DEPOSITO PATRONAL"
+    },
+    {
+      "clave": "15",
+      "descripcion": "DEPOSITO DE TRABAJADOR"
+    },
+    {
+      "clave": "16",
+      "descripcion": "PRESTAMOS O CREDITOS PARA LA ADQUISICION DE VALORES CON GARANTIA"
+    },
+    {
+      "clave": "17",
+      "descripcion": "REPORTOS Y PRESTAMOS SOBRE VALORES"
+    },
+    {
+      "clave": "18",
+      "descripcion": "COMPRA DE VALORES"
+    },
+    {
+      "clave": "19",
+      "descripcion": "VENTA DE VALORES"
+    },
+    {
+      "clave": "20",
+      "descripcion": "DEPOSITO DE APORTACION VOLUNTARIA O COMPLEMENTARIA"
+    },
+    {
+      "clave": "21",
+      "descripcion": "DISPOSICION DE APORTACION VOLUNTARIA O COMPLEMENTARIA"
+    },
+    {
+      "clave": "22",
+      "descripcion": "ALMACENAMIENTO DE BIENES O MERCANCIAS"
+    },
+    {
+      "clave": "23",
+      "descripcion": "EMPAQUE Y ENVASADO DE BIENES Y MERCANCIAS"
+    },
+    {
+      "clave": "24",
+      "descripcion": "GESTION DE GARANTIAS"
+    },
+    {
+      "clave": "25",
+      "descripcion": "SERVICIOS DE DEPOSITO FISCAL"
+    },
+    {
+      "clave": "26",
+      "descripcion": "CONTRATACION DE ARRENDAMIENTO FINANCIERO"
+    },
+    {
+      "clave": "27",
+      "descripcion": "PAGO DE RENTAS DE ARRENDAMIENTO FINANCIERO"
+    },
+    {
+      "clave": "28",
+      "descripcion": "VENTA DE BIENES ARRENDADOS"
+    },
+    {
+      "clave": "29",
+      "descripcion": "ADQUISICION DE BIENES DEL FUTURO ARRENDATARIO"
+    },
+    {
+      "clave": "30",
+      "descripcion": "RECEPCION DE PRESTAMOS"
+    },
+    {
+      "clave": "31",
+      "descripcion": "ADQUISICION DE DOCUMENTOS"
+    },
+    {
+      "clave": "32",
+      "descripcion": "CONTRATACION, CONSTRUCCION O ADMINISTRACION DE OBRAS"
+    },
+    {
+      "clave": "33",
+      "descripcion": "PROMOCION DE ORGANIZACION Y ADMINISTRACION DE EMPRESAS"
+    },
+    {
+      "clave": "34",
+      "descripcion": "COMPRA Y VENTA DE FRUTOS O PRODUCTOS"
+    },
+    {
+      "clave": "35",
+      "descripcion": "CONTRATOS DE FACTORAJE FINANCIERO"
+    },
+    {
+      "clave": "36",
+      "descripcion": "SERVICIOS DE ADMINISTRACION Y COBRANZA DE CREDITOS"
+    },
+    {
+      "clave": "37",
+      "descripcion": "RECUPERACION TOTAL"
+    },
+    {
+      "clave": "98",
+      "descripcion": "SALIDA DE MAS DE $10MIL DLS (EXCLUSIVO DECLARACION DE ADUANAS)"
+    },
+    {
+      "clave": "99",
+      "descripcion": "ENTRADA DE MAS DE $10MIL DLS (EXCLUSIVO DECLARACION DE ADUANAS)"
+    }
+  ]
+}

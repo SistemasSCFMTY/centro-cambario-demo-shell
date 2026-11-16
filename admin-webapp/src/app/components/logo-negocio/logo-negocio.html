@@ -1,0 +1,11 @@
+@if (marca()?.logoUrl; as logo) {
+  <img [src]="logo" [alt]="marca()?.nombre" [class]="clasesTamano()" class="object-contain" />
+} @else {
+  <span
+    aria-hidden="true"
+    [class]="clasesTamano()"
+    class="inline-flex items-center justify-center bg-primary font-extrabold text-primary-foreground"
+  >
+    {{ iniciales() }}
+  </span>
+}
