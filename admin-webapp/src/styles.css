@@ -459,6 +459,22 @@
   scrollbar-width: thin;
 }
 
+/* A block that folds to zero height; `data-abierto` unfolds it. Pair with `inert` while closed. */
+@utility despliegue {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 200ms var(--ease-soft);
+
+  &[data-abierto] {
+    grid-template-rows: 1fr;
+  }
+
+  & > * {
+    min-height: 0;
+    overflow: hidden;
+  }
+}
+
 /* The current page's nav link (routerLink sets aria-current="page"). */
 @custom-variant pagina-actual (&[aria-current='page']);
 

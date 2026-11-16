@@ -1,57 +1,65 @@
 <div
   class="flex h-full flex-col rounded-2xl bg-chrome-card text-chrome-text ring-1 ring-chrome-line"
 >
-  <div class="flex items-center gap-3 px-5 pt-5">
-    <app-logo-negocio />
-    <span class="text-title-3">{{ nombreNegocio() }}</span>
-  </div>
-
-  <div class="px-5 pt-5 pb-1">
-    @if (usuario(); as u) {
-      <p class="text-callout text-chrome-muted">Bienvenido de nuevo</p>
-      <p class="truncate text-title-1">{{ u.nombre }}</p>
-    } @else {
-      <p class="text-title-1">Administración</p>
-    }
-    <p class="mt-0.5 text-subheadline text-chrome-muted first-letter:uppercase">
-      {{ hoy | date: 'fullDate' }}
-    </p>
+  <div class="flex items-center gap-3 px-5 pt-5 pb-4">
+    <app-logo-negocio tamano="sm" />
+    <span class="min-w-0 truncate text-headline" [title]="nombreNegocio()">{{
+      nombreNegocio()
+    }}</span>
   </div>
 
   <nav aria-label="Principal" class="scrollbar-thin min-h-0 flex-1 overflow-y-auto px-3 pb-3">
-    @for (grupo of grupos; track $index) {
-      @if (grupo.etiqueta) {
-        <p class="px-3 pt-4 pb-1 text-caption-1 font-bold text-chrome-muted">
-          {{ grupo.etiqueta }}
-        </p>
+    @for (grupo of grupos; track $index; let i = $index) {
+      @if (grupo.etiqueta; as etiqueta) {
+        <button
+          type="button"
+          [attr.aria-expanded]="abierto()[etiqueta]"
+          [attr.aria-controls]="prefijo + '-' + i"
+          (click)="alternar(etiqueta)"
+          class="group/grupo mt-3 flex h-8 w-full items-center justify-between rounded-full px-3.5 text-footnote font-bold text-chrome-muted hover:text-chrome-text"
+          [class.text-chrome-text]="grupoActual() === etiqueta"
+        >
+          {{ etiqueta }}
+          <ng-icon
+            name="lucideChevronRight"
+            size="14"
+            aria-hidden="true"
+            class="transition-transform duration-200 ease-soft group-aria-expanded/grupo:rotate-90"
+          />
+        </button>
       }
-      <ul class="flex flex-col gap-0.5" [class.pt-3]="!grupo.etiqueta">
-        @for (elemento of grupo.elementos; track elemento.ruta) {
-          <li>
-            <a
-              [routerLink]="['/', elemento.ruta]"
-              routerLinkActive
-              ariaCurrentWhenActive="page"
-              (click)="navego.emit()"
-              class="group flex h-9 items-center gap-3 rounded-full px-3.5 text-body text-chrome-muted hover:bg-chrome-hover hover:text-chrome-text pagina-actual:bg-chrome-raised pagina-actual:font-bold pagina-actual:text-chrome-text"
-            >
-              <ng-icon
-                [name]="elemento.icono"
-                size="18"
-                aria-hidden="true"
-                class="shrink-0 transition-colors group-pagina-actual:text-primary-400"
-              />
-              <span class="truncate">{{ elemento.etiqueta }}</span>
-            </a>
-          </li>
-        }
-      </ul>
+      <div
+        [id]="prefijo + '-' + i"
+        class="despliegue"
+        [attr.data-abierto]="!grupo.etiqueta || abierto()[grupo.etiqueta] ? '' : null"
+        [inert]="!!grupo.etiqueta && !abierto()[grupo.etiqueta]"
+      >
+        <ul class="flex flex-col gap-0.5">
+          @for (elemento of grupo.elementos; track elemento.ruta) {
+            <li>
+              <a
+                [routerLink]="['/', elemento.ruta]"
+                routerLinkActive
+                ariaCurrentWhenActive="page"
+                (click)="navego.emit()"
+                class="group flex h-9 items-center gap-3 rounded-full px-3.5 text-body text-chrome-muted -outline-offset-2 hover:bg-chrome-hover hover:text-chrome-text pagina-actual:bg-chrome-raised pagina-actual:font-bold pagina-actual:text-chrome-text"
+              >
+                <ng-icon
+                  [name]="elemento.icono"
+                  size="18"
+                  aria-hidden="true"
+                  class="shrink-0 transition-colors group-pagina-actual:text-primary-400"
+                />
+                <span class="truncate">{{ elemento.etiqueta }}</span>
+              </a>
+            </li>
+          }
+        </ul>
+      </div>
     }
   </nav>
 
-  <div class="flex flex-col gap-3 border-t border-chrome-line p-3">
-    <app-selector-modo />
-
+  <div class="border-t border-chrome-line p-3">
     @if (usuario(); as u) {
       <button
         type="button"

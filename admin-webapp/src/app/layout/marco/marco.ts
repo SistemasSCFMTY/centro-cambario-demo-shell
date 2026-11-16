@@ -9,6 +9,7 @@ import {
 import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { LogoNegocio } from '@components/logo-negocio/logo-negocio';
 import { BarraLateral } from '@layout/barra-lateral/barra-lateral';
+import { SelectorModo } from '@layout/selector-modo/selector-modo';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideMenu } from '@ng-icons/lucide';
 import { select } from '@ngxs/store';
@@ -19,12 +20,20 @@ import { filter } from 'rxjs';
 
 /**
  * The admin shell (plans/00 Visual direction, plans/05 Shell): exactly one screen tall. The Neuro
- * sidebar card stays put in both modes; only the content pane scrolls. The pane is silver metal in
+ * sidebar card stays put in both modes; a top bar holds the theme menu; only the content scrolls. The pane is silver metal in
  * light and flat Neuro dark in dark. Below lg the sidebar opens from a sheet.
  */
 @Component({
   selector: 'app-marco',
-  imports: [RouterOutlet, BarraLateral, LogoNegocio, NgIcon, HlmButtonImports, HlmSheetImports],
+  imports: [
+    RouterOutlet,
+    BarraLateral,
+    SelectorModo,
+    LogoNegocio,
+    NgIcon,
+    HlmButtonImports,
+    HlmSheetImports,
+  ],
   providers: [provideIcons({ lucideMenu })],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './marco.html',

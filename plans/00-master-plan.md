@@ -34,7 +34,8 @@ This repo is a clean rebuild ("facewash") of `../../demos/centro-cambiario-demo/
 ## Visual direction
 - **Dark mode = Neuro Bank, end to end:**
   - deep navy/black canvas and a dark main container
-  - a floating sidebar card with the logo, the "Bienvenido de nuevo" greeting and the date
+  - a floating sidebar card with the logo and business name on one line, the nav (labeled groups collapse in place) and the user menu. No greeting or date (lead, 2026-11-16)
+  - a slim top bar across the pane with the theme menu (Sistema · Claro · Oscuro) on the right
   - a pill nav whose active item sits on a lighter surface
   - glowing ECharts area/line charts. **No glow on the chrome** (lead, 2026-11-16): sidebar, nav, access card and dark pane are flat
 - **Light mode = metallic white:** the sidebar card and outer canvas **stay Neuro dark**. Only the main right container becomes the silver pane from `Jobs/DASOM/quotations/cotizacion-onp-site/index.html`:
@@ -115,6 +116,10 @@ This repo is a clean rebuild ("facewash") of `../../demos/centro-cambiario-demo/
   - one-screen shell (only the content pane scrolls), chrome glow removed, flat empty states, one panel per page
   - services are thin HTTP; Phase 1 answers them from `interceptors/simulacion-api/`
   - constants, interfaces and state defaults moved to `data/`; member order fixed; no arbitrary Tailwind values
+- **2026-11-16, sidebar pass (impeccable distill):**
+  - nav groups (Operación, Control, Administración) collapse in place; the group holding the current page opens on its own; closed groups are `inert`
+  - theme switch moved out of the sidebar into a dropdown in the pane's top bar; greeting and date removed; brand on one line
+  - fits 1366×768 with room to spare (603 px nav, only overflows by 27 px with every group open)
 
 ## Related plans
 - [`01-table-detail-rules.md`](01-table-detail-rules.md): table and detail-view styling rules, copied from manttio-whitelabeled/superadmin.
@@ -125,5 +130,6 @@ This repo is a clean rebuild ("facewash") of `../../demos/centro-cambiario-demo/
 - [`catalogos/`](catalogos/README.md): official CNBV / Banxico catalogs as JSON fixtures.
 
 ## OPEN: needs the lead's call
-- The 1366×768 sidebar fit (`05` OPEN).
+- Form action placement (`05` OPEN).
+
 `negocio` is drafted in `04-negocio.md`.

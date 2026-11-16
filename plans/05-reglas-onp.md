@@ -78,7 +78,7 @@
 |---|---|---|---|
 | `text-display` | 60/60 | 800 | Hero number inside a visual |
 | `text-large-title` | 34/41 | 700 | Page title (`h1` default) |
-| `text-title-1` | 28/34 | 700 | Secondary metrics, the sidebar greeting name |
+| `text-title-1` | 28/34 | 700 | Secondary metrics |
 | `text-title-2` | 22/28 | 700 | Section titles (`h2` default) |
 | `text-title-3` | 20/25 | 700 | Dialog titles, brand name |
 | `text-headline` | 17/22 | 700 | Subsections (`h3`/`h4` default), row titles |
@@ -95,7 +95,8 @@
 ## Shell
 - `h-dvh overflow-hidden`: exactly one screen tall. The sidebar is not sticky; it sits at `h-full` and its nav scrolls inside it.
 - The silver pane doesn't scroll (so its gradient and grain stay put). **Only the content inside it scrolls** (`#contenido`), and `Marco` resets it to the top on each navigation.
-- The theme switch **stays in the sidebar**. onp keeps it in an account popover; that is option 2 of the open 1366×768 sidebar question.
+- **Top bar** (lead, 2026-11-16): a slim row across the top of the pane, outside the scroller. It holds the theme menu (icon button → Sistema · Claro · Oscuro radio menu) on the right; below `lg` it also holds the menu button and the brand.
+- **Sidebar** (lead, 2026-11-16): brand on one line (`sm` logo + `text-headline`, truncated), the nav, the user menu. No greeting or date. Labeled groups collapse in place (`despliegue` utility, `inert` while closed); the group holding the current page opens on arrival.
 
 ## Page anatomy
 ```html
@@ -129,4 +130,3 @@
 
 ## OPEN: needs the lead's call
 - **Form actions:** `02` plans a sticky action bar on the client form; onp puts Cancelar/Guardar at the bottom right of the last section (or each section's own save). Which one?
-- The 1366×768 sidebar fit (from 2026-11-16): the nav shows 469 of its 618 px, and Administración sits below the fold. The options are the same four as before (hide the greeting on short screens, move the theme switch into an account menu, tighten rows, keep scrolling with a fade).

@@ -1,20 +1,30 @@
-<div
-  role="radiogroup"
-  aria-label="Tema"
-  class="grid grid-cols-3 gap-1 rounded-full bg-chrome-canvas p-1 ring-1 ring-chrome-line"
+<button
+  type="button"
+  hlmBtn
+  variant="outline"
+  size="icon"
+  [hlmDropdownMenuTrigger]="menuModo"
+  align="end"
+  class="rounded-full bg-panel/70"
 >
-  @for (opcion of opciones; track opcion.valor; let i = $index) {
-    <button
-      type="button"
-      role="radio"
-      [attr.aria-checked]="modo() === opcion.valor"
-      [tabindex]="modo() === opcion.valor ? 0 : -1"
-      (click)="establecer(opcion.valor)"
-      (keydown)="mover($event, i)"
-      class="flex h-8 items-center justify-center gap-1.5 rounded-full text-subheadline text-chrome-muted hover:text-chrome-text aria-checked:bg-chrome-raised aria-checked:text-chrome-text"
-    >
-      <ng-icon [name]="opcion.icono" size="14" aria-hidden="true" />
-      <span>{{ opcion.etiqueta }}</span>
-    </button>
-  }
-</div>
+  <ng-icon [name]="actual().icono" size="16" aria-hidden="true" />
+  <span class="sr-only">Tema: {{ actual().etiqueta }}</span>
+</button>
+
+<ng-template #menuModo>
+  <hlm-dropdown-menu class="w-44">
+    <hlm-dropdown-menu-label>Tema</hlm-dropdown-menu-label>
+    @for (opcion of opciones; track opcion.valor) {
+      <button
+        hlmDropdownMenuRadio
+        [checked]="modo() === opcion.valor"
+        [keepOpen]="false"
+        (triggered)="establecer(opcion.valor)"
+      >
+        <ng-icon [name]="opcion.icono" size="16" aria-hidden="true" />
+        {{ opcion.etiqueta }}
+        <hlm-dropdown-menu-radio-indicator />
+      </button>
+    }
+  </hlm-dropdown-menu>
+</ng-template>
