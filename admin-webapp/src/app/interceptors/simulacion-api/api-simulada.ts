@@ -17,11 +17,14 @@ import { MARCA_DEMO } from '@data/fixtures/marca.fixture';
 import { CODIGO_OTP_PRUEBA, USUARIOS_PRUEBA } from '@data/fixtures/usuarios.fixture';
 import { RetoPendiente } from '@data/interfaces/reto-pendiente';
 import { CodigoErrorAutenticacion } from '@data/types/autenticacion.types';
+import { RespuestaSimulada } from '@data/types/simulacion.types';
+import { MANEJADORES } from '@interceptors/simulacion-api/manejadores/manejadores';
 import { enmascararCorreo } from '@utils/autenticacion/error-autenticacion';
 
 /**
  * **Phase 1 only:** a stand-in for backend-api, answered in the browser (plans/00). It plays the
- * server's part for branding and for login → OTP → session against the two test users, so the
+ * server's part for branding and for login → OTP → session against the two test users, and hands
+ * every module's routes to its handler in `manejadores/`, so the
  * services stay thin HTTP and the states never know. Its pending OTP steps are the server's memory,
  * not app state. Phase 2 deletes this folder and the interceptor line in app.config.ts.
  */
@@ -29,8 +32,8 @@ import { enmascararCorreo } from '@utils/autenticacion/error-autenticacion';
 export class ApiSimulada {
   private readonly retos = new Map<string, RetoPendiente>();
 
-  /** The response for a request under URL_API, or null for a route it doesn't know. */
-  responder(solicitud: HttpRequest<unknown>): HttpResponse<unknown> | null {
+  /** The response for a request under URL_API (possibly still loading), or null for a route it doesn't know. */
+  responder(solicitud: HttpRequest<unknown>): RespuestaSimulada | null {
     switch (solicitud.url) {
       case RUTAS_API.marca:
         return this.ok(solicitud, MARCA_DEMO);
@@ -41,8 +44,17 @@ export class ApiSimulada {
       case RUTAS_API.reenvio:
         return this.reenviarCodigo(solicitud as HttpRequest<ReenvioDto>);
       default:
-        return null;
+        return this.delegar(solicitud);
     }
+  }
+
+  /** The module handlers (`manejadores/`), in order; null when none of them owns the route. */
+  private delegar(solicitud: HttpRequest<unknown>): RespuestaSimulada | null {
+    for (const manejador of MANEJADORES) {
+      const respuesta = manejador.responder(solicitud);
+      if (respuesta) return respuesta;
+    }
+    return null;
   }
 
   private iniciarSesion(solicitud: HttpRequest<CredencialesDto>): HttpResponse<RetoOtpDto> {

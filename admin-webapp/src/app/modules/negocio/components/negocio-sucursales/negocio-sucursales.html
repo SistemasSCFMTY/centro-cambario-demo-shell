@@ -1,0 +1,142 @@
+@if (error() && filas().length === 0) {
+  <div class="px-8 py-4">
+    <p class="callout callout-danger" role="alert">{{ error() }}</p>
+  </div>
+}
+<app-tabla-datos
+  titulo="Sucursales"
+  alto="alta"
+  campoEtiquetaAccion="nombre"
+  [etiquetaAccion]="null"
+  [columnas]="columnas"
+  [filas]="filas()"
+  [total]="pagina()?.total ?? 0"
+  [cargando]="cargando()"
+  [pagina]="lista.estado().pagina"
+  [tamano]="lista.estado().tamano"
+  [tamanos]="esquema.tamanos"
+  [orden]="lista.estado().orden"
+  [ordenInicial]="esquema.ordenInicial"
+  [ordenables]="esquema.ordenables"
+  [vacioTitulo]="hayFiltros() ? 'Sin resultados' : 'Aún no hay sucursales'"
+  [vacioDescripcion]="
+    hayFiltros() ? 'Revise los filtros.' : 'Agregue la primera sucursal del centro cambiario.'
+  "
+  (paginaCambia)="lista.irAPagina($event)"
+  (tamanoCambia)="lista.cambiarTamano($event)"
+  (ordenCambia)="lista.ordenar($event)"
+  (filaClic)="editar($event)"
+>
+  <ng-template appCeldaTabla="clave" [filas]="filas()" let-fila>
+    <span class="font-data">{{ fila.clave }}</span>
+  </ng-template>
+  <ng-template appCeldaTabla="nombre" [filas]="filas()" let-fila>
+    <app-celda-principal
+      tipo="cosa"
+      icono="lucideBuilding2"
+      [nombre]="fila.nombre"
+      [detalle]="fila.entidad"
+    />
+  </ng-template>
+  <ng-template appCeldaTabla="codigoPostal" [filas]="filas()" let-fila>
+    @if (fila.codigoPostal) {
+      <span class="font-data">{{ fila.codigoPostal }}</span>
+    } @else {
+      <app-pill-estatus [ajuste]="pillFalta" />
+    }
+  </ng-template>
+  <ng-template appCeldaTabla="localidad" [filas]="filas()" let-fila>
+    @if (fila.localidad) {
+      <span class="font-data">{{ fila.localidad }}</span>
+      @if (fila.localidadDescripcion) {
+        <span class="block text-caption-1 text-ink-muted">{{ fila.localidadDescripcion }}</span>
+      }
+    } @else {
+      <app-pill-estatus [ajuste]="pillFalta" />
+    }
+  </ng-template>
+  <ng-template appCeldaTabla="domicilio" [filas]="filas()" let-fila>
+    @let domicilio = fila | appDomicilio;
+    <span class="block max-w-80 truncate" [attr.title]="domicilio">{{ domicilio || '—' }}</span>
+  </ng-template>
+  <ng-template appCeldaTabla="estatus" [filas]="filas()" let-fila>
+    <app-pill-estatus [ajuste]="pillEstatus[fila.estatus]" />
+  </ng-template>
+  <ng-template appCeldaTabla="acciones" [filas]="filas()" let-fila>
+    <div class="flex items-center gap-1">
+      <button
+        type="button"
+        class="row-action"
+        [attr.aria-label]="'Editar ' + fila.nombre"
+        (click)="$event.stopPropagation(); editar(fila)"
+      >
+        <ng-icon name="lucidePencil" size="16" aria-hidden="true" />
+      </button>
+      @if (fila.estatus === 'ACTIVA') {
+        <button
+          type="button"
+          class="row-action row-action-danger"
+          [attr.aria-label]="'Dar de baja ' + fila.nombre"
+          (click)="$event.stopPropagation(); pedirConfirmacion(fila)"
+        >
+          <ng-icon name="lucideBan" size="16" aria-hidden="true" />
+        </button>
+      } @else {
+        <button
+          type="button"
+          class="row-action row-action-success"
+          [attr.aria-label]="'Reactivar ' + fila.nombre"
+          (click)="$event.stopPropagation(); pedirConfirmacion(fila)"
+        >
+          <ng-icon name="lucideRotateCcw" size="16" aria-hidden="true" />
+        </button>
+      }
+    </div>
+  </ng-template>
+  <a vacio-accion hlmBtn variant="outline" size="sm" routerLink="/negocio/sucursales/nueva">
+    Nueva sucursal
+  </a>
+</app-tabla-datos>
+
+<p class="border-t border-line px-8 py-4 text-caption-1 text-ink-muted">{{ nota }}</p>
+
+<hlm-dialog [state]="estadoDialogo()" (stateChanged)="alCambiarEstado($event)">
+  <hlm-dialog-content *hlmDialogPortal="let ctx">
+    @if (confirmando(); as sucursal) {
+      <hlm-dialog-header>
+        <h2 hlmDialogTitle class="text-title-3">
+          {{
+            sucursal.estatus === 'ACTIVA' ? '¿Dar de baja la sucursal?' : '¿Reactivar la sucursal?'
+          }}
+        </h2>
+        <p hlmDialogDescription class="text-callout text-ink-muted">
+          @if (sucursal.estatus === 'ACTIVA') {
+            {{ sucursal.nombre }} deja de operar. Sus operaciones y su historial se conservan.
+          } @else {
+            {{ sucursal.nombre }} vuelve a estar disponible para operar.
+          }
+        </p>
+      </hlm-dialog-header>
+      @if (errorGuardado(); as mensaje) {
+        <p class="callout callout-danger" role="alert">{{ mensaje }}</p>
+      }
+      <hlm-dialog-footer>
+        <button hlmBtn variant="secondary" type="button" [disabled]="guardando()" hlmDialogClose>
+          Cancelar
+        </button>
+        <button
+          hlmBtn
+          type="button"
+          [variant]="sucursal.estatus === 'ACTIVA' ? 'destructive' : 'default'"
+          [disabled]="guardando()"
+          (click)="confirmar()"
+        >
+          @if (guardando()) {
+            <hlm-spinner class="size-4" aria-hidden="true" />
+          }
+          {{ sucursal.estatus === 'ACTIVA' ? 'Dar de baja' : 'Reactivar' }}
+        </button>
+      </hlm-dialog-footer>
+    }
+  </hlm-dialog-content>
+</hlm-dialog>

@@ -6,14 +6,14 @@
 </a>
 
 <div class="flex h-dvh gap-4 overflow-hidden p-2.5 sm:p-3 lg:p-4">
-  <aside class="dark hidden h-full w-72 shrink-0 lg:block">
+  <aside class="dark hidden h-full w-76 shrink-0 lg:block">
     <app-barra-lateral />
   </aside>
 
   <!-- The pane stays put (its silver and grain don't scroll); only the content inside it scrolls. -->
   <main class="panel-principal flex min-h-0 min-w-0 flex-1 flex-col overflow-hidden rounded-2xl">
-    <header class="flex shrink-0 items-center gap-3 px-4 py-3 sm:px-6">
-      <div class="flex min-w-0 items-center gap-3 lg:hidden">
+    <header class="flex shrink-0 items-center gap-3 px-4 py-3 sm:px-6 lg:hidden">
+      <div class="flex min-w-0 items-center gap-3">
         <hlm-sheet #hoja side="left">
           <button
             hlmSheetTrigger
@@ -37,8 +37,6 @@
         <app-logo-negocio tamano="sm" />
         <span class="truncate text-headline">{{ nombreNegocio() }}</span>
       </div>
-
-      <app-selector-modo class="ms-auto" />
     </header>
 
     <div
@@ -47,9 +45,7 @@
       tabindex="-1"
       class="scrollbar-thin min-h-0 flex-1 overflow-y-auto outline-none"
     >
-      <div class="px-4 pb-4 sm:px-6 sm:pb-6">
-        <router-outlet />
-      </div>
+      <router-outlet />
     </div>
   </main>
 </div>

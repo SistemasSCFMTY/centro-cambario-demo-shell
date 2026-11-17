@@ -1,0 +1,99 @@
+<article class="panel animate-page-in">
+  <app-encabezado-pagina
+    titulo="Caja"
+    descripcion="Cajas y bóveda de cada sucursal: estatus, responsable y existencia por divisa."
+  >
+    <a hlmBtn variant="outline" [routerLink]="['/caja', 'cortes']">Cortes y arqueos</a>
+    <app-filtros-popover [filtros]="esquema().filtros" />
+  </app-encabezado-pagina>
+
+  @if (error()) {
+    <div class="border-t border-line px-8 py-4">
+      <div class="callout callout-danger" role="alert">{{ error() }}</div>
+    </div>
+  }
+
+  <section class="border-t border-line px-8 py-6" aria-labelledby="titulo-existencia">
+    <h2 id="titulo-existencia" class="mb-4">Existencia total</h2>
+    @if (pagina()) {
+      <dl class="flex flex-wrap gap-y-4">
+        @for (total of totales(); track total.divisa; let primero = $first) {
+          <div class="min-w-0 border-line px-6 first:ps-0 not-first:border-s">
+            <dt class="micro-label">{{ total.divisa }}</dt>
+            <dd
+              class="font-data mt-0.5 truncate"
+              [class.text-title-1]="primero"
+              [class.text-title-3]="!primero"
+            >
+              {{ total.saldo | appNumero: total.decimales }}
+            </dd>
+          </div>
+        }
+      </dl>
+    } @else {
+      <div class="flex gap-6" role="status" aria-label="Cargando existencia">
+        @for (divisa of divisas; track divisa) {
+          <div>
+            <span class="skeleton max-w-12"></span>
+            <span class="skeleton mt-2 max-w-24"></span>
+          </div>
+        }
+      </div>
+    }
+    <p class="mt-4 max-w-prose text-footnote text-ink-muted">
+      La existencia de cada caja es la suma de sus movimientos. El efectivo en tránsito (traspasos
+      enviados y no recibidos) no está en ninguna caja.
+    </p>
+  </section>
+
+  <section class="border-t border-line" aria-label="Cajas y bóvedas">
+    <app-tabla-datos
+      titulo="Cajas y bóvedas"
+      [columnas]="columnas()"
+      [filas]="filas()"
+      [total]="total()"
+      [cargando]="cargando()"
+      [pagina]="lista.estado().pagina"
+      [tamano]="lista.estado().tamano"
+      [tamanos]="esquema().tamanos"
+      [orden]="lista.estado().orden"
+      [ordenInicial]="esquema().ordenInicial"
+      [ordenables]="esquema().ordenables"
+      alto="alta"
+      [filaClicable]="false"
+      [etiquetaAccion]="null"
+      vacioTitulo="No hay cajas con estos filtros"
+      vacioDescripcion="Cambie los filtros para ver otras cajas o bóvedas."
+      (paginaCambia)="lista.irAPagina($event)"
+      (tamanoCambia)="lista.cambiarTamano($event)"
+      (ordenCambia)="lista.ordenar($event)"
+    >
+      <ng-template appCeldaTabla="caja" [filas]="filas()" let-fila>
+        <app-celda-principal
+          tipo="cosa"
+          [icono]="fila.tipo === 'BOVEDA' ? 'lucideVault' : 'lucideBanknote'"
+          [nombre]="fila.nombre"
+          [detalle]="fila.sucursal + ' · ' + fila.clave"
+        />
+      </ng-template>
+      <ng-template appCeldaTabla="estatus" [filas]="filas()" let-fila>
+        <app-pill-estatus [ajuste]="pillEstatus[fila.estatus]" />
+        @if (fila.responsable) {
+          <p class="mt-0.5 text-caption-1 whitespace-nowrap text-ink-muted">
+            {{ fila.responsable }}
+            @if (fila.abiertaEn) {
+              <span class="font-data">· desde {{ fila.abiertaEn | appFechaHora }}</span>
+            }
+          </p>
+        }
+      </ng-template>
+      @for (divisa of divisas; track divisa) {
+        <ng-template [appCeldaTabla]="divisa" [filas]="filas()" let-fila>
+          <span [class.text-ink-subtle]="fila.estatus === 'INACTIVA' || fila.saldos[divisa] === 0">
+            {{ fila.saldos[divisa] | appNumero: decimales()[divisa] }}
+          </span>
+        </ng-template>
+      }
+    </app-tabla-datos>
+  </section>
+</article>

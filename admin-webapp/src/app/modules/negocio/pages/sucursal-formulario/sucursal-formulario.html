@@ -1,0 +1,57 @@
+<article class="panel animate-page-in">
+  <app-encabezado-pagina
+    [titulo]="titulo()"
+    [descripcion]="descripcion()"
+    [volverA]="['/negocio']"
+    [volverParametros]="volverParametros"
+    etiquetaVolver="Volver a negocio"
+  />
+
+  @if (!listo()) {
+    @if (errorCarga()) {
+      <div class="border-t border-line px-8 py-4">
+        <p class="callout callout-danger" role="alert">{{ errorCarga() }}</p>
+      </div>
+    } @else {
+      <div class="border-t border-line px-8 py-8" role="status" aria-label="Cargando sucursal">
+        <span class="skeleton max-w-24"></span>
+        <div class="mt-4 grid gap-x-6 gap-y-4 sm:grid-cols-2">
+          @for (campo of [1, 2, 3, 4]; track campo) {
+            <div>
+              <span class="skeleton max-w-24"></span>
+              <span class="skeleton mt-2 max-w-48"></span>
+            </div>
+          }
+        </div>
+      </div>
+    }
+  } @else {
+    @if (errorGuardado(); as mensaje) {
+      <div class="border-t border-line px-8 py-4">
+        <p class="callout callout-danger" role="alert">{{ mensaje }}</p>
+      </div>
+    }
+    @for (seccion of secciones; track seccion.id) {
+      <app-seccion-negocio
+        [seccion]="seccion"
+        [grupo]="formulario"
+        [opciones]="opciones()"
+        prefijo="sucursal"
+        [cargandoGeografia]="cargandoGeografia()"
+        [errorGeografia]="errorGeografia()"
+      />
+    }
+  }
+
+  <app-barra-acciones
+    [guardando]="guardando()"
+    [guardarDeshabilitado]="!listo()"
+    [etiquetaGuardar]="id ? 'Guardar cambios' : 'Agregar sucursal'"
+    (cancelar)="cancelar()"
+    (guardar)="guardar()"
+  >
+    @if (intentado()) {
+      <span role="alert">Revise los campos marcados antes de guardar.</span>
+    }
+  </app-barra-acciones>
+</article>

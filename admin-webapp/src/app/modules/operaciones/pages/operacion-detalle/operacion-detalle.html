@@ -1,0 +1,76 @@
+@if (noEncontrada()) {
+  <article class="panel animate-page-in">
+    <app-encabezado-pagina
+      titulo="Operación"
+      [volverA]="['/operaciones']"
+      etiquetaVolver="Volver a operaciones"
+    />
+    <section class="border-t border-line" aria-label="Operación no encontrada">
+      <div class="flex min-h-60 flex-col items-center justify-center gap-3 p-8 text-center">
+        <ng-icon
+          name="lucideSearchX"
+          size="28"
+          [strokeWidth]="1.5"
+          class="text-ink-subtle"
+          aria-hidden="true"
+        />
+        <div>
+          <p class="text-headline">No encontramos esta operación</p>
+          <p class="text-callout text-ink-muted">
+            Puede que el enlace sea incorrecto. Vuelve al listado para buscarla.
+          </p>
+        </div>
+        <a class="link-action" routerLink="/operaciones">Ir a operaciones</a>
+      </div>
+    </section>
+  </article>
+} @else {
+  <app-detalle-pagina
+    [titulo]="titulo()"
+    [descripcion]="descripcion()"
+    [volverA]="['/operaciones']"
+    etiquetaVolver="Volver a operaciones"
+    claveUrl="tab"
+    [cargando]="cargando()"
+    etiquetaCarga="Cargando operación"
+    [(pestana)]="pestana"
+  >
+    @if (falla()) {
+      <section class="px-8 py-4" aria-label="Error">
+        <div
+          class="callout callout-danger flex flex-wrap items-center justify-between gap-3"
+          role="alert"
+        >
+          <p>{{ error() }}</p>
+          <button type="button" class="link-action" (click)="reintentar()">Reintentar</button>
+        </div>
+      </section>
+    }
+
+    @if (pill(); as ajuste) {
+      <app-pill-estatus meta [ajuste]="ajuste" />
+    }
+
+    @switch (pestana()) {
+      @case ('auditoria') {
+        <app-pestana-auditoria [registros]="auditoria()" />
+      }
+      @default {
+        @for (seccion of secciones(); track seccion.id; let primera = $first) {
+          <section
+            class="px-8 py-8"
+            [class.border-t]="!primera"
+            [class.border-line]="!primera"
+            [attr.aria-labelledby]="'seccion-' + seccion.id"
+          >
+            <header>
+              <h2 [id]="'seccion-' + seccion.id">{{ seccion.titulo }}</h2>
+              <p class="max-w-prose text-callout text-ink-muted">{{ seccion.descripcion }}</p>
+            </header>
+            <app-cuadricula-campos [campos]="seccion.campos" [columnas]="3" />
+          </section>
+        }
+      }
+    }
+  </app-detalle-pagina>
+}

@@ -1,0 +1,99 @@
+<section class="px-8 pt-8" aria-labelledby="legal-claves">
+  <h2 id="legal-claves">Claves para los reportes oficiales</h2>
+  <p class="callout callout-info mt-3">{{ aviso }}</p>
+  <div class="card-flush-table relative mt-6">
+    <div hlmTableContainer appDesvanecidoDesplazamiento class="scrollbar-thin">
+      <table hlmTable class="text-subheadline whitespace-nowrap">
+        <caption class="sr-only">
+          Claves para los reportes oficiales
+        </caption>
+        <thead class="bg-panel-muted">
+          <tr>
+            <th scope="col" class="micro-label px-8 py-3 text-start whitespace-nowrap">Dato</th>
+            <th scope="col" class="micro-label px-4 py-3 text-start whitespace-nowrap">Valor</th>
+            <th scope="col" class="micro-label px-4 py-3 text-start whitespace-nowrap">
+              Fundamento
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (clave of claves(); track clave.dato) {
+            <tr class="border-0">
+              <td class="px-8 py-2.5 text-subheadline font-bold text-ink">{{ clave.dato }}</td>
+              <td class="font-data px-4 py-2.5 text-subheadline whitespace-nowrap text-ink">
+                {{ clave.valor || '—' }}
+              </td>
+              <td class="px-4 py-2.5 text-subheadline text-ink-muted">{{ clave.fundamento }}</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+@for (seccion of secciones(); track seccion.id) {
+  <section class="border-t border-line px-8 py-8" [attr.aria-labelledby]="'legal-' + seccion.id">
+    <h2 [id]="'legal-' + seccion.id">{{ seccion.titulo }}</h2>
+    <app-cuadricula-campos [campos]="seccion.campos" [columnas]="3" />
+  </section>
+}
+
+<section class="border-t border-line pt-8" aria-labelledby="legal-documentos">
+  <h2 id="legal-documentos" class="px-8">Documentos legales</h2>
+  <div class="relative mt-3">
+    <div hlmTableContainer appDesvanecidoDesplazamiento class="scrollbar-thin">
+      <table hlmTable class="text-subheadline whitespace-nowrap">
+        <caption class="sr-only">
+          Documentos legales
+        </caption>
+        <thead class="bg-panel-muted">
+          <tr>
+            <th scope="col" class="micro-label px-8 py-3 text-start whitespace-nowrap">
+              Documento
+            </th>
+            <th scope="col" class="micro-label px-4 py-3 text-start whitespace-nowrap">Archivo</th>
+            <th scope="col" class="micro-label px-4 py-3 text-start whitespace-nowrap">Fecha</th>
+            <th scope="col" class="micro-label px-4 py-3 text-start whitespace-nowrap">Vigencia</th>
+            <th scope="col" class="w-px px-4 py-3"><span class="sr-only">Ver</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (documento of documentos(); track documento.id) {
+            <tr class="border-0">
+              <td class="px-8 py-2.5 text-subheadline font-bold whitespace-nowrap text-ink">
+                {{ documento.etiqueta }}
+              </td>
+              <td class="px-4 py-2.5 text-subheadline whitespace-nowrap text-ink">
+                @if (documento.archivo) {
+                  {{ documento.archivo }}
+                  <span class="font-data text-caption-1 text-ink-muted"
+                    >({{ documento.tamano }})</span
+                  >
+                } @else {
+                  <app-pill-estatus [ajuste]="pillPendiente" />
+                }
+              </td>
+              <td class="font-data px-4 py-2.5 text-subheadline whitespace-nowrap text-ink">
+                {{ documento.fecha | appFecha }}
+              </td>
+              <td class="font-data px-4 py-2.5 text-subheadline whitespace-nowrap text-ink">
+                {{ documento.vigencia | appFecha }}
+              </td>
+              <td class="px-4 py-2.5">
+                <button
+                  type="button"
+                  class="row-action"
+                  [disabled]="!documento.archivo"
+                  [attr.aria-label]="'Ver ' + documento.etiqueta"
+                >
+                  <ng-icon name="lucideEye" size="16" aria-hidden="true" />
+                </button>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>

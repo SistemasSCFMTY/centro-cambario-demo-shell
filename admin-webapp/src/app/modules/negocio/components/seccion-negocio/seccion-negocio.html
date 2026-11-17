@@ -1,0 +1,23 @@
+<div class="grid gap-x-6 gap-y-6 lg:grid-cols-3">
+  <header>
+    <h2 [id]="prefijo() + '-' + seccion().id">{{ seccion().titulo }}</h2>
+    <p class="mt-1 text-callout text-ink-muted">{{ seccion().descripcion }}</p>
+  </header>
+  <div class="grid content-start gap-x-6 gap-y-4 sm:grid-cols-2 lg:col-span-2">
+    @for (item of campos(); track item.campo.id) {
+      <app-campo-negocio
+        [campo]="item.campo"
+        [control]="item.control"
+        [opciones]="item.lista"
+        [divisas]="divisas()"
+        [prefijo]="prefijo()"
+        [padre]="item.padre"
+        [cargando]="cargandoGeografia()"
+      />
+    }
+    @if (tieneDomicilio() && errorGeografia(); as error) {
+      <p class="callout callout-danger sm:col-span-2" role="alert">{{ error }}</p>
+    }
+    <ng-content />
+  </div>
+</div>

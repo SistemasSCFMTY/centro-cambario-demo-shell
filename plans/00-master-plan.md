@@ -35,7 +35,7 @@ This repo is a clean rebuild ("facewash") of `../../demos/centro-cambiario-demo/
 - **Dark mode = Neuro Bank, end to end:**
   - deep navy/black canvas and a dark main container
   - a floating sidebar card with the logo and business name on one line, the nav (labeled groups collapse in place) and the user menu. No greeting or date (lead, 2026-11-16)
-  - a slim top bar across the pane with the theme menu (Sistema · Claro · Oscuro) on the right
+  - the theme menu (Sistema · Claro · Oscuro) as an icon button in the sidebar's brand row; no top bar on desktop (lead, 2026-11-16)
   - a pill nav whose active item sits on a lighter surface
   - glowing ECharts area/line charts. **No glow on the chrome** (lead, 2026-11-16): sidebar, nav, access card and dark pane are flat
 - **Light mode = metallic white:** the sidebar card and outer canvas **stay Neuro dark**. Only the main right container becomes the silver pane from `Jobs/DASOM/quotations/cotizacion-onp-site/index.html`:
@@ -134,9 +134,9 @@ This repo is a clean rebuild ("facewash") of `../../demos/centro-cambiario-demo/
 - [`03-expediente-cliente.md`](03-expediente-cliente.md): full client expediente spec + decisions D-1…D-20.
 - [`04-negocio.md`](04-negocio.md): centro cambiario profile + sucursales.
 - [`05-reglas-onp.md`](05-reglas-onp.md): code and visual rules taken from onp admin-webapp.
+- [`06-ola-1.md`](06-ola-1.md): ola 1 contract: foundation + operaciones, caja, movimientos, clientes (read-only), negocio.
 - [`catalogos/`](catalogos/README.md): official CNBV / Banxico catalogs as JSON fixtures.
 
 ## OPEN: needs the lead's call
-- Form action placement (`05` OPEN).
 
 `negocio` is drafted in `04-negocio.md`.

@@ -1,0 +1,129 @@
+<article class="panel animate-page-in">
+  <app-encabezado-pagina
+    titulo="Operaciones"
+    descripcion="Compras y ventas de divisas de todas las sucursales. Haz clic en una fila para ver su detalle."
+  >
+    <app-filtros-popover [filtros]="filtros()" />
+  </app-encabezado-pagina>
+
+  <div class="border-t border-line px-8">
+    <hlm-tabs [tab]="vista()" (tabActivated)="cambiarVista($event)">
+      <hlm-tabs-list variant="line" class="w-full justify-start">
+        @for (pestana of pestanasVista; track pestana.id) {
+          <button type="button" [hlmTabsTrigger]="pestana.id" class="flex-none px-3 py-2">
+            {{ pestana.etiqueta }}
+          </button>
+        }
+      </hlm-tabs-list>
+    </hlm-tabs>
+  </div>
+
+  @if (error()) {
+    <section class="border-t border-line px-8 py-4" aria-label="Error">
+      <div
+        class="callout callout-danger flex flex-wrap items-center justify-between gap-3"
+        role="alert"
+      >
+        <p>{{ error() }}</p>
+        <button hlmBtn variant="secondary" type="button" (click)="reintentar()">Reintentar</button>
+      </div>
+    </section>
+  }
+
+  <section
+    class="border-t border-line"
+    role="tabpanel"
+    aria-label="Listado de operaciones"
+    [id]="'brn-tabs-content-' + vista()"
+    [attr.aria-labelledby]="'brn-tabs-label-' + vista()"
+  >
+    <app-tabla-datos
+      titulo="Operaciones"
+      alto="alta"
+      campoEtiquetaAccion="folio"
+      [columnas]="columnas"
+      [filas]="filas()"
+      [total]="pagina()?.total ?? 0"
+      [cargando]="cargando()"
+      [pagina]="lista.estado().pagina"
+      [tamano]="lista.estado().tamano"
+      [orden]="lista.estado().orden"
+      [ordenInicial]="ordenInicial"
+      [ordenables]="ordenables"
+      vacioTitulo="Sin operaciones"
+      [vacioDescripcion]="textoVacio()"
+      (paginaCambia)="lista.irAPagina($event)"
+      (tamanoCambia)="lista.cambiarTamano($event)"
+      (ordenCambia)="ordenar($event)"
+      (filaClic)="abrir($event)"
+    >
+      <ng-template appCeldaTabla="folio" [filas]="filas()" let-fila>
+        <p class="font-data font-bold">{{ fila.folio }}</p>
+        @if (fila.esRelevante) {
+          <app-pill-estatus [ajuste]="pillRelevante" />
+        }
+      </ng-template>
+
+      <ng-template appCeldaTabla="fechaOperacion" [filas]="filas()" let-fila>
+        <p class="font-data">{{ fila.fechaOperacion | appFechaHora }}</p>
+        <p class="text-caption-1 text-ink-muted">{{ fila.cajero }}</p>
+      </ng-template>
+
+      <ng-template appCeldaTabla="tipo" [filas]="filas()" let-fila>
+        <p class="font-bold">{{ etiquetaTipo[fila.tipo] }} {{ fila.divisa }}</p>
+        <p class="text-caption-1 text-ink-muted">{{ etiquetaInstrumento[fila.instrumento] }}</p>
+      </ng-template>
+
+      <ng-template appCeldaTabla="montoDivisa" [filas]="filas()" let-fila>
+        {{ fila.montoDivisa | appMonto: fila.divisa }}
+      </ng-template>
+
+      <ng-template appCeldaTabla="tipoCambio" [filas]="filas()" let-fila>
+        {{ fila.tipoCambio | appNumero: 4 }}
+      </ng-template>
+
+      <ng-template appCeldaTabla="montoMxn" [filas]="filas()" let-fila>
+        {{ fila.montoMxn | appMonto: 'MXN' }}
+      </ng-template>
+
+      <ng-template appCeldaTabla="montoUsd" [filas]="filas()" let-fila>
+        {{ fila.montoUsd | appMonto: 'USD' }}
+      </ng-template>
+
+      <ng-template appCeldaTabla="cliente" [filas]="filas()" let-fila>
+        @if (fila.clienteId) {
+          <a
+            class="link-action"
+            [routerLink]="['/clientes', fila.clienteId]"
+            (click)="$event.stopPropagation()"
+          >
+            {{ fila.cliente }}
+          </a>
+          <p class="font-data text-caption-1 text-ink-muted">{{ fila.numeroCliente }}</p>
+        } @else {
+          <span class="text-ink-muted">{{ fila.nombreOcasional ?? 'Cliente ocasional' }}</span>
+        }
+      </ng-template>
+
+      <ng-template appCeldaTabla="estatus" [filas]="filas()" let-fila>
+        <app-pill-estatus [ajuste]="pillEstatus[fila.estatus]" />
+        @if (fila.motivoAutorizacion) {
+          <p
+            class="max-w-64 truncate text-caption-1 text-ink-muted"
+            [title]="fila.motivoAutorizacion"
+          >
+            {{ fila.motivoAutorizacion }}
+          </p>
+        }
+        @if (fila.comentarioAutorizacion) {
+          <p
+            class="max-w-64 truncate text-caption-1 text-ink-muted"
+            [title]="'Comentario: ' + fila.comentarioAutorizacion"
+          >
+            Comentario: {{ fila.comentarioAutorizacion }}
+          </p>
+        }
+      </ng-template>
+    </app-tabla-datos>
+  </section>
+</article>

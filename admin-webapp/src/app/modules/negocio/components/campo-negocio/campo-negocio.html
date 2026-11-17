@@ -1,0 +1,90 @@
+@let c = campo();
+@if (c.tipo === 'divisas') {
+  <fieldset class="flex flex-col gap-1.5" [attr.aria-describedby]="mensaje() ? idAyuda() : null">
+    <legend class="micro-label mb-1.5">{{ c.etiqueta }}</legend>
+    <div class="flex flex-wrap gap-x-6 gap-y-2">
+      @for (divisa of opcionesDivisas(); track divisa.clave) {
+        <label class="flex cursor-pointer items-center gap-2 text-subheadline text-ink">
+          <input
+            type="checkbox"
+            class="size-4 accent-primary-700"
+            [checked]="divisa.marcada"
+            (change)="alternarDivisa(divisa.clave, $any($event.target).checked)"
+          />
+          <span class="font-data">{{ divisa.clave }}</span>
+          <span class="text-ink-muted">{{ divisa.nombre }}</span>
+        </label>
+      }
+    </div>
+    @if (mensaje(); as texto) {
+      <p [id]="idAyuda()" class="text-footnote text-danger-700 dark:text-danger-400" role="alert">
+        {{ texto }}
+      </p>
+    }
+  </fieldset>
+} @else {
+  <div hlmField class="gap-1.5">
+    <label hlmFieldLabel class="micro-label" [for]="idControl()">{{ c.etiqueta }}</label>
+    @switch (c.tipo) {
+      @case ('seleccion') {
+        <hlm-select [formControl]="control()" [itemToString]="etiquetaOpcion()">
+          <hlm-select-trigger
+            class="w-full bg-panel text-subheadline"
+            [class.opacity-60]="sinPadre()"
+            [buttonId]="idControl()"
+            [aria-invalid]="!!mensaje()"
+            [aria-describedby]="describedBy()"
+          >
+            <hlm-select-value [placeholder]="textoVacio()" />
+          </hlm-select-trigger>
+          <hlm-select-content *hlmSelectPortal>
+            @for (opcion of opciones(); track opcion.clave) {
+              <hlm-select-item class="text-subheadline" [value]="opcion.clave">
+                {{ opcion.etiqueta }}
+              </hlm-select-item>
+            } @empty {
+              <hlm-select-item class="text-subheadline" value="" disabled>
+                {{ textoVacio() }}
+              </hlm-select-item>
+            }
+          </hlm-select-content>
+        </hlm-select>
+      }
+      @case ('fecha') {
+        <input
+          hlmInput
+          type="date"
+          class="font-data bg-panel text-subheadline"
+          [id]="idControl()"
+          [formControl]="control()"
+          [attr.aria-invalid]="mensaje() ? true : null"
+          [attr.aria-describedby]="describedBy()"
+        />
+      }
+      @default {
+        <input
+          hlmInput
+          type="text"
+          class="bg-panel text-subheadline"
+          [class.font-data]="c.dato"
+          [class.uppercase]="c.mayusculas"
+          [id]="idControl()"
+          [formControl]="control()"
+          [attr.maxlength]="c.maxLongitud ?? null"
+          [attr.aria-invalid]="mensaje() ? true : null"
+          [attr.aria-describedby]="describedBy()"
+          [attr.inputmode]="c.dato ? 'text' : null"
+          autocomplete="off"
+          spellcheck="false"
+        />
+      }
+    }
+    @if (mensaje(); as texto) {
+      <p [id]="idAyuda()" class="text-footnote text-danger-700 dark:text-danger-400" role="alert">
+        {{ texto }}
+      </p>
+    } @else if (c.ayuda) {
+      <p [id]="idAyuda()" class="text-footnote text-ink-muted">{{ c.ayuda }}</p>
+    }
+  </div>
+}

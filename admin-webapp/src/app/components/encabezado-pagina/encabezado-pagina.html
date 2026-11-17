@@ -1,9 +1,19 @@
 <header class="flex flex-wrap items-end justify-between gap-4 px-8 pt-8 pb-6">
   <div class="min-w-0">
-    <h1>{{ titulo() }}</h1>
+    @if (volverA()) {
+      <a class="link-action mb-2" [routerLink]="volverA()" [queryParams]="volverParametros()">
+        <ng-icon name="lucideChevronLeft" size="14" aria-hidden="true" />
+        {{ etiquetaVolver() }}
+      </a>
+    }
+    <div class="flex flex-wrap items-center gap-3">
+      <h1>{{ titulo() }}</h1>
+      <ng-content select="[meta]" />
+    </div>
     @if (descripcion()) {
       <p class="max-w-prose text-callout text-ink-muted">{{ descripcion() }}</p>
     }
+    <ng-content select="[linea]" />
   </div>
   <div class="flex flex-wrap items-center gap-2 empty:hidden">
     <ng-content />

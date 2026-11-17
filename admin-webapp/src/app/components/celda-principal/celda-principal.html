@@ -1,0 +1,20 @@
+<div class="flex items-center gap-3">
+  @if (tipo() === 'persona') {
+    <span class="lead-avatar" aria-hidden="true">{{ siglas() }}</span>
+  } @else if (imagenUrl()) {
+    <img class="lead-thumb" [src]="imagenUrl()" alt="" />
+  } @else {
+    <span class="lead-thumb-fallback" aria-hidden="true">
+      <ng-icon [name]="icono()" size="16" />
+    </span>
+  }
+  <div class="min-w-0">
+    <div class="flex items-center gap-2">
+      <p class="truncate text-subheadline font-bold text-ink">{{ nombre() }}</p>
+      <ng-content />
+    </div>
+    @if (detalle()) {
+      <p class="truncate text-caption-1 text-ink-muted">{{ detalle() }}</p>
+    }
+  </div>
+</div>

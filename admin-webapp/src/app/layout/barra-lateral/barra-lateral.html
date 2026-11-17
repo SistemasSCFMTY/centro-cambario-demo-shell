@@ -1,11 +1,12 @@
 <div
   class="flex h-full flex-col rounded-2xl bg-chrome-card text-chrome-text ring-1 ring-chrome-line"
 >
-  <div class="flex items-center gap-3 px-5 pt-5 pb-4">
+  <div class="flex items-center gap-2.5 ps-5 pe-2.5 pt-5 pb-4">
     <app-logo-negocio tamano="sm" />
-    <span class="min-w-0 truncate text-headline" [title]="nombreNegocio()">{{
+    <span class="min-w-0 flex-1 truncate text-headline" [title]="nombreNegocio()">{{
       nombreNegocio()
     }}</span>
+    <app-selector-modo />
   </div>
 
   <nav aria-label="Principal" class="scrollbar-thin min-h-0 flex-1 overflow-y-auto px-3 pb-3">

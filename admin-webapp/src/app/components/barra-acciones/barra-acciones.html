@@ -1,0 +1,17 @@
+<div class="me-auto min-w-0 text-subheadline text-ink-muted empty:hidden">
+  <ng-content />
+</div>
+<button hlmBtn variant="secondary" type="button" [disabled]="guardando()" (click)="cancelar.emit()">
+  {{ etiquetaCancelar() }}
+</button>
+<button
+  hlmBtn
+  type="button"
+  [disabled]="guardando() || guardarDeshabilitado()"
+  (click)="guardar.emit()"
+>
+  @if (guardando()) {
+    <hlm-spinner class="size-4" aria-hidden="true" />
+  }
+  {{ etiquetaGuardar() }}
+</button>

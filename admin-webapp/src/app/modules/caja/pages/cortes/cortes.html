@@ -1,0 +1,97 @@
+<article class="panel animate-page-in">
+  <app-encabezado-pagina
+    titulo="Cortes y arqueos"
+    descripcion="Aperturas, arqueos y cortes de cada caja, con lo que dijo el sistema, lo contado y la diferencia."
+    [volverA]="['/caja']"
+    etiquetaVolver="Volver a caja"
+  >
+    <app-filtros-popover [filtros]="esquema().filtros" />
+  </app-encabezado-pagina>
+
+  @if (error()) {
+    <div class="border-t border-line px-8 py-4">
+      <div class="callout callout-danger" role="alert">{{ error() }}</div>
+    </div>
+  }
+
+  @if (pillsDiferencias().length > 0) {
+    <section
+      class="flex flex-wrap items-center gap-2 border-t border-line px-8 py-4"
+      aria-labelledby="titulo-diferencias"
+    >
+      <h2 id="titulo-diferencias" class="micro-label me-2">Diferencias en el filtro</h2>
+      @for (pill of pillsDiferencias(); track pill.etiqueta) {
+        <app-pill-estatus [ajuste]="pill" />
+      }
+      <p class="w-full text-caption-1 text-ink-muted">
+        Los arqueos no se suman: sus diferencias se aclaran y se ajustan en el corte.
+      </p>
+    </section>
+  }
+
+  <section class="border-t border-line" aria-label="Conteos de caja">
+    <app-tabla-datos
+      titulo="Aperturas, arqueos y cortes"
+      [columnas]="columnas"
+      [filas]="filas()"
+      [total]="total()"
+      [cargando]="cargando()"
+      [pagina]="lista.estado().pagina"
+      [tamano]="lista.estado().tamano"
+      [tamanos]="esquema().tamanos"
+      [orden]="lista.estado().orden"
+      [ordenInicial]="esquema().ordenInicial"
+      [ordenables]="esquema().ordenables"
+      alto="alta"
+      [filaClicable]="false"
+      [etiquetaAccion]="null"
+      vacioTitulo="No hay conteos con estos filtros"
+      vacioDescripcion="Cambie los filtros para ver otras aperturas, arqueos o cortes."
+      (paginaCambia)="lista.irAPagina($event)"
+      (tamanoCambia)="lista.cambiarTamano($event)"
+      (ordenCambia)="lista.ordenar($event)"
+    >
+      <ng-template appCeldaTabla="fecha" [filas]="filas()" let-fila>
+        <span class="font-data whitespace-nowrap">{{ fila.realizadoEn | appFechaHora }}</span>
+      </ng-template>
+      <ng-template appCeldaTabla="tipo" [filas]="filas()" let-fila>
+        <app-pill-estatus [ajuste]="pillTipo[fila.tipo]" />
+      </ng-template>
+      <ng-template appCeldaTabla="caja" [filas]="filas()" let-fila>
+        <app-celda-principal
+          tipo="cosa"
+          [icono]="fila.tipoCaja === 'BOVEDA' ? 'lucideVault' : 'lucideBanknote'"
+          [nombre]="fila.caja"
+          [detalle]="fila.sucursal"
+        />
+      </ng-template>
+      <ng-template appCeldaTabla="responsable" [filas]="filas()" let-fila>
+        <p class="whitespace-nowrap">{{ fila.responsable }}</p>
+        @if (fila.realizo !== fila.responsable) {
+          <p class="text-caption-1 whitespace-nowrap text-ink-muted">Contó: {{ fila.realizo }}</p>
+        }
+      </ng-template>
+      <ng-template appCeldaTabla="conteo" [filas]="filas()" let-fila>
+        @for (d of fila.detalle; track d.divisa) {
+          <p class="font-data whitespace-nowrap">
+            <span class="font-bold">{{ d.divisa }}</span>
+            {{ d.sistema | appNumero: d.decimales }} → {{ d.contado | appNumero: d.decimales }}
+            @if (d.diferencia < 0) {
+              <span class="text-danger-700 dark:text-danger-400">
+                ({{ d.diferencia | appNumero: d.decimales }})
+              </span>
+            } @else if (d.diferencia > 0) {
+              <span class="text-success-700 dark:text-success-400">
+                (+{{ d.diferencia | appNumero: d.decimales }})
+              </span>
+            }
+          </p>
+        } @empty {
+          <span class="text-ink-muted">Todo en cero</span>
+        }
+      </ng-template>
+    </app-tabla-datos>
+  </section>
+
+  <p class="border-t border-line px-8 py-4 text-footnote text-ink-muted">{{ nota }}</p>
+</article>

@@ -1,0 +1,58 @@
+<article class="panel animate-page-in">
+  @if (cargando()) {
+    <div role="status" [attr.aria-label]="etiquetaCarga()">
+      <header class="px-8 pt-8 pb-6">
+        <span class="skeleton max-w-64"></span>
+        <span class="skeleton mt-3 max-w-96"></span>
+      </header>
+      @for (seccion of [1, 2]; track seccion) {
+        <section class="border-t border-line px-8 py-8">
+          <span class="skeleton max-w-24"></span>
+          <div class="mt-4 grid gap-x-6 gap-y-4 sm:grid-cols-2">
+            @for (campo of esqueletoCampos; track campo) {
+              <div>
+                <span class="skeleton max-w-24"></span>
+                <span class="skeleton mt-2 max-w-48"></span>
+              </div>
+            }
+          </div>
+        </section>
+      }
+    </div>
+  } @else {
+    <app-encabezado-pagina
+      [titulo]="titulo()"
+      [descripcion]="descripcion()"
+      [volverA]="volverA()"
+      [volverParametros]="volverParametros()"
+      [etiquetaVolver]="etiquetaVolver()"
+    >
+      <ng-content select="[meta]" ngProjectAs="[meta]" />
+      <ng-content select="[linea]" ngProjectAs="[linea]" />
+      <ng-content select="[acciones]" />
+    </app-encabezado-pagina>
+
+    <ng-content select="[banner]" />
+
+    <div class="border-t border-line px-8">
+      <hlm-tabs [tab]="activa()" (tabActivated)="seleccionar($event)">
+        <hlm-tabs-list variant="line" class="w-full justify-start">
+          @for (pestana of todas(); track pestana.id) {
+            <button type="button" [hlmTabsTrigger]="pestana.id" class="flex-none px-3 py-2">
+              {{ pestana.etiqueta }}
+            </button>
+          }
+        </hlm-tabs-list>
+      </hlm-tabs>
+    </div>
+
+    <div
+      role="tabpanel"
+      class="border-t border-line"
+      [id]="'brn-tabs-content-' + activa()"
+      [attr.aria-labelledby]="'brn-tabs-label-' + activa()"
+    >
+      <ng-content />
+    </div>
+  }
+</article>

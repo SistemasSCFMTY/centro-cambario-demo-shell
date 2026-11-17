@@ -1,0 +1,94 @@
+<hlm-popover align="end" [state]="estado()" (stateChanged)="alCambiarEstado($event)">
+  <button hlmBtn hlmPopoverTrigger variant="outline" type="button">
+    <ng-icon name="lucideListFilter" size="16" aria-hidden="true" />
+    Filtros
+    @if (activos() > 0) {
+      <span
+        class="font-data inline-flex size-5 items-center justify-center rounded-full bg-primary-700 text-caption-2 font-bold text-primary-foreground"
+      >
+        {{ activos() }}
+        <span class="sr-only">filtros activos</span>
+      </span>
+    }
+  </button>
+
+  <hlm-popover-content
+    *hlmPopoverPortal="let ctx"
+    class="scrollbar-thin max-h-96 w-80 overflow-y-auto"
+  >
+    <form class="flex flex-col gap-4" (submit)="aplicar($event)">
+      @for (filtro of visibles(); track filtro.id) {
+        <div class="flex flex-col gap-1.5">
+          <label class="micro-label" [for]="'filtro-' + filtro.id">{{ filtro.etiqueta }}</label>
+          @switch (filtro.tipo) {
+            @case ('seleccion') {
+              <hlm-select
+                [value]="borrador()[filtro.id] ?? ''"
+                [itemToString]="etiquetas()[filtro.id]"
+                (valueChange)="escribirValor(filtro.id, $event)"
+              >
+                <hlm-select-trigger
+                  class="w-full text-subheadline"
+                  [buttonId]="'filtro-' + filtro.id"
+                >
+                  <hlm-select-value placeholder="Todos" />
+                </hlm-select-trigger>
+                <hlm-select-content *hlmSelectPortal>
+                  <hlm-select-item class="text-subheadline" value="">Todos</hlm-select-item>
+                  @for (opcion of filtro.opciones ?? []; track opcion.valor) {
+                    <hlm-select-item class="text-subheadline" [value]="opcion.valor">
+                      {{ opcion.etiqueta }}
+                    </hlm-select-item>
+                  }
+                </hlm-select-content>
+              </hlm-select>
+            }
+            @case ('fecha') {
+              <input
+                hlmInput
+                type="date"
+                [id]="'filtro-' + filtro.id"
+                class="font-data text-subheadline"
+                [value]="borrador()[filtro.id] ?? ''"
+                (input)="escribir(filtro.id, $event)"
+              />
+            }
+            @case ('numero') {
+              <input
+                hlmInput
+                type="text"
+                inputmode="decimal"
+                [id]="'filtro-' + filtro.id"
+                class="font-data text-subheadline"
+                [value]="borrador()[filtro.id] ?? ''"
+                (input)="escribir(filtro.id, $event)"
+              />
+            }
+            @default {
+              <input
+                hlmInput
+                type="text"
+                [id]="'filtro-' + filtro.id"
+                class="text-subheadline"
+                [value]="borrador()[filtro.id] ?? ''"
+                (input)="escribir(filtro.id, $event)"
+              />
+            }
+          }
+        </div>
+      }
+      <div class="sticky bottom-0 flex justify-end gap-2 bg-popover pt-2">
+        <button
+          hlmBtn
+          variant="ghost"
+          type="button"
+          [disabled]="activos() === 0"
+          (click)="limpiar()"
+        >
+          Limpiar
+        </button>
+        <button hlmBtn type="submit">Aplicar</button>
+      </div>
+    </form>
+  </hlm-popover-content>
+</hlm-popover>

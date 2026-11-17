@@ -1,0 +1,162 @@
+<app-detalle-pagina
+  claveUrl="tab"
+  etiquetaVolver="Volver a movimientos"
+  etiquetaCarga="Cargando movimiento"
+  [titulo]="titulo()"
+  [descripcion]="descripcion()"
+  [volverA]="['/movimientos']"
+  [pestanas]="pestanas"
+  [cargando]="cargando() && !movimiento()"
+  [(pestana)]="pestana"
+>
+  @if (pill(); as ajuste) {
+    <app-pill-estatus meta [ajuste]="ajuste" />
+  }
+  @if (puedeRevisar()) {
+    <a hlmBtn acciones routerLink="revisar">Revisar solicitud</a>
+  }
+
+  @if (!movimiento()) {
+    @if (error()) {
+      <div class="flex min-h-60 flex-col items-center justify-center gap-3 p-8 text-center">
+        <ng-icon
+          name="lucideTruck"
+          size="28"
+          [strokeWidth]="1.5"
+          class="text-ink-subtle"
+          aria-hidden="true"
+        />
+        <div>
+          <p class="text-headline">No encontramos este movimiento</p>
+          <p class="text-callout text-ink-muted">
+            Es posible que el folio no exista. Regrese a la lista para elegir otro.
+          </p>
+        </div>
+      </div>
+    }
+  } @else {
+    @switch (pestana()) {
+      @case ('auditoria') {
+        <app-pestana-auditoria [registros]="detalle()!.auditoria" />
+      }
+      @default {
+        @if (porRevisar()) {
+          <div class="px-8 pt-8">
+            <div class="callout callout-warn" role="status">
+              Esta dotación espera la revisión de un superadministrador. Hasta entonces no se mueve
+              efectivo.
+            </div>
+          </div>
+        }
+
+        <section class="px-8 py-8" aria-labelledby="titulo-resumen">
+          <h2 id="titulo-resumen">Resumen</h2>
+          <app-cuadricula-campos [campos]="campos()" [columnas]="3" />
+          @if (movimiento()!.observaciones; as observaciones) {
+            <p class="mt-4 rounded-lg bg-panel-muted px-3 py-2 text-subheadline">
+              <span class="micro-label">Observaciones</span><br />
+              {{ observaciones }}
+            </p>
+          }
+          @if (movimiento()!.notaResolucion; as nota) {
+            <p class="mt-4 rounded-lg bg-panel-muted px-3 py-2 text-subheadline">
+              <span class="micro-label">{{ etiquetaNota() }}</span><br />
+              {{ nota }}
+            </p>
+          }
+        </section>
+
+        <section class="border-t border-line px-8 py-8" aria-labelledby="titulo-montos">
+          <h2 id="titulo-montos">Montos por divisa</h2>
+          <div class="card-flush-table relative mt-4">
+            <div hlmTableContainer appDesvanecidoDesplazamiento class="scrollbar-thin">
+              <table hlmTable class="text-subheadline whitespace-nowrap">
+                <caption class="sr-only">
+                  Montos por divisa
+                </caption>
+                <thead class="bg-panel-muted">
+                  <tr>
+                    <th scope="col" class="micro-label px-8 py-3 text-start whitespace-nowrap">
+                      Divisa
+                    </th>
+                    <th scope="col" class="micro-label px-4 py-3 text-end whitespace-nowrap">
+                      {{ etiquetaSolicitado() }}
+                    </th>
+                    @if (muestraAutorizado()) {
+                      <th scope="col" class="micro-label px-8 py-3 text-end whitespace-nowrap">
+                        Autorizado
+                      </th>
+                    }
+                  </tr>
+                </thead>
+                <tbody>
+                  @for (fila of filasMontos(); track fila.divisa) {
+                    <tr class="border-0">
+                      <td class="px-8 py-2.5 font-bold text-ink">{{ fila.divisa }}</td>
+                      <td class="font-data px-4 py-2.5 text-end text-ink">
+                        {{ fila.solicitado | appMonto: fila.divisa }}
+                      </td>
+                      @if (muestraAutorizado()) {
+                        <td class="font-data px-8 py-2.5 text-end text-ink">
+                          <span [class.font-bold]="fila.autorizado !== fila.solicitado">
+                            {{ fila.autorizado | appMonto: fila.divisa }}
+                          </span>
+                          @if (fila.autorizado !== fila.solicitado) {
+                            <span class="ms-2 text-caption-1 text-ink-muted">Corregido</span>
+                          }
+                        </td>
+                      }
+                    </tr>
+                  }
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        @if (movimiento()!.traslado) {
+          <section class="border-t border-line px-8 py-8" aria-labelledby="titulo-transporte">
+            <h2 id="titulo-transporte">Transporte</h2>
+            <app-cuadricula-campos [campos]="camposTransporte()" [columnas]="3" />
+          </section>
+        }
+
+        <section class="border-t border-line px-8 py-8" aria-labelledby="titulo-seguimiento">
+          <h2 id="titulo-seguimiento">Seguimiento</h2>
+          <ol class="mt-4 divide-y divide-line">
+            @for (paso of detalle()!.seguimiento; track paso.etiqueta) {
+              <li class="flex gap-3 py-3">
+                <span
+                  class="mt-2 size-2 shrink-0 rounded-full"
+                  [class]="clasePunto[paso.estado]"
+                  aria-hidden="true"
+                ></span>
+                <div class="min-w-0">
+                  <p class="text-subheadline font-bold text-ink">{{ paso.etiqueta }}</p>
+                  @if (paso.fecha) {
+                    <p class="text-caption-1 text-ink-muted">
+                      <span class="font-data">{{ paso.fecha | appFechaHora }}</span>
+                      @if (paso.usuario) {
+                        · {{ paso.usuario }}
+                      }
+                    </p>
+                  } @else {
+                    <p class="text-caption-1 text-ink-muted">Pendiente</p>
+                  }
+                  @if (paso.nota) {
+                    <p class="mt-1 text-subheadline text-ink-muted">{{ paso.nota }}</p>
+                  }
+                  @for (cambio of paso.cambios; track cambio.campo) {
+                    <p class="font-data mt-1 text-caption-1 text-ink-muted">
+                      {{ cambio.campo }}: {{ cambio.antes }} → {{ cambio.despues }}
+                    </p>
+                  }
+                </div>
+              </li>
+            }
+          </ol>
+        </section>
+      }
+    }
+  }
+</app-detalle-pagina>

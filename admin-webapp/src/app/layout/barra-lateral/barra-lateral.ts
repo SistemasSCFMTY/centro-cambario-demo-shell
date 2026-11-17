@@ -11,6 +11,7 @@ import {
 import { toSignal } from '@angular/core/rxjs-interop';
 import { NavigationEnd, Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { LogoNegocio } from '@components/logo-negocio/logo-negocio';
+import { SelectorModo } from '@layout/selector-modo/selector-modo';
 import { ICONOS_NAVEGACION, NAVEGACION } from '@data/constants/navegacion.constants';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import {
@@ -27,12 +28,19 @@ import { TemaState } from '@store/tema/state/tema.state';
 import { filter, map } from 'rxjs';
 
 /**
- * The Neuro sidebar card: brand, module nav and usuario. Always rendered in a `.dark` scope. Labeled
+ * The Neuro sidebar card: brand with the theme menu, module nav and usuario. Always rendered in a `.dark` scope. Labeled
  * groups collapse in place; the group holding the current page opens on its own.
  */
 @Component({
   selector: 'app-barra-lateral',
-  imports: [RouterLink, RouterLinkActive, NgIcon, LogoNegocio, HlmDropdownMenuImports],
+  imports: [
+    RouterLink,
+    RouterLinkActive,
+    NgIcon,
+    LogoNegocio,
+    SelectorModo,
+    HlmDropdownMenuImports,
+  ],
   providers: [
     provideIcons({
       ...ICONOS_NAVEGACION,

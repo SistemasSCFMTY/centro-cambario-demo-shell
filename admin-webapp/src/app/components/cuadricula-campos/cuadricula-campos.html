@@ -1,0 +1,16 @@
+<dl class="mt-3 grid gap-x-6 gap-y-3" [class]="clasesColumnas[columnas()]">
+  @for (campo of filas(); track campo.etiqueta) {
+    <div class="min-w-0">
+      <dt class="micro-label">{{ campo.etiqueta }}</dt>
+      <dd class="mt-0.5 text-subheadline font-bold text-ink">
+        @if (campo.pill) {
+          <app-pill-estatus [ajuste]="campo.pill" />
+        } @else if (campo.enlace && campo.texto !== '—') {
+          <a class="link-action" [routerLink]="campo.enlace">{{ campo.texto }}</a>
+        } @else {
+          <span [class.font-data]="campo.dato">{{ campo.texto }}</span>
+        }
+      </dd>
+    </div>
+  }
+</dl>

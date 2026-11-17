@@ -95,8 +95,9 @@
 ## Shell
 - `h-dvh overflow-hidden`: exactly one screen tall. The sidebar is not sticky; it sits at `h-full` and its nav scrolls inside it.
 - The silver pane doesn't scroll (so its gradient and grain stay put). **Only the content inside it scrolls** (`#contenido`), and `Marco` resets it to the top on each navigation.
-- **Top bar** (lead, 2026-11-16): a slim row across the top of the pane, outside the scroller. It holds the theme menu (icon button → Sistema · Claro · Oscuro radio menu) on the right; below `lg` it also holds the menu button and the brand.
-- **Sidebar** (lead, 2026-11-16): brand on one line (`sm` logo + `text-headline`, truncated), the nav, the user menu. No greeting or date. Labeled groups collapse in place (`despliegue` utility, `inert` while closed); the group holding the current page opens on arrival.
+- **The pane has no padding of its own** (lead, 2026-11-16, both apps): the page panel sits flush in it and carries the padding. Never wrap `<router-outlet>` in a padded container.
+- **Theme menu** (lead, 2026-11-16): an icon button at the right end of the sidebar's brand row (→ Sistema · Claro · Oscuro radio menu). The pane has **no top bar on desktop**, so the page panel starts at the top of the pane. Below `lg` a slim row holds only the menu button and the brand.
+- **Sidebar** (lead, 2026-11-16): brand on one line (`sm` logo + `text-headline`, truncated) with the theme button, the nav, the user menu. No greeting or date. Labeled groups collapse in place (`despliegue` utility, `inert` while closed); the group holding the current page opens on arrival.
 
 ## Page anatomy
 ```html
@@ -112,7 +113,7 @@
 </article>
 ```
 - Header `px-8 pt-8 pb-6`. Sections are separated by space and `border-t border-line`; cards only for content that stands on its own. Never a card in a card.
-- **Admin forms:** grouped sections (title + one-line description on the left, fields on the right, `lg:grid-cols-3`), `gap-y-4` between fields, `gap-x-6` between columns, sections `py-8`, **no `max-w-*`** on page roots or forms (only `max-w-prose` on prose). Section saves sit at the bottom right of their own field grid; one primary per view.
+- **Admin forms:** grouped sections (title + one-line description on the left, fields on the right, `lg:grid-cols-3`), `gap-y-4` between fields, `gap-x-6` between columns, sections `py-8`, **no `max-w-*`** on page roots or forms (only `max-w-prose` on prose). Form actions live in a **sticky action bar** at the bottom of the pane (Cancelar · Guardar), not in the sections (lead, 2026-11-16); one primary per view.
 - **Empty state,** flat in the panel:
 ```html
 <div class="flex min-h-60 flex-col items-center justify-center gap-3 p-8 text-center">
@@ -125,8 +126,9 @@
 </div>
 ```
 - **Metrics:** one card with figures divided by hairlines, the first one leading. No rows of colored stat tiles.
-- **Horizontal overflow** (tables, boards) gets a scroll-fade directive (onp's `appScrollFade`). Not built yet: no screen scrolls sideways so far.
+- **Horizontal overflow** (lead, 2026-11-17, onp's table rule): table cells never wrap (`whitespace-nowrap` on the `<table>`); a table wider than its panel scrolls sideways inside its container, and `appDesvanecidoDesplazamiento` (`components/desvanecido-desplazamiento/`, a port of onp's `appScrollFade`) draws a fade at the right edge while there is more to the right. The container's parent must be `relative`. Long free text in a cell (authorization notes) truncates within a max width, with the full text in `title`. The base `p`/heading rules use `text-wrap-style` (the longhand), because the `text-wrap` shorthand would turn wrapping back on inside the table.
+- **Selects** (lead, 2026-11-17): Spartan's `hlm-select` everywhere (forms, filters, rows per page), never the native `<select>`. With reactive forms, put `[formControl]` on `hlm-select` and pass `[itemToString]` so the trigger shows the label of the stored key; `hlm-select-trigger` takes `buttonId` (for the `<label>`) and `aria-describedby` (the help or error line).
 - **Avoid:** gradient text, glass blur, icons in colored squares, rows of equal colored stat cards, uppercase tracking-wide eyebrows, centered hero layouts inside the app, arrow glyphs on CTAs, dead hover/focus states.
 
 ## OPEN: needs the lead's call
-- **Form actions:** `02` plans a sticky action bar on the client form; onp puts Cancelar/Guardar at the bottom right of the last section (or each section's own save). Which one?
+None.

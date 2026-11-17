@@ -32,7 +32,7 @@ Items marked **OPEN** in a plan are waiting on the lead. Don't resolve them on y
 - **Tailwind 4:** tokens, `@utility` and `@custom-variant` in `src/styles.css`.
 - **NGXS** for state, plus its storage plugin.
 - **`@ng-icons/lucide`** for icons. **Zain** is the only font.
-- Path aliases: `@data/*`, `@components/*`, `@interceptors/*`, `@layout/*`, `@modules/*`, `@services/*`, `@store/*`, `@utils/*`.
+- Path aliases: `@data/*`, `@components/*`, `@interceptors/*`, `@layout/*`, `@modules/*`, `@pipes/*`, `@services/*`, `@store/*`, `@utils/*`.
 
 ```bash
 cd admin-webapp    # or cashier-webapp

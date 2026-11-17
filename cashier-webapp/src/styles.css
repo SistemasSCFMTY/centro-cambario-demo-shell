@@ -341,7 +341,8 @@
   h3,
   h4 {
     @apply text-ink;
-    text-wrap: balance;
+    /* The style longhand only: the `text-wrap` shorthand would also reset wrapping inside no-wrap tables. */
+    text-wrap-style: balance;
   }
 
   h1 {
@@ -358,7 +359,7 @@
   }
 
   :where(p) {
-    text-wrap: pretty;
+    text-wrap-style: pretty;
   }
 
   /* One focus language for our own controls; helm components draw their own ring. */

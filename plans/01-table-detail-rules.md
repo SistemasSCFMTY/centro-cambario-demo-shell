@@ -31,7 +31,7 @@
 - **Tabular/feed data is always a table** (`<table>` via our table primitive). **Never** hand-rolled `<ol>`/`<div>` row lists.
 - **A list page's table sits flush in its panel section** (`05`): the section's hairline is its top edge and the table carries no radius, border or shadow of its own.
 - **Inside a padded section or card,** wrap it in `.card-flush-table`: `-mx-8` (section) or `-mx-6` (card) cancels the gutters, and the table sheds its radius, border and shadow, because what's around it already draws them.
-- The table container scrolls horizontally on its own (`overflow-x-auto`). **Never page-level horizontal scroll** on mobile.
+- The table container scrolls horizontally on its own (`overflow-x-auto`), with the right-edge fade (`05`, Horizontal overflow). Cells never wrap. **Never page-level horizontal scroll.**
 
 ### Density: "airy chrome, dense data"
 - Header cells: `px-4 py-3 text-left micro-label whitespace-nowrap`, on the card's own fill.
@@ -79,7 +79,7 @@
   - Page buttons: `size-9 rounded-md text-subheadline font-bold font-data tabular-nums`, neutral text, `primary-0` hover.
   - **Selected page = solid `primary-700` + white** (hover `800`; dark `600`/`500`), **no weight bump**.
   - Disabled: `opacity-30 cursor-not-allowed`.
-  - Rows-per-page select: compact, `h-9 px-3 text-subheadline`.
+  - Rows-per-page select: Spartan's `hlm-select`, small trigger (`size="sm"`), `text-subheadline`.
 - Empty caption/footer slots collapse. The footer is `px-4 py-3` on the card fill.
 
 ## Detail views

@@ -1,0 +1,9 @@
+@for (seccion of secciones(); track seccion.id) {
+  <section
+    class="border-t border-line px-8 py-8 first:border-t-0"
+    [attr.aria-labelledby]="'general-' + seccion.id"
+  >
+    <h2 [id]="'general-' + seccion.id">{{ seccion.titulo }}</h2>
+    <app-cuadricula-campos [campos]="seccion.campos" [columnas]="3" />
+  </section>
+}

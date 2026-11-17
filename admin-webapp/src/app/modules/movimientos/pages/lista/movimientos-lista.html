@@ -1,0 +1,138 @@
+<article class="panel animate-page-in">
+  <app-encabezado-pagina
+    titulo="Movimientos"
+    descripcion="Traspasos entre cajas y sucursales, traslados de valores y dotaciones de efectivo."
+  >
+    <app-filtros-popover [filtros]="esquema().filtros" />
+    <button
+      hlmBtn
+      variant="outline"
+      type="button"
+      [disabled]="exportando() || total() === 0"
+      (click)="exportar()"
+    >
+      @if (exportando()) {
+        <hlm-spinner class="size-4" aria-hidden="true" />
+      } @else {
+        <ng-icon name="lucideDownload" size="16" aria-hidden="true" />
+      }
+      Exportar a Excel
+    </button>
+  </app-encabezado-pagina>
+
+  @if (error(); as mensaje) {
+    <div class="px-8 pb-4">
+      <div class="callout callout-danger" role="alert">{{ mensaje }}</div>
+    </div>
+  }
+
+  <div class="border-t border-line px-8">
+    <hlm-tabs [tab]="vistaActual()" (tabActivated)="cambiarVista($event)">
+      <hlm-tabs-list variant="line" class="w-full justify-start">
+        @for (vista of vistas; track vista.valor) {
+          <button type="button" [hlmTabsTrigger]="vista.valor" class="flex-none px-3 py-2">
+            {{ vista.etiqueta }}
+          </button>
+        }
+      </hlm-tabs-list>
+    </hlm-tabs>
+  </div>
+
+  @if (!error()) {
+    <section class="border-t border-line px-8 py-4" aria-label="Totales">
+      <div class="flex flex-wrap items-center gap-2">
+        <span class="micro-label me-1">Total sin cancelados ni rechazados</span>
+        @if (pagina()) {
+          @for (total of totales(); track total.divisa) {
+            <span
+              class="font-data rounded-full bg-panel-muted px-3 py-1 text-caption-1 font-bold text-ink"
+            >
+              {{ total.monto | appMonto: total.divisa }}
+            </span>
+          } @empty {
+            <span class="text-caption-1 text-ink-muted">Sin movimientos con estos filtros.</span>
+          }
+        } @else {
+          <span class="skeleton max-w-24" role="status" aria-label="Cargando totales"></span>
+        }
+      </div>
+    </section>
+  }
+
+  <section
+    class="border-t border-line"
+    role="tabpanel"
+    aria-label="Lista de movimientos"
+    [id]="'brn-tabs-content-' + vistaActual()"
+    [attr.aria-labelledby]="'brn-tabs-label-' + vistaActual()"
+  >
+    <app-tabla-datos
+      titulo="Movimientos de efectivo"
+      alto="alta"
+      campoEtiquetaAccion="folio"
+      [vacioTitulo]="error() ? 'No se pudo cargar la lista' : 'No hay movimientos'"
+      [vacioDescripcion]="
+        error()
+          ? 'Intente de nuevo en un momento.'
+          : 'Cambie los filtros o la vista para ver otros movimientos.'
+      "
+      [tamanos]="esquema().tamanos"
+      [columnas]="columnas"
+      [filas]="filas()"
+      [total]="total()"
+      [cargando]="cargando()"
+      [pagina]="lista.estado().pagina"
+      [tamano]="lista.estado().tamano"
+      [orden]="lista.estado().orden"
+      [ordenInicial]="esquema().ordenInicial"
+      [ordenables]="esquema().ordenables"
+      (paginaCambia)="lista.irAPagina($event)"
+      (tamanoCambia)="lista.cambiarTamano($event)"
+      (ordenCambia)="lista.ordenar($event)"
+      (filaClic)="abrir($event)"
+    >
+      <ng-template appCeldaTabla="folio" [filas]="filas()" let-fila>
+        <app-celda-principal
+          tipo="cosa"
+          [nombre]="fila.folio"
+          [detalle]="etiquetaClase[fila.clase]"
+          [icono]="iconoClase[fila.clase]"
+        />
+      </ng-template>
+      <ng-template appCeldaTabla="fecha" [filas]="filas()" let-fila>
+        <span class="font-data">{{ fila.fecha | appFechaHora }}</span>
+      </ng-template>
+      <ng-template appCeldaTabla="origen" [filas]="filas()" let-fila>
+        <p>{{ fila.origen }}</p>
+        <p class="text-caption-1 text-ink-muted">{{ fila.origenDetalle }}</p>
+      </ng-template>
+      <ng-template appCeldaTabla="destino" [filas]="filas()" let-fila>
+        <p>{{ fila.destino }}</p>
+        <p class="text-caption-1 text-ink-muted">{{ fila.destinoDetalle }}</p>
+      </ng-template>
+      <ng-template appCeldaTabla="montos" [filas]="filas()" let-fila>
+        @for (monto of fila.montos; track monto.divisa) {
+          @if ($index < 2) {
+            <p>{{ monto.monto | appMonto: monto.divisa }}</p>
+          }
+        }
+        @if (fila.montos.length > 2) {
+          <p class="text-caption-1 text-ink-muted">+{{ fila.montos.length - 2 }} más</p>
+        }
+      </ng-template>
+      <ng-template appCeldaTabla="resolvio" [filas]="filas()" let-fila>
+        @if (fila.resueltoPor) {
+          <p>{{ fila.resueltoPor }}</p>
+          <p class="font-data text-caption-1 text-ink-muted">
+            {{ fila.resueltoEn | appFechaHora }}
+          </p>
+        } @else {
+          <span class="text-ink-muted">—</span>
+        }
+      </ng-template>
+      <ng-template appCeldaTabla="estatus" [filas]="filas()" let-fila>
+        <app-pill-estatus [ajuste]="pillEstatus[fila.estatus]" />
+      </ng-template>
+    </app-tabla-datos>
+  </section>
+</article>

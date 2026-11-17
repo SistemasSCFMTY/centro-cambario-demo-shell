@@ -98,7 +98,7 @@
 | Route | Page | Notes |
 |---|---|---|
 | `/clientes` | List | TanStack, URL filters, `Filtros` popover, "Nuevo cliente" primary. Lead cell `.lead-avatar`. |
-| `/clientes/nuevo`, `/clientes/:id/editar` | Form page | Grouped form sections in the page panel (`05`) and a sticky action bar (see `05` OPEN on action placement). |
+| `/clientes/nuevo`, `/clientes/:id/editar` | Form page | Grouped form sections in the page panel (`05`) and a sticky action bar (lead, 2026-11-16). |
 | `/clientes/:id` | Detail ("360") | Header card + tabs: General · Documentos · Operaciones. |
 | `/operaciones` | List | Tabs → URL param (`?vista=hoy|pendientes|todas`). |
 | `/operaciones/nueva` | Stepped page | Operación → Cliente → (Recursos) → result. Draft kept in NGXS. |

@@ -1,0 +1,209 @@
+<div class="relative" [style.min-height.rem]="alturaMinimaRem()">
+  @if (refrescando()) {
+    <span
+      class="pointer-events-none absolute inset-x-0 top-0 h-0.5 overflow-hidden"
+      aria-hidden="true"
+    >
+      <span class="barra-refresco"></span>
+    </span>
+  }
+
+  <div hlmTableContainer appDesvanecidoDesplazamiento class="scrollbar-thin">
+    <table hlmTable class="text-subheadline whitespace-nowrap" [attr.aria-busy]="cargando()">
+      <caption class="sr-only">
+        {{
+          titulo()
+        }}
+      </caption>
+      <thead class="bg-panel-muted">
+        <tr>
+          @for (encabezado of encabezados(); track encabezado.id) {
+            <th
+              scope="col"
+              class="micro-label px-4 py-3 whitespace-nowrap"
+              [class.text-start]="!encabezado.numerica"
+              [class.text-end]="encabezado.numerica"
+              [attr.aria-sort]="encabezado.ordenable ? encabezado.ariaOrden : null"
+            >
+              @if (encabezado.oculto) {
+                <span class="sr-only">{{ encabezado.etiqueta }}</span>
+              } @else if (encabezado.ordenable) {
+                <button
+                  type="button"
+                  class="inline-flex cursor-pointer items-center gap-1 select-none hover:text-ink"
+                  (click)="alternarOrden(encabezado.columna)"
+                >
+                  {{ encabezado.etiqueta }}
+                  @switch (encabezado.direccion) {
+                    @case ('asc') {
+                      <ng-icon
+                        name="lucideArrowUp"
+                        size="14"
+                        class="text-primary-600 dark:text-primary-400"
+                        aria-hidden="true"
+                      />
+                    }
+                    @case ('desc') {
+                      <ng-icon
+                        name="lucideArrowDown"
+                        size="14"
+                        class="text-primary-600 dark:text-primary-400"
+                        aria-hidden="true"
+                      />
+                    }
+                    @default {
+                      <ng-icon
+                        name="lucideChevronsUpDown"
+                        size="14"
+                        class="text-ink-subtle"
+                        aria-hidden="true"
+                      />
+                    }
+                  }
+                </button>
+              } @else {
+                {{ encabezado.etiqueta }}
+              }
+            </th>
+          }
+          @if (etiquetaAccion()) {
+            <th scope="col" class="w-px px-4 py-3"><span class="sr-only">Acciones</span></th>
+          }
+        </tr>
+      </thead>
+
+      @if (esqueleto()) {
+        <tbody role="status" aria-label="Cargando datos">
+          @for (fila of filasEsqueleto; track fila) {
+            <tr class="border-0 hover:bg-transparent" [class]="claseEsqueleto()">
+              @for (columna of columnasEsqueleto(); track columna) {
+                <td class="px-4 py-2.5"><span class="skeleton"></span></td>
+              }
+            </tr>
+          }
+        </tbody>
+      } @else if (vacia()) {
+        <tbody>
+          <tr class="border-0 hover:bg-transparent">
+            <td [attr.colspan]="columnasTotales()" class="p-0">
+              <div
+                class="flex min-h-60 flex-col items-center justify-center gap-3 p-8 text-center whitespace-normal"
+              >
+                <ng-icon
+                  name="lucideInbox"
+                  size="28"
+                  [strokeWidth]="1.5"
+                  class="text-ink-subtle"
+                  aria-hidden="true"
+                />
+                <div>
+                  <p class="text-headline">{{ vacioTitulo() }}</p>
+                  <p class="text-callout text-ink-muted">{{ vacioDescripcion() }}</p>
+                </div>
+                <ng-content select="[vacio-accion]" />
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      } @else {
+        <tbody [class.pointer-events-none]="refrescando()">
+          @for (fila of filasVista(); track fila.id) {
+            <tr
+              class="border-0 transition-colors duration-100"
+              [class]="claseFila()"
+              (click)="filaClicable() && filaClic.emit(fila.original)"
+            >
+              @for (celda of fila.celdas; track celda.id) {
+                <td
+                  class="px-4 py-2 text-subheadline text-ink"
+                  [class.font-data]="celda.numerica"
+                  [class.text-end]="celda.numerica"
+                >
+                  @if (celda.plantilla; as plantilla) {
+                    <ng-container
+                      *ngTemplateOutlet="plantilla; context: { $implicit: fila.original }"
+                    />
+                  } @else {
+                    {{ celda.texto }}
+                  }
+                </td>
+              }
+              @if (etiquetaAccion()) {
+                <td class="w-px px-4 py-2 text-end">
+                  <button
+                    type="button"
+                    class="row-action"
+                    [attr.aria-label]="fila.etiquetaAccion"
+                    (click)="$event.stopPropagation(); filaClic.emit(fila.original)"
+                  >
+                    <ng-icon name="lucideChevronRight" size="16" aria-hidden="true" />
+                  </button>
+                </td>
+              }
+            </tr>
+          }
+        </tbody>
+      }
+    </table>
+  </div>
+</div>
+
+@if (total() > 0) {
+  <nav class="flex flex-wrap items-center justify-between gap-3 px-4 py-3" aria-label="Paginación">
+    <p class="font-data text-caption-1 text-ink-muted" aria-live="polite">{{ rango() }}</p>
+
+    <div class="flex flex-wrap items-center gap-1.5">
+      <div class="me-3 flex items-center gap-2">
+        <label class="text-caption-1 text-ink-muted" [for]="idTamano">Filas por página</label>
+        <hlm-select [value]="tamano()" (valueChange)="cambiarTamano($event)">
+          <hlm-select-trigger class="font-data text-subheadline" size="sm" [buttonId]="idTamano">
+            <hlm-select-value />
+          </hlm-select-trigger>
+          <hlm-select-content *hlmSelectPortal>
+            @for (opcion of tamanos(); track opcion) {
+              <hlm-select-item class="font-data text-subheadline" [value]="opcion">
+                {{ opcion }}
+              </hlm-select-item>
+            }
+          </hlm-select-content>
+        </hlm-select>
+      </div>
+
+      <button
+        type="button"
+        class="size-9 cursor-pointer rounded-md text-ink hover:bg-primary-50 disabled:cursor-not-allowed disabled:opacity-30 dark:hover:bg-panel-muted"
+        aria-label="Página anterior"
+        [disabled]="pagina() <= 1"
+        (click)="paginaCambia.emit(pagina() - 1)"
+      >
+        <ng-icon name="lucideChevronLeft" size="16" class="mx-auto" aria-hidden="true" />
+      </button>
+
+      @for (boton of botonesPagina(); track $index) {
+        @if (boton === null) {
+          <span class="px-1 text-ink-subtle" aria-hidden="true">…</span>
+        } @else {
+          <button
+            type="button"
+            class="font-data size-9 cursor-pointer rounded-md text-subheadline font-bold text-ink hover:bg-primary-50 pagina-actual:bg-primary-700 pagina-actual:text-surface-0 pagina-actual:hover:bg-primary-800 dark:hover:bg-panel-muted dark:pagina-actual:bg-primary-600 dark:pagina-actual:hover:bg-primary-500"
+            [attr.aria-current]="boton === pagina() ? 'page' : null"
+            [attr.aria-label]="'Página ' + boton"
+            (click)="paginaCambia.emit(boton)"
+          >
+            {{ boton }}
+          </button>
+        }
+      }
+
+      <button
+        type="button"
+        class="size-9 cursor-pointer rounded-md text-ink hover:bg-primary-50 disabled:cursor-not-allowed disabled:opacity-30 dark:hover:bg-panel-muted"
+        aria-label="Página siguiente"
+        [disabled]="pagina() >= paginasTotales()"
+        (click)="paginaCambia.emit(pagina() + 1)"
+      >
+        <ng-icon name="lucideChevronRight" size="16" class="mx-auto" aria-hidden="true" />
+      </button>
+    </div>
+  </nav>
+}

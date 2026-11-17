@@ -1,0 +1,74 @@
+<article class="panel animate-page-in">
+  <app-encabezado-pagina
+    titulo="Clientes"
+    descripcion="Expedientes de personas físicas y morales, del más reciente al más antiguo."
+  >
+    <app-filtros-popover [filtros]="esquema.filtros" />
+  </app-encabezado-pagina>
+
+  <section class="border-t border-line" aria-label="Lista de clientes">
+    <app-tabla-datos
+      titulo="Clientes"
+      alto="alta"
+      campoEtiquetaAccion="nombreCompleto"
+      etiquetaAccion="Ver expediente"
+      [columnas]="columnas"
+      [filas]="filas()"
+      [total]="pagina()?.total ?? 0"
+      [cargando]="cargando()"
+      [pagina]="lista.estado().pagina"
+      [tamano]="lista.estado().tamano"
+      [tamanos]="esquema.tamanos"
+      [orden]="lista.estado().orden"
+      [ordenInicial]="esquema.ordenInicial"
+      [ordenables]="esquema.ordenables"
+      [vacioTitulo]="
+        error()
+          ? 'No pudimos cargar los clientes'
+          : hayFiltros()
+            ? 'Sin resultados'
+            : 'Aún no hay clientes'
+      "
+      [vacioDescripcion]="
+        error()
+          ? 'Intente de nuevo en unos momentos.'
+          : hayFiltros()
+            ? 'Revise los filtros o lo que escribió en la búsqueda.'
+            : 'Los clientes registrados aparecerán aquí.'
+      "
+      (paginaCambia)="lista.irAPagina($event)"
+      (tamanoCambia)="lista.cambiarTamano($event)"
+      (ordenCambia)="lista.ordenar($event)"
+      (filaClic)="abrir($event)"
+    >
+      <ng-template appCeldaTabla="nombreCompleto" [filas]="filas()" let-fila>
+        <app-celda-principal
+          [nombre]="fila.nombreCompleto"
+          [detalle]="etiquetaPersona[fila.tipoPersona]"
+        >
+          @if (fila.esPep) {
+            <app-pill-estatus [ajuste]="pillPep" />
+          }
+        </app-celda-principal>
+      </ng-template>
+      <ng-template appCeldaTabla="numeroCliente" [filas]="filas()" let-fila>
+        <span class="font-data">{{ fila.numeroCliente }}</span>
+      </ng-template>
+      <ng-template appCeldaTabla="fechaBase" [filas]="filas()" let-fila>
+        <span class="font-data">{{ fila.fechaBase | appFecha }}</span>
+      </ng-template>
+      <ng-template appCeldaTabla="identificador" [filas]="filas()" let-fila>
+        <span class="font-data">{{ fila.curp ?? fila.rfc }}</span>
+      </ng-template>
+      <ng-template appCeldaTabla="nivelExpediente" [filas]="filas()" let-fila>
+        <app-pill-estatus [ajuste]="pillNivel[fila.nivelExpediente]" />
+      </ng-template>
+      <ng-template appCeldaTabla="estatus" [filas]="filas()" let-fila>
+        <app-pill-estatus [ajuste]="pillEstatus[fila.estatus]" />
+      </ng-template>
+      <ng-template appCeldaTabla="fechaAlta" [filas]="filas()" let-fila>
+        <span class="font-data">{{ fila.fechaAlta | appFecha }}</span>
+      </ng-template>
+    </app-tabla-datos>
+  </section>
+</article>

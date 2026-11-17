@@ -1,0 +1,527 @@
+@if (noEncontrado()) {
+  <article class="panel animate-page-in">
+    <app-encabezado-pagina
+      titulo="Cliente no encontrado"
+      [volverA]="['/clientes']"
+      etiquetaVolver="Volver a clientes"
+    />
+    <section class="border-t border-line">
+      <div class="flex min-h-60 flex-col items-center justify-center gap-3 p-8 text-center">
+        <ng-icon
+          name="lucideSearchX"
+          size="28"
+          [strokeWidth]="1.5"
+          class="text-ink-subtle"
+          aria-hidden="true"
+        />
+        <div>
+          <p class="text-headline">No encontramos este cliente</p>
+          <p class="text-callout text-ink-muted">
+            Puede que el expediente ya no exista. Regrese a la lista y búsquelo de nuevo.
+          </p>
+        </div>
+      </div>
+    </section>
+  </article>
+} @else {
+  <app-detalle-pagina
+    [titulo]="cliente()?.nombreCompleto ?? 'Cliente'"
+    [descripcion]="descripcion()"
+    [volverA]="['/clientes']"
+    etiquetaVolver="Volver a clientes"
+    [pestanas]="pestanas()"
+    claveUrl="tab"
+    [cargando]="esqueleto()"
+    etiquetaCarga="Cargando cliente"
+    [(pestana)]="pestana"
+  >
+    <ng-container meta>
+      @if (cliente(); as c) {
+        <app-pill-estatus [ajuste]="pillNivel[c.nivelExpediente]" />
+        @if (pillPep(); as pep) {
+          <app-pill-estatus [ajuste]="pep" />
+        }
+        <app-pill-estatus [ajuste]="pillEstatus[c.estatus]" />
+      }
+    </ng-container>
+
+    <p linea class="mt-1 text-subheadline font-bold text-ink">
+      @if (cliente()) {
+        {{ puedeOperar() }}
+      }
+    </p>
+
+    <div banner class="px-8 pb-6 empty:hidden">
+      @if (cliente(); as c) {
+        @if (c.estatus !== 'ACTIVO') {
+          <p
+            class="callout"
+            [class.callout-warn]="c.estatus !== 'BLOQUEADO'"
+            [class.callout-danger]="c.estatus === 'BLOQUEADO'"
+            role="status"
+          >
+            <span class="font-bold">{{ pillEstatus[c.estatus].etiqueta }}.</span>
+            {{ c.motivoEstatus }}
+          </p>
+        }
+      }
+    </div>
+
+    @if (error() && !cliente()) {
+      <div class="px-8 py-8">
+        <p class="callout callout-danger" role="alert">{{ error() }}</p>
+      </div>
+    } @else if (cliente(); as c) {
+      @switch (pestana()) {
+        @case ('movimientos') {
+          <section aria-labelledby="cliente-movimientos">
+            <header class="px-8 pt-8 pb-4">
+              <h2 id="cliente-movimientos">Movimientos</h2>
+              <p class="max-w-prose text-callout text-ink-muted">
+                El efectivo que entró y salió por cada divisa en las operaciones completadas.
+              </p>
+            </header>
+            @if (errorOperaciones()) {
+              <p class="callout callout-danger mx-8 mb-8" role="alert">{{ errorOperaciones() }}</p>
+            } @else if (cargandoOperaciones()) {
+              <div
+                class="flex flex-col gap-4 px-8 pb-8"
+                role="status"
+                aria-label="Cargando movimientos"
+              >
+                @for (fila of [1, 2, 3]; track fila) {
+                  <span class="skeleton max-w-full"></span>
+                }
+              </div>
+            } @else if ((operaciones()?.movimientos ?? []).length === 0) {
+              <div class="flex min-h-60 flex-col items-center justify-center gap-3 p-8 text-center">
+                <ng-icon
+                  name="lucideFileText"
+                  size="28"
+                  [strokeWidth]="1.5"
+                  class="text-ink-subtle"
+                  aria-hidden="true"
+                />
+                <div>
+                  <p class="text-headline">Sin movimientos</p>
+                  <p class="text-callout text-ink-muted">
+                    Cuando este cliente complete operaciones, el efectivo aparecerá aquí.
+                  </p>
+                </div>
+              </div>
+            } @else {
+              <div class="relative">
+                <div hlmTableContainer appDesvanecidoDesplazamiento class="scrollbar-thin">
+                  <table hlmTable class="text-subheadline whitespace-nowrap">
+                    <caption class="sr-only">
+                      Movimientos de efectivo del cliente
+                    </caption>
+                    <thead class="bg-panel-muted">
+                      <tr>
+                        <th scope="col" class="micro-label px-8 py-3 text-start whitespace-nowrap">
+                          Fecha
+                        </th>
+                        <th scope="col" class="micro-label px-4 py-3 text-start whitespace-nowrap">
+                          Folio
+                        </th>
+                        <th scope="col" class="micro-label px-4 py-3 text-start whitespace-nowrap">
+                          Divisa
+                        </th>
+                        <th scope="col" class="micro-label px-4 py-3 text-end whitespace-nowrap">
+                          Entrada
+                        </th>
+                        <th scope="col" class="micro-label px-4 py-3 text-end whitespace-nowrap">
+                          Salida
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      @for (m of operaciones()?.movimientos; track m.id) {
+                        <tr class="border-0 h-10">
+                          <td class="font-data px-8 py-2 whitespace-nowrap">
+                            {{ m.fecha | appFechaHora }}
+                          </td>
+                          <td class="px-4 py-2 whitespace-nowrap">
+                            <a
+                              class="link-action font-data"
+                              [routerLink]="['/operaciones', m.operacionId]"
+                              >{{ m.folio }}</a
+                            >
+                          </td>
+                          <td class="font-data px-4 py-2 whitespace-nowrap">{{ m.divisa }}</td>
+                          <td class="font-data px-4 py-2 text-end whitespace-nowrap">
+                            @if (m.entrada > 0) {
+                              {{ m.entrada | appMonto: m.divisa }}
+                            } @else {
+                              —
+                            }
+                          </td>
+                          <td class="font-data px-4 py-2 text-end whitespace-nowrap">
+                            @if (m.salida > 0) {
+                              {{ m.salida | appMonto: m.divisa }}
+                            } @else {
+                              —
+                            }
+                          </td>
+                        </tr>
+                      }
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            }
+          </section>
+        }
+        @case ('representantes') {
+          <section class="px-8 py-8" aria-labelledby="cliente-representantes">
+            <h2 id="cliente-representantes">Representantes legales</h2>
+            <p class="max-w-prose text-callout text-ink-muted">
+              Quien comparece en nombre de la persona moral. Los demás representantes aún no se
+              capturan.
+            </p>
+            <app-cuadricula-campos [campos]="camposRepresentante()" [columnas]="3" />
+          </section>
+        }
+        @case ('beneficiarios') {
+          <section aria-labelledby="cliente-beneficiarios">
+            <header class="px-8 pt-8 pb-4">
+              <h2 id="cliente-beneficiarios">Beneficiarios</h2>
+              <p class="max-w-prose text-callout text-ink-muted">
+                Propietarios reales del cliente, o el tercero por cuenta de quien actúa.
+              </p>
+            </header>
+            <div class="flex min-h-60 flex-col items-center justify-center gap-3 p-8 text-center">
+              <ng-icon
+                name="lucideFileText"
+                size="28"
+                [strokeWidth]="1.5"
+                class="text-ink-subtle"
+                aria-hidden="true"
+              />
+              <div>
+                <p class="text-headline">Sin capturar</p>
+                <p class="text-callout text-ink-muted">
+                  Los propietarios reales y beneficiarios aparecerán aquí cuando se capturen.
+                </p>
+              </div>
+            </div>
+          </section>
+        }
+        @case ('pep') {
+          <section aria-labelledby="cliente-pep">
+            <header class="px-8 pt-8 pb-4">
+              <h2 id="cliente-pep">Declaración PEP</h2>
+              <p class="max-w-prose text-callout text-ink-muted">
+                Si el cliente se declaró como persona políticamente expuesta.
+              </p>
+            </header>
+            @if (camposPep().length === 0) {
+              <div class="flex min-h-60 flex-col items-center justify-center gap-3 p-8 text-center">
+                <ng-icon
+                  name="lucideFileText"
+                  size="28"
+                  [strokeWidth]="1.5"
+                  class="text-ink-subtle"
+                  aria-hidden="true"
+                />
+                <div>
+                  <p class="text-headline">Sin declaración como PEP</p>
+                  <p class="text-callout text-ink-muted">
+                    Este cliente no se declaró como persona políticamente expuesta.
+                  </p>
+                </div>
+              </div>
+            } @else {
+              <div class="px-8 pb-8">
+                <app-cuadricula-campos [campos]="camposPep()" [columnas]="3" />
+              </div>
+            }
+          </section>
+        }
+        @case ('operaciones') {
+          <section class="px-8 py-8" aria-labelledby="cliente-resumen">
+            <h2 id="cliente-resumen">Operado</h2>
+            <p class="max-w-prose text-callout text-ink-muted">
+              Lo que este cliente ha operado este mes y hoy, frente al límite diario de
+              {{ limiteDiarioUsd | appNumero: 0 }} USD.
+            </p>
+            @if (errorOperaciones()) {
+              <p class="callout callout-danger mt-6" role="alert">{{ errorOperaciones() }}</p>
+            } @else if (operaciones(); as datos) {
+              <dl
+                class="card mt-6 grid divide-y divide-line sm:grid-cols-2 sm:divide-x sm:divide-y-0 lg:grid-cols-4"
+              >
+                <div class="px-6 py-4">
+                  <dt class="micro-label">Monto del mes (USD)</dt>
+                  <dd class="font-data text-title-1 font-bold text-ink">
+                    {{ datos.resumen.montoUsdMes | appNumero }}
+                  </dd>
+                  <dd class="text-caption-1 text-ink-muted">Sin perfil declarado</dd>
+                </div>
+                <div class="px-6 py-4">
+                  <dt class="micro-label">Operaciones del mes</dt>
+                  <dd class="font-data text-title-1 font-bold text-ink">
+                    {{ datos.resumen.operacionesMes }}
+                  </dd>
+                  <dd class="text-caption-1 text-ink-muted">Sin perfil declarado</dd>
+                </div>
+                <div class="px-6 py-4">
+                  <dt class="micro-label">Divisas operadas</dt>
+                  <dd class="font-data text-title-1 font-bold text-ink">
+                    {{ divisasMes() || '—' }}
+                  </dd>
+                  <dd class="text-caption-1 text-ink-muted">Sin divisas declaradas</dd>
+                </div>
+                <div class="px-6 py-4">
+                  <dt class="micro-label">Operado hoy (USD)</dt>
+                  <dd class="font-data text-title-1 font-bold text-ink">
+                    {{ datos.resumen.montoUsdHoy | appNumero }}
+                  </dd>
+                  <dd class="font-data text-caption-1 text-ink-muted">
+                    Límite diario: {{ datos.resumen.limiteDiarioUsd | appNumero: 0 }} USD
+                  </dd>
+                </div>
+              </dl>
+            } @else if (cargandoOperaciones()) {
+              <div
+                class="card mt-6 grid divide-y divide-line sm:grid-cols-2 sm:divide-x sm:divide-y-0 lg:grid-cols-4"
+                role="status"
+                aria-label="Cargando operaciones"
+              >
+                @for (cifra of [1, 2, 3, 4]; track cifra) {
+                  <div class="px-6 py-4">
+                    <span class="skeleton max-w-24"></span>
+                    <span class="skeleton mt-2 max-w-32"></span>
+                  </div>
+                }
+              </div>
+            }
+          </section>
+
+          <section class="border-t border-line" aria-labelledby="cliente-operaciones">
+            <header class="px-8 pt-8 pb-4">
+              <h2 id="cliente-operaciones">Últimas operaciones</h2>
+              <p class="max-w-prose text-callout text-ink-muted">
+                Las diez más recientes, de la más nueva a la más antigua.
+              </p>
+            </header>
+            @if (cargandoOperaciones()) {
+              <div
+                class="flex flex-col gap-4 px-8 pb-8"
+                role="status"
+                aria-label="Cargando operaciones"
+              >
+                @for (fila of [1, 2, 3]; track fila) {
+                  <span class="skeleton max-w-full"></span>
+                }
+              </div>
+            } @else if (errorOperaciones()) {
+              <p class="callout callout-danger mx-8 mb-8" role="alert">{{ errorOperaciones() }}</p>
+            } @else if ((operaciones()?.operaciones ?? []).length === 0) {
+              <div class="flex min-h-60 flex-col items-center justify-center gap-3 p-8 text-center">
+                <ng-icon
+                  name="lucideFileText"
+                  size="28"
+                  [strokeWidth]="1.5"
+                  class="text-ink-subtle"
+                  aria-hidden="true"
+                />
+                <div>
+                  <p class="text-headline">Sin operaciones</p>
+                  <p class="text-callout text-ink-muted">
+                    Cuando este cliente opere, sus operaciones aparecerán aquí.
+                  </p>
+                </div>
+              </div>
+            } @else {
+              <div class="relative">
+                <div hlmTableContainer appDesvanecidoDesplazamiento class="scrollbar-thin">
+                  <table hlmTable class="text-subheadline whitespace-nowrap">
+                    <caption class="sr-only">
+                      Operaciones del cliente
+                    </caption>
+                    <thead class="bg-panel-muted">
+                      <tr>
+                        <th scope="col" class="micro-label px-8 py-3 text-start whitespace-nowrap">
+                          Folio
+                        </th>
+                        <th scope="col" class="micro-label px-4 py-3 text-start whitespace-nowrap">
+                          Fecha
+                        </th>
+                        <th scope="col" class="micro-label px-4 py-3 text-start whitespace-nowrap">
+                          Operación
+                        </th>
+                        <th scope="col" class="micro-label px-4 py-3 text-end whitespace-nowrap">
+                          Monto en divisa
+                        </th>
+                        <th scope="col" class="micro-label px-4 py-3 text-end whitespace-nowrap">
+                          Equiv. USD
+                        </th>
+                        <th scope="col" class="micro-label px-4 py-3 text-start whitespace-nowrap">
+                          Estatus
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      @for (o of operaciones()?.operaciones; track o.id) {
+                        <tr class="border-0 h-10">
+                          <td class="px-8 py-2 whitespace-nowrap">
+                            <span class="flex items-center gap-2">
+                              <a
+                                class="link-action font-data"
+                                [routerLink]="['/operaciones', o.id]"
+                                >{{ o.folio }}</a
+                              >
+                              @if (o.esRelevante) {
+                                <app-pill-estatus [ajuste]="pillRelevante" />
+                              }
+                            </span>
+                          </td>
+                          <td class="font-data px-4 py-2 whitespace-nowrap">
+                            {{ o.fechaOperacion | appFechaHora }}
+                          </td>
+                          <td class="px-4 py-2 whitespace-nowrap">{{ etiquetaTipo[o.tipo] }}</td>
+                          <td class="font-data px-4 py-2 text-end whitespace-nowrap">
+                            {{ o.montoDivisa | appMonto: o.divisa }}
+                          </td>
+                          <td class="font-data px-4 py-2 text-end whitespace-nowrap">
+                            {{ o.montoUsd | appNumero }}
+                          </td>
+                          <td class="px-4 py-2 whitespace-nowrap">
+                            <app-pill-estatus [ajuste]="pillEstatusOperacion[o.estatus]" />
+                          </td>
+                        </tr>
+                      }
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            }
+          </section>
+        }
+        @case ('documentos') {
+          <section aria-labelledby="cliente-documentos">
+            <header class="px-8 pt-8 pb-4">
+              <h2 id="cliente-documentos">Documentos</h2>
+              <p class="max-w-prose text-callout text-ink-muted">
+                Los documentos digitalizados del expediente y si se cotejaron contra el original.
+              </p>
+            </header>
+            @if (documentos().length === 0) {
+              <div class="flex min-h-60 flex-col items-center justify-center gap-3 p-8 text-center">
+                <ng-icon
+                  name="lucideFileText"
+                  size="28"
+                  [strokeWidth]="1.5"
+                  class="text-ink-subtle"
+                  aria-hidden="true"
+                />
+                <div>
+                  <p class="text-headline">Sin documentos digitalizados</p>
+                  <p class="text-callout text-ink-muted">
+                    Los documentos que se carguen al expediente aparecerán aquí.
+                  </p>
+                </div>
+              </div>
+            } @else {
+              <div class="relative">
+                <div hlmTableContainer appDesvanecidoDesplazamiento class="scrollbar-thin">
+                  <table hlmTable class="text-subheadline whitespace-nowrap">
+                    <caption class="sr-only">
+                      Documentos del expediente
+                    </caption>
+                    <thead class="bg-panel-muted">
+                      <tr>
+                        <th scope="col" class="micro-label px-8 py-3 text-start whitespace-nowrap">
+                          Documento
+                        </th>
+                        <th scope="col" class="micro-label px-4 py-3 text-start whitespace-nowrap">
+                          Archivo
+                        </th>
+                        <th scope="col" class="micro-label px-4 py-3 text-start whitespace-nowrap">
+                          Fecha
+                        </th>
+                        <th scope="col" class="micro-label px-4 py-3 text-start whitespace-nowrap">
+                          Cotejado
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      @for (d of documentos(); track d.id) {
+                        <tr class="border-0 h-10">
+                          <td class="px-8 py-2 font-bold whitespace-nowrap">{{ d.tipo }}</td>
+                          <td class="px-4 py-2 whitespace-nowrap">
+                            {{ d.nombreArchivo }}
+                            <span class="font-data text-caption-1 text-ink-muted">{{
+                              d.tamano
+                            }}</span>
+                          </td>
+                          <td class="font-data px-4 py-2 whitespace-nowrap">
+                            {{ d.fechaDocumento | appFecha }}
+                          </td>
+                          <td class="px-4 py-2 whitespace-nowrap">
+                            <app-pill-estatus [ajuste]="d.cotejado" />
+                          </td>
+                        </tr>
+                      }
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            }
+          </section>
+        }
+        @case ('auditoria') {
+          <app-pestana-auditoria [registros]="detalle()?.auditoria ?? []" />
+        }
+        @default {
+          <section class="px-8 py-8" aria-labelledby="cliente-completitud">
+            <h2 id="cliente-completitud">Completitud del expediente</h2>
+            <p class="max-w-prose text-callout text-ink-muted">
+              Cada nivel suma requisitos (4ª de las disposiciones).
+            </p>
+            <div class="mt-6 grid gap-8 lg:grid-cols-3">
+              @for (n of niveles(); track n.nivel) {
+                <div>
+                  <h3 class="flex items-center gap-2">
+                    Nivel {{ n.nivel }}
+                    <app-pill-estatus [ajuste]="n.pill" />
+                  </h3>
+                  <ul class="mt-3 flex flex-col gap-2">
+                    @for (requisito of n.requisitos; track requisito) {
+                      <li class="flex items-start gap-2 text-subheadline">
+                        @if (n.completo) {
+                          <ng-icon
+                            name="lucideCheck"
+                            size="14"
+                            class="mt-1 shrink-0 text-success-700 dark:text-success-400"
+                            aria-hidden="true"
+                          />
+                          <span class="sr-only">Cumplido:</span>
+                        } @else {
+                          <ng-icon
+                            name="lucideMinus"
+                            size="14"
+                            class="mt-1 shrink-0 text-ink-subtle"
+                            aria-hidden="true"
+                          />
+                          <span class="sr-only">Pendiente:</span>
+                        }
+                        <span [class.text-ink-muted]="!n.completo">{{ requisito }}</span>
+                      </li>
+                    }
+                  </ul>
+                </div>
+              }
+            </div>
+          </section>
+
+          <section class="border-t border-line px-8 py-8" aria-labelledby="cliente-datos">
+            <h2 id="cliente-datos">Datos del cliente</h2>
+            <app-cuadricula-campos [campos]="campos()" [columnas]="3" />
+          </section>
+        }
+      }
+    }
+  </app-detalle-pagina>
+}

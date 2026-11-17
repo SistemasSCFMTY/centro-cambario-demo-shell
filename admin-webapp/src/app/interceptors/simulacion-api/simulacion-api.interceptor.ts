@@ -2,7 +2,7 @@ import { HttpInterceptorFn } from '@angular/common/http';
 import { inject } from '@angular/core';
 import { LATENCIA_SIMULADA_MS, URL_API } from '@data/constants/api.constants';
 import { ApiSimulada } from '@interceptors/simulacion-api/api-simulada';
-import { defer, delay, dematerialize, materialize, of, throwError } from 'rxjs';
+import { defer, delay, dematerialize, from, materialize, of, throwError } from 'rxjs';
 
 /** Phase 1: answers backend-api requests in the browser (see ApiSimulada), after a short delay. */
 export const simulacionApiInterceptor: HttpInterceptorFn = (solicitud, siguiente) => {
@@ -11,7 +11,8 @@ export const simulacionApiInterceptor: HttpInterceptorFn = (solicitud, siguiente
   return defer(() => {
     try {
       const respuesta = api.responder(solicitud);
-      return respuesta ? of(respuesta) : siguiente(solicitud);
+      if (!respuesta) return siguiente(solicitud);
+      return respuesta instanceof Promise ? from(respuesta) : of(respuesta);
     } catch (error) {
       return throwError(() => error);
     }

@@ -1,0 +1,65 @@
+<article class="panel animate-page-in">
+  <app-encabezado-pagina
+    titulo="Editar negocio"
+    descripcion="Datos generales y legales del centro cambiario."
+    [volverA]="['/negocio']"
+    etiquetaVolver="Volver a negocio"
+  />
+
+  @if (!listo()) {
+    @if (error()) {
+      <div class="border-t border-line px-8 py-4">
+        <p class="callout callout-danger" role="alert">{{ error() }}</p>
+      </div>
+    } @else {
+      <div class="border-t border-line px-8 py-8" role="status" aria-label="Cargando negocio">
+        <span class="skeleton max-w-24"></span>
+        <div class="mt-4 grid gap-x-6 gap-y-4 sm:grid-cols-2">
+          @for (campo of [1, 2, 3, 4]; track campo) {
+            <div>
+              <span class="skeleton max-w-24"></span>
+              <span class="skeleton mt-2 max-w-48"></span>
+            </div>
+          }
+        </div>
+      </div>
+    }
+  } @else {
+    @if (errorGuardado(); as mensaje) {
+      <div class="border-t border-line px-8 py-4">
+        <p class="callout callout-danger" role="alert">{{ mensaje }}</p>
+      </div>
+    }
+    @for (seccion of secciones; track seccion.id) {
+      <app-seccion-negocio
+        [seccion]="seccion"
+        [grupo]="formulario"
+        [opciones]="opciones()"
+        prefijo="negocio"
+        [cargandoGeografia]="cargandoGeografia()"
+        [errorGeografia]="errorGeografia()"
+      >
+        @if (seccion.id === 'operacion') {
+          <div class="min-w-0 sm:col-span-2">
+            <p class="micro-label">Límite diario por cliente</p>
+            <p class="font-data mt-0.5 text-subheadline font-bold text-ink">{{ limiteDiario() }}</p>
+            <p class="mt-1 text-footnote text-ink-muted">
+              Se cambia en los parámetros de operación, no aquí.
+            </p>
+          </div>
+        }
+      </app-seccion-negocio>
+    }
+  }
+
+  <app-barra-acciones
+    [guardando]="guardando()"
+    [guardarDeshabilitado]="!listo()"
+    (cancelar)="cancelar()"
+    (guardar)="guardar()"
+  >
+    @if (intentado()) {
+      <span role="alert">Revise los campos marcados antes de guardar.</span>
+    }
+  </app-barra-acciones>
+</article>

@@ -1,0 +1,75 @@
+<section aria-label="Auditoría">
+  @if (cargando()) {
+    <div class="flex flex-col gap-4 px-8 py-8" role="status" aria-label="Cargando auditoría">
+      @for (fila of [1, 2, 3, 4]; track fila) {
+        <span class="skeleton max-w-full"></span>
+      }
+    </div>
+  } @else if (ordenados().length === 0) {
+    <div class="flex min-h-60 flex-col items-center justify-center gap-3 p-8 text-center">
+      <ng-icon
+        name="lucideHistory"
+        size="28"
+        [strokeWidth]="1.5"
+        class="text-ink-subtle"
+        aria-hidden="true"
+      />
+      <div>
+        <p class="text-headline">Aún no hay cambios registrados</p>
+        <p class="text-callout text-ink-muted">Los cambios de este registro aparecerán aquí.</p>
+      </div>
+    </div>
+  } @else {
+    <div class="relative">
+      <div hlmTableContainer appDesvanecidoDesplazamiento class="scrollbar-thin">
+        <table hlmTable class="text-subheadline">
+          <thead class="bg-panel-muted">
+            <tr>
+              <th scope="col" class="micro-label px-8 py-3 text-start whitespace-nowrap">
+                Fecha y hora
+              </th>
+              <th scope="col" class="micro-label px-4 py-3 text-start whitespace-nowrap">
+                Usuario
+              </th>
+              <th scope="col" class="micro-label px-4 py-3 text-start whitespace-nowrap">Acción</th>
+              <th scope="col" class="micro-label px-4 py-3 text-start whitespace-nowrap">
+                Detalle
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (registro of ordenados(); track registro.id) {
+              <tr class="border-0 align-top">
+                <td class="font-data px-8 py-2.5 text-subheadline whitespace-nowrap text-ink">
+                  {{ registro.fecha | appFechaHora }}
+                </td>
+                <td class="px-4 py-2.5 text-subheadline whitespace-nowrap text-ink">
+                  {{ registro.usuario }}
+                </td>
+                <td class="px-4 py-2.5 text-subheadline font-bold whitespace-nowrap text-ink">
+                  {{ registro.accion }}
+                </td>
+                <td class="px-4 py-2.5 text-subheadline whitespace-nowrap text-ink-muted">
+                  @if (registro.detalle) {
+                    <p>{{ registro.detalle }}</p>
+                  }
+                  @for (cambio of registro.cambios; track cambio.campo) {
+                    <p>
+                      {{ cambio.campo }}:
+                      <span class="font-data text-ink">{{ cambio.antes ?? '—' }}</span>
+                      →
+                      <span class="font-data text-ink">{{ cambio.despues ?? '—' }}</span>
+                    </p>
+                  }
+                  @if (!registro.detalle && registro.cambios.length === 0) {
+                    <span>—</span>
+                  }
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+  }
+</section>

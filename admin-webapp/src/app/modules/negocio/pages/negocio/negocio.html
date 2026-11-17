@@ -1,0 +1,68 @@
+<app-detalle-pagina
+  titulo="Negocio"
+  etiquetaCarga="Cargando negocio"
+  [descripcion]="descripcion()"
+  [pestanas]="pestanas"
+  [claveUrl]="claveUrl"
+  [cargando]="cargando() && !perfil()"
+  [(pestana)]="pestana"
+>
+  @if (pestana() === 'sucursales') {
+    <ng-container acciones>
+      <app-filtros-popover [filtros]="filtros" />
+      <a hlmBtn routerLink="/negocio/sucursales/nueva">
+        <ng-icon name="lucidePlus" size="16" aria-hidden="true" />
+        Nueva sucursal
+      </a>
+    </ng-container>
+  } @else if (pestana() !== 'auditoria') {
+    <a acciones hlmBtn variant="secondary" routerLink="/negocio/editar">
+      <ng-icon name="lucidePencil" size="16" aria-hidden="true" />
+      Editar
+    </a>
+  }
+
+  @switch (pestana()) {
+    @case ('general') {
+      @if (perfil(); as datos) {
+        <app-negocio-general [perfil]="datos" [opciones]="opciones()" />
+      } @else if (error()) {
+        <p class="callout callout-danger m-8" role="alert">{{ error() }}</p>
+      }
+    }
+    @case ('legal') {
+      @if (perfil(); as datos) {
+        <app-negocio-legal [perfil]="datos" [opciones]="opciones()" />
+      } @else if (error()) {
+        <p class="callout callout-danger m-8" role="alert">{{ error() }}</p>
+      }
+    }
+    @case ('sucursales') {
+      <app-negocio-sucursales />
+    }
+    @case ('auditoria') {
+      <div
+        class="flex flex-wrap items-center gap-2 px-8 py-4"
+        role="group"
+        aria-label="Registros que se muestran"
+      >
+        @for (opcion of opcionesAuditoria; track opcion.valor) {
+          <button
+            hlmBtn
+            type="button"
+            size="sm"
+            [variant]="filtroAuditoria() === opcion.valor ? 'secondary' : 'ghost'"
+            [attr.aria-pressed]="filtroAuditoria() === opcion.valor"
+            (click)="filtrarAuditoria(opcion.valor)"
+          >
+            {{ opcion.etiqueta }}
+          </button>
+        }
+      </div>
+      @if (errorAuditoria(); as mensaje) {
+        <p class="callout callout-danger m-8" role="alert">{{ mensaje }}</p>
+      }
+      <app-pestana-auditoria [registros]="registrosAuditoria()" [cargando]="cargandoAuditoria()" />
+    }
+  }
+</app-detalle-pagina>
