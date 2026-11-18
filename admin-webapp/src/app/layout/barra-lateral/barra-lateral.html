@@ -1,13 +1,11 @@
 <div
-  class="flex h-full flex-col rounded-2xl bg-chrome-card text-chrome-text ring-1 ring-chrome-line"
+  class="relative flex h-full flex-col rounded-2xl bg-chrome-card text-chrome-text ring-1 ring-chrome-line"
 >
-  <div class="flex items-center gap-2.5 ps-5 pe-2.5 pt-5 pb-4">
-    <app-logo-negocio tamano="sm" />
-    <span class="min-w-0 flex-1 truncate text-headline" [title]="nombreNegocio()">{{
-      nombreNegocio()
-    }}</span>
-    <app-selector-modo />
+  <div class="flex flex-col items-center gap-2.5 px-4 pt-7 pb-5 text-center">
+    <app-logo-negocio tamano="lg" />
+    <span class="line-clamp-2 text-headline" [title]="nombreNegocio()">{{ nombreNegocio() }}</span>
   </div>
+  <app-selector-modo class="absolute top-2.5 right-2.5" />
 
   <nav aria-label="Principal" class="scrollbar-thin min-h-0 flex-1 overflow-y-auto px-3 pb-3">
     @for (grupo of grupos; track $index; let i = $index) {

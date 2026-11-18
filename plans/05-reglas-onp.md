@@ -96,7 +96,8 @@
 - `h-dvh overflow-hidden`: exactly one screen tall. The sidebar is not sticky; it sits at `h-full` and its nav scrolls inside it.
 - The silver pane doesn't scroll (so its gradient and grain stay put). **Only the content inside it scrolls** (`#contenido`), and `Marco` resets it to the top on each navigation.
 - **The pane has no padding of its own** (lead, 2026-11-16, both apps): the page panel sits flush in it and carries the padding. Never wrap `<router-outlet>` in a padded container.
-- **Theme menu** (lead, 2026-11-16): an icon button at the right end of the sidebar's brand row (→ Sistema · Claro · Oscuro radio menu). The pane has **no top bar on desktop**, so the page panel starts at the top of the pane. Below `lg` a slim row holds only the menu button and the brand.
+- **Sidebar brand** (lead, 2026-11-17): the sidebar is `w-64`; the tenant logo (`lg`) is centered with the tenant name centered below it (up to two lines).
+- **Theme menu** (lead, 2026-11-16; moved 2026-11-17): an icon button in the sidebar card's top-right corner, beside the brand block (→ Sistema · Claro · Oscuro radio menu). The pane has **no top bar on desktop**, so the page panel starts at the top of the pane. Below `lg` a slim row holds only the menu button and the brand.
 - **Sidebar** (lead, 2026-11-16): brand on one line (`sm` logo + `text-headline`, truncated) with the theme button, the nav, the user menu. No greeting or date. Labeled groups collapse in place (`despliegue` utility, `inert` while closed); the group holding the current page opens on arrival.
 
 ## Page anatomy

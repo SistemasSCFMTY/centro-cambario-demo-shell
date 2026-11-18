@@ -7,7 +7,7 @@ import { HlmDropdownMenuImports } from '@spartan-ng/helm/dropdown-menu';
 import { EstablecerModoTema } from '@store/tema/actions/tema.actions';
 import { TemaState } from '@store/tema/state/tema.state';
 
-/** Sistema · Claro · Oscuro: an icon button in the sidebar's brand row that opens a radio menu. */
+/** Sistema · Claro · Oscuro: an icon button in the sidebar card's top-right corner that opens a radio menu. */
 @Component({
   selector: 'app-selector-modo',
   imports: [NgIcon, HlmDropdownMenuImports],

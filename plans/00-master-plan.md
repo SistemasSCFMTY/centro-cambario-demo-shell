@@ -35,7 +35,7 @@ This repo is a clean rebuild ("facewash") of `../../demos/centro-cambiario-demo/
 - **Dark mode = Neuro Bank, end to end:**
   - deep navy/black canvas and a dark main container
   - a floating sidebar card with the logo and business name on one line, the nav (labeled groups collapse in place) and the user menu. No greeting or date (lead, 2026-11-16)
-  - the theme menu (Sistema · Claro · Oscuro) as an icon button in the sidebar's brand row; no top bar on desktop (lead, 2026-11-16)
+  - the theme menu (Sistema · Claro · Oscuro) as an icon button in the sidebar card's top-right corner, beside the centered logo and name; no top bar on desktop (lead, 2026-11-16/17)
   - a pill nav whose active item sits on a lighter surface
   - glowing ECharts area/line charts. **No glow on the chrome** (lead, 2026-11-16): sidebar, nav, access card and dark pane are flat
 - **Light mode = metallic white:** the sidebar card and outer canvas **stay Neuro dark**. Only the main right container becomes the silver pane from `Jobs/DASOM/quotations/cotizacion-onp-site/index.html`:
