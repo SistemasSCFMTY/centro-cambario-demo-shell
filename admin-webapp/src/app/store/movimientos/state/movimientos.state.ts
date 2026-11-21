@@ -73,6 +73,11 @@ export class MovimientosState {
   }
 
   @Selector()
+  static notFound(state: MovimientosStateModel): boolean {
+    return state.notFound;
+  }
+
+  @Selector()
   static errorRevision(state: MovimientosStateModel): string | null {
     return state.errorRevision;
   }
@@ -108,13 +113,17 @@ export class MovimientosState {
     ctx.patchState({
       cargandoDetalle: true,
       errorDetalle: null,
+      notFound: false,
       errorRevision: null,
       detalle: null,
     });
     return this.servicio.obtener(id).pipe(
       tap((detalle) => ctx.patchState({ detalle })),
-      catchError(() => {
-        ctx.patchState({ errorDetalle: MENSAJE_ERROR_GENERICO });
+      catchError((fallo: unknown) => {
+        ctx.patchState({
+          errorDetalle: MENSAJE_ERROR_GENERICO,
+          notFound: fallo instanceof HttpErrorResponse && fallo.status === 404,
+        });
         return EMPTY;
       }),
       finalize(() => ctx.patchState({ cargandoDetalle: false })),

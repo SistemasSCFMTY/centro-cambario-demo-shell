@@ -1,0 +1,16 @@
+<hlm-date-picker
+  align="start"
+  captionLayout="dropdown"
+  [date]="date()"
+  [disabled]="disabled()"
+  (dateChange)="pick($event)"
+>
+  <hlm-date-picker-trigger
+    class="font-data w-full text-subheadline"
+    [buttonId]="buttonId()"
+    [forceInvalid]="invalid()"
+    [aria-describedby]="describedBy()"
+  >
+    {{ placeholder() }}
+  </hlm-date-picker-trigger>
+</hlm-date-picker>

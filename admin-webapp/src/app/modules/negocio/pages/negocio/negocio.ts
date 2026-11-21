@@ -1,3 +1,4 @@
+import { ErrorNotice } from '@components/error-notice/error-notice';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -41,6 +42,7 @@ import { NegocioState } from '@store/negocio/state/negocio.state';
 @Component({
   selector: 'app-negocio',
   imports: [
+    ErrorNotice,
     DetallePagina,
     FiltrosPopover,
     HlmButtonImports,
@@ -91,6 +93,14 @@ export class PaginaNegocio {
         untracked(() => this.store.dispatch(new CargarAuditoriaNegocio()));
       }
     });
+  }
+
+  protected retry(): void {
+    this.store.dispatch([new CargarNegocio(), new CargarOpcionesNegocio()]);
+  }
+
+  protected retryAudit(): void {
+    this.store.dispatch(new CargarAuditoriaNegocio());
   }
 
   protected filtrarAuditoria(filtro: FiltroAuditoriaNegocio): void {

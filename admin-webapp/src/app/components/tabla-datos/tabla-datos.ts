@@ -1,9 +1,11 @@
+import { ListaUrl } from '@components/lista-url/lista-url';
 import { NgTemplateOutlet } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
   computed,
   contentChildren,
+  inject,
   input,
   output,
   TemplateRef,
@@ -29,6 +31,7 @@ import {
   lucideInbox,
 } from '@ng-icons/lucide';
 import { injectTable, RowData } from '@tanstack/angular-table';
+import { HlmButtonImports } from '@spartan-ng/helm/button';
 import { HlmSelectImports } from '@spartan-ng/helm/select';
 import { HlmTableImports } from '@spartan-ng/helm/table';
 import { paginaMaxima } from '@utils/lista/estado-lista';
@@ -46,7 +49,14 @@ import { paginasVisibles } from '@utils/tabla/paginas-visibles';
  */
 @Component({
   selector: 'app-tabla-datos',
-  imports: [DesvanecidoDesplazamiento, HlmSelectImports, HlmTableImports, NgTemplateOutlet, NgIcon],
+  imports: [
+    DesvanecidoDesplazamiento,
+    HlmButtonImports,
+    HlmSelectImports,
+    HlmTableImports,
+    NgTemplateOutlet,
+    NgIcon,
+  ],
   providers: [
     provideIcons({
       lucideArrowDown,
@@ -90,12 +100,17 @@ export class TablaDatos<T extends RowData> {
   readonly campoEtiquetaAccion = input<string | null>(null);
   readonly vacioTitulo = input('No hay registros');
   readonly vacioDescripcion = input('Cuando haya información, aparecerá aquí.');
+  /** The page shows a load error above the table: no empty state then, and no height floor. */
+  readonly error = input(false);
 
   readonly paginaCambia = output<number>();
   readonly tamanoCambia = output<number>();
   /** `null` once a third click on the same (non-default) column goes back to the default order. */
   readonly ordenCambia = output<OrdenLista | null>();
   readonly filaClic = output<T>();
+
+  /** The list page's URL state, when there is one: the empty state offers «Limpiar filtros». */
+  private readonly listState = inject(ListaUrl, { optional: true });
 
   private readonly celdas = contentChildren(CeldaTabla);
 
@@ -137,6 +152,7 @@ export class TablaDatos<T extends RowData> {
         etiqueta: typeof definicion.header === 'string' ? definicion.header : encabezado.column.id,
         numerica: !!definicion.meta?.numerica,
         oculto: !!definicion.meta?.encabezadoOculto,
+        pinned: !!definicion.meta?.pinned,
         ordenable,
         direccion,
         ariaOrden: direccion === 'asc' ? 'ascending' : direccion === 'desc' ? 'descending' : 'none',
@@ -161,6 +177,7 @@ export class TablaDatos<T extends RowData> {
           return {
             id: celda.id,
             numerica: !!celda.column.columnDef.meta?.numerica,
+            pinned: !!celda.column.columnDef.meta?.pinned,
             plantilla: plantillas.get(celda.column.id) ?? null,
             texto: valor === null || valor === undefined || valor === '' ? '—' : String(valor),
           };
@@ -171,7 +188,19 @@ export class TablaDatos<T extends RowData> {
 
   protected readonly esqueleto = computed(() => this.cargando() && this.filas().length === 0);
   protected readonly refrescando = computed(() => this.cargando() && this.filas().length > 0);
-  protected readonly vacia = computed(() => !this.cargando() && this.filas().length === 0);
+  protected readonly vacia = computed(
+    () => !this.cargando() && !this.error() && this.filas().length === 0,
+  );
+  protected readonly hasFilters = computed(() => (this.listState?.filtrosActivos() ?? 0) > 0);
+
+  /**
+   * What a screen reader hears after each load: the range, or the empty state when nothing
+   * matched. It stays mounted (the paginator unmounts at zero rows), so «no results» is announced.
+   */
+  protected readonly announcement = computed(() => {
+    if (this.cargando() || this.error()) return '';
+    return this.total() > 0 ? this.rango() : `${this.vacioTitulo()}. ${this.vacioDescripcion()}`;
+  });
 
   protected readonly columnasEsqueleto = computed(() =>
     Array.from({ length: this.columnas().length + (this.etiquetaAccion() ? 1 : 0) }, (_, i) => i),
@@ -186,13 +215,20 @@ export class TablaDatos<T extends RowData> {
   protected readonly claseFila = computed(() => {
     const alto = this.claseEsqueleto();
     return this.filaClicable()
-      ? `${alto} cursor-pointer hover:bg-primary-50 active:bg-primary-100 dark:hover:bg-panel-muted dark:active:bg-surface-700`
+      ? `${alto} group cursor-pointer hover:bg-primary-50 active:bg-primary-100 dark:hover:bg-panel-muted dark:active:bg-surface-700`
       : `${alto} hover:bg-transparent`;
   });
 
+  /** A pinned cell paints its own fill, so it follows the row's hover and press colors. */
+  protected readonly pinnedCellClass = computed(() =>
+    this.filaClicable()
+      ? 'bg-panel transition-colors duration-100 group-hover:bg-primary-50 group-active:bg-primary-100 dark:group-hover:bg-panel-muted dark:group-active:bg-surface-700'
+      : 'bg-panel',
+  );
+
   /** A floor, not a fixed height: a full page keeps the paginator from jumping. */
-  protected readonly alturaMinimaRem = computed(
-    () => this.tamano() * ALTO_FILA_REM[this.alto()] + ALTO_ENCABEZADO_TABLA_REM,
+  protected readonly alturaMinimaRem = computed(() =>
+    this.error() ? 0 : this.tamano() * ALTO_FILA_REM[this.alto()] + ALTO_ENCABEZADO_TABLA_REM,
   );
 
   protected readonly paginasTotales = computed(() => paginaMaxima(this.total(), this.tamano()));
@@ -220,6 +256,10 @@ export class TablaDatos<T extends RowData> {
     if (actual.direccion === 'asc') this.ordenCambia.emit({ columna, direccion: 'desc' });
     else if (esInicial) this.ordenCambia.emit({ columna, direccion: 'asc' });
     else this.ordenCambia.emit(null);
+  }
+
+  protected clearFilters(): void {
+    this.listState?.limpiarFiltros();
   }
 
   protected cambiarTamano(tamano: number | null | undefined): void {

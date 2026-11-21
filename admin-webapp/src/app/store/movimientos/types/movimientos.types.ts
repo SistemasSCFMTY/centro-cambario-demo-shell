@@ -16,6 +16,8 @@ export interface MovimientosStateModel {
   errorLista: string | null;
   /** Message of the last failed load of one movement. */
   errorDetalle: string | null;
+  /** The last movement asked for doesn't exist (404). */
+  notFound: boolean;
   /** Message of the last refused review. */
   errorRevision: string | null;
 }

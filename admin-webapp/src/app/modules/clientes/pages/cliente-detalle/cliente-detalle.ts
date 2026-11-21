@@ -1,3 +1,5 @@
+import { RecordNotFound } from '@components/record-not-found/record-not-found';
+import { ErrorNotice } from '@components/error-notice/error-notice';
 import { DesvanecidoDesplazamiento } from '@components/desvanecido-desplazamiento/desvanecido-desplazamiento';
 import {
   ChangeDetectionStrategy,
@@ -12,7 +14,6 @@ import {
 import { RouterLink } from '@angular/router';
 import { CuadriculaCampos } from '@components/cuadricula-campos/cuadricula-campos';
 import { DetallePagina } from '@components/detalle-pagina/detalle-pagina';
-import { EncabezadoPagina } from '@components/encabezado-pagina/encabezado-pagina';
 import { PestanaAuditoria } from '@components/pestana-auditoria/pestana-auditoria';
 import { PillEstatus } from '@components/pill-estatus/pill-estatus';
 import {
@@ -41,37 +42,36 @@ import { AjustePill } from '@data/interfaces/ajuste-pill';
 import { CampoDetalle } from '@data/interfaces/campo-detalle';
 import { OpcionCatalogo } from '@data/interfaces/opcion-catalogo';
 import { NgIcon, provideIcons } from '@ng-icons/core';
-import { lucideCheck, lucideFileText, lucideMinus, lucideSearchX } from '@ng-icons/lucide';
+import { lucideCheck, lucideFileText, lucideMinus } from '@ng-icons/lucide';
 import { Store } from '@ngxs/store';
 import { FechaHoraPipe } from '@pipes/fecha-hora.pipe';
 import { FechaPipe } from '@pipes/fecha.pipe';
 import { MontoPipe } from '@pipes/monto.pipe';
-import { NumeroPipe } from '@pipes/numero.pipe';
 import { HlmTableImports } from '@spartan-ng/helm/table';
 import { CargarCliente, CargarClienteOperaciones } from '@store/clientes/actions/clientes.actions';
 import { ClientesState } from '@store/clientes/state/clientes.state';
-import { formatearNumero } from '@utils/dinero/formato-dinero';
+import { formatearMonto, formatearNumero } from '@utils/dinero/formato-dinero';
 import { formatearFecha } from '@utils/fechas/fechas';
 
 /** `/clientes/:id`: the read-only 360 of one cliente (General · Movimientos · Representantes legales · Beneficiarios · Operaciones · Documentos · Declaración PEP · Auditoría). */
 @Component({
   selector: 'app-cliente-detalle',
   imports: [
+    ErrorNotice,
     CuadriculaCampos,
     DesvanecidoDesplazamiento,
     DetallePagina,
-    EncabezadoPagina,
     FechaHoraPipe,
     FechaPipe,
     HlmTableImports,
     MontoPipe,
     NgIcon,
-    NumeroPipe,
     PestanaAuditoria,
     PillEstatus,
+    RecordNotFound,
     RouterLink,
   ],
-  providers: [provideIcons({ lucideCheck, lucideFileText, lucideMinus, lucideSearchX })],
+  providers: [provideIcons({ lucideCheck, lucideFileText, lucideMinus })],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './cliente-detalle.html',
 })
@@ -127,11 +127,11 @@ export class ClienteDetallePagina {
     if (cliente?.estatus === 'SUSPENDIDO') return 'El cliente está suspendido: no puede operar.';
     switch (cliente?.nivelExpediente ?? 0) {
       case 0:
-        return `No puede operar desde ${formatearNumero(REGLAS_OPERACION.umbralNivel1Usd, 0)} USD`;
+        return `No puede operar desde ${formatearMonto(REGLAS_OPERACION.umbralNivel1Usd, 'USD', 0)}`;
       case 1:
-        return `Puede operar montos menores a ${formatearNumero(REGLAS_OPERACION.umbralNivel2Usd, 0)} USD`;
+        return `Puede operar montos menores a ${formatearMonto(REGLAS_OPERACION.umbralNivel2Usd, 'USD', 0)}`;
       case 2:
-        return `Puede operar montos menores a ${formatearNumero(REGLAS_OPERACION.umbralNivel3Usd, 0)} USD`;
+        return `Puede operar montos menores a ${formatearMonto(REGLAS_OPERACION.umbralNivel3Usd, 'USD', 0)}`;
       default:
         return 'Puede operar cualquier monto';
     }
@@ -251,6 +251,14 @@ export class ClienteDetallePagina {
         this.store.dispatch(new CargarClienteOperaciones(id));
       });
     });
+  }
+
+  protected retry(): void {
+    this.store.dispatch([new CargarCliente(this.id()), new CargarClienteOperaciones(this.id())]);
+  }
+
+  protected retryOperations(): void {
+    this.store.dispatch(new CargarClienteOperaciones(this.id()));
   }
 
   private etiquetaDe(opciones: readonly OpcionCatalogo[], clave: string): string {

@@ -6,6 +6,12 @@
     <app-filtros-popover [filtros]="esquema.filtros" />
   </app-encabezado-pagina>
 
+  <app-filter-chips [filters]="esquema.filtros" />
+
+  @if (error(); as mensaje) {
+    <app-error-notice [message]="mensaje" (retry)="retry()" />
+  }
+
   <section class="border-t border-line" aria-label="Lista de clientes">
     <app-tabla-datos
       titulo="Clientes"
@@ -22,19 +28,12 @@
       [orden]="lista.estado().orden"
       [ordenInicial]="esquema.ordenInicial"
       [ordenables]="esquema.ordenables"
-      [vacioTitulo]="
-        error()
-          ? 'No pudimos cargar los clientes'
-          : hayFiltros()
-            ? 'Sin resultados'
-            : 'Aún no hay clientes'
-      "
+      [error]="!!error()"
+      [vacioTitulo]="hayFiltros() ? 'Sin resultados' : 'Aún no hay clientes'"
       [vacioDescripcion]="
-        error()
-          ? 'Intente de nuevo en unos momentos.'
-          : hayFiltros()
-            ? 'Revise los filtros o lo que escribió en la búsqueda.'
-            : 'Los clientes registrados aparecerán aquí.'
+        hayFiltros()
+          ? 'Revise los filtros o lo que escribió en la búsqueda.'
+          : 'Los clientes registrados aparecerán aquí.'
       "
       (paginaCambia)="lista.irAPagina($event)"
       (tamanoCambia)="lista.cambiarTamano($event)"

@@ -1,29 +1,10 @@
 @if (noEncontrada()) {
-  <article class="panel animate-page-in">
-    <app-encabezado-pagina
-      titulo="Operación"
-      [volverA]="['/operaciones']"
-      etiquetaVolver="Volver a operaciones"
-    />
-    <section class="border-t border-line" aria-label="Operación no encontrada">
-      <div class="flex min-h-60 flex-col items-center justify-center gap-3 p-8 text-center">
-        <ng-icon
-          name="lucideSearchX"
-          size="28"
-          [strokeWidth]="1.5"
-          class="text-ink-subtle"
-          aria-hidden="true"
-        />
-        <div>
-          <p class="text-headline">No encontramos esta operación</p>
-          <p class="text-callout text-ink-muted">
-            Puede que el enlace sea incorrecto. Vuelve al listado para buscarla.
-          </p>
-        </div>
-        <a class="link-action" routerLink="/operaciones">Ir a operaciones</a>
-      </div>
-    </section>
-  </article>
+  <app-record-not-found
+    title="Operación"
+    message="No encontramos esta operación"
+    [backTo]="['/operaciones']"
+    backLabel="Volver a operaciones"
+  />
 } @else {
   <app-detalle-pagina
     [titulo]="titulo()"
@@ -35,16 +16,8 @@
     etiquetaCarga="Cargando operación"
     [(pestana)]="pestana"
   >
-    @if (falla()) {
-      <section class="px-8 py-4" aria-label="Error">
-        <div
-          class="callout callout-danger flex flex-wrap items-center justify-between gap-3"
-          role="alert"
-        >
-          <p>{{ error() }}</p>
-          <button type="button" class="link-action" (click)="reintentar()">Reintentar</button>
-        </div>
-      </section>
+    @if (falla() && error(); as mensaje) {
+      <app-error-notice [separated]="false" [message]="mensaje" (retry)="retry()" />
     }
 
     @if (pill(); as ajuste) {

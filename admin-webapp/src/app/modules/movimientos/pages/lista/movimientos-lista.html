@@ -20,12 +20,6 @@
     </button>
   </app-encabezado-pagina>
 
-  @if (error(); as mensaje) {
-    <div class="px-8 pb-4">
-      <div class="callout callout-danger" role="alert">{{ mensaje }}</div>
-    </div>
-  }
-
   <div class="border-t border-line px-8">
     <hlm-tabs [tab]="vistaActual()" (tabActivated)="cambiarVista($event)">
       <hlm-tabs-list variant="line" class="w-full justify-start">
@@ -38,7 +32,11 @@
     </hlm-tabs>
   </div>
 
-  @if (!error()) {
+  <app-filter-chips [filters]="esquema().filtros" />
+
+  @if (error(); as mensaje) {
+    <app-error-notice [message]="mensaje" (retry)="retry()" />
+  } @else {
     <section class="border-t border-line px-8 py-4" aria-label="Totales">
       <div class="flex flex-wrap items-center gap-2">
         <span class="micro-label me-1">Total sin cancelados ni rechazados</span>
@@ -70,12 +68,9 @@
       titulo="Movimientos de efectivo"
       alto="alta"
       campoEtiquetaAccion="folio"
-      [vacioTitulo]="error() ? 'No se pudo cargar la lista' : 'No hay movimientos'"
-      [vacioDescripcion]="
-        error()
-          ? 'Intente de nuevo en un momento.'
-          : 'Cambie los filtros o la vista para ver otros movimientos.'
-      "
+      vacioTitulo="No hay movimientos"
+      vacioDescripcion="Cambie los filtros o la vista para ver otros movimientos."
+      [error]="!!error()"
       [tamanos]="esquema().tamanos"
       [columnas]="columnas"
       [filas]="filas()"
@@ -100,7 +95,8 @@
         />
       </ng-template>
       <ng-template appCeldaTabla="fecha" [filas]="filas()" let-fila>
-        <span class="font-data">{{ fila.fecha | appFechaHora }}</span>
+        <p class="font-data">{{ fila.fecha | appFechaHora }}</p>
+        <p class="text-caption-1 text-ink-muted">Registró: {{ fila.solicitadoPor }}</p>
       </ng-template>
       <ng-template appCeldaTabla="origen" [filas]="filas()" let-fila>
         <p>{{ fila.origen }}</p>

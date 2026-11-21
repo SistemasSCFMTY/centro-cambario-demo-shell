@@ -3,6 +3,7 @@ import { toSignal } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { ESTADO_LISTA_INICIAL, PARAMETROS_LISTA } from '@data/constants/lista.constants';
 import { EsquemaLista } from '@data/interfaces/esquema-lista';
+import { BackState } from '@data/interfaces/back-state';
 import { EstadoLista } from '@data/interfaces/estado-lista';
 import { OrdenLista } from '@data/interfaces/orden-lista';
 import {
@@ -11,6 +12,7 @@ import {
   paginaMaxima,
   parametrosDeEstado,
 } from '@utils/lista/estado-lista';
+import { backState } from '@utils/navigation/back-link';
 
 /**
  * The URL state of one list page (plans/01 List behaviors). Provide it in the page component
@@ -40,6 +42,14 @@ export class ListaUrl {
     const esquema = this.esquemaActual();
     return esquema ? contarFiltrosActivos(this.estado(), esquema) : 0;
   });
+
+  /**
+   * History state for the navigation to a row (`router.navigate([...], { state })`): the detail's
+   * back link then returns to this exact view (see `EncabezadoPagina`).
+   */
+  backState(): BackState {
+    return backState(this.router.url, this.ruta.snapshot.queryParams);
+  }
 
   iniciar(esquema: EsquemaLista): void {
     this.esquemaActual.set(esquema);

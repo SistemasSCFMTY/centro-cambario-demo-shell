@@ -303,9 +303,10 @@
   color-scheme: dark;
 
   --canvas: var(--color-chrome-pane);
-  --panel: var(--color-surface-900);
-  --panel-muted: var(--color-surface-800);
-  --line: color-mix(in oklch, var(--color-surface-700) 70%, var(--color-surface-900));
+  /* Panel sits a notch above surface-900 so its edge reads against the pane; muted and line keep their step above it. */
+  --panel: color-mix(in oklch, var(--color-surface-900) 50%, var(--color-surface-800));
+  --panel-muted: color-mix(in oklch, var(--color-surface-800) 75%, var(--color-surface-700));
+  --line: color-mix(in oklch, var(--color-surface-700) 80%, var(--color-surface-900));
   --line-strong: var(--color-surface-700);
   --ink: var(--color-surface-50);
   --ink-muted: var(--color-surface-400);

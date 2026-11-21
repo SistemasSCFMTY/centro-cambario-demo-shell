@@ -1,6 +1,6 @@
 # Plan: Centro Cambiario shell (cajero + admin)
 
-> **Status: DRAFT.** Phase 1 in progress: the admin-webapp **shell + auth screens** are built (2026-11-13). Items marked **OPEN** are the lead's decisions to make.
+> **Status: DRAFT.** Phase 1 in progress: the admin-webapp **shell + auth screens** (2026-11-13) and the **ola 1 screens** (2026-11-16/17, `06`) are built. Items marked **OPEN** are the lead's decisions to make.
 
 ## Context
 This repo is a clean rebuild ("facewash") of `../../demos/centro-cambiario-demo/centro-cambiario-demo`. The demo stays untouched as a reference for screens, flows and domain vocabulary only. **No code, services or sql.js are ported.** The impeccable skill polishes the result.
@@ -17,7 +17,7 @@ This repo is a clean rebuild ("facewash") of `../../demos/centro-cambiario-demo/
 | State | **NGXS**, onp style: `store/<modulo>/{actions,state,types}`, storage plugin for persistence, and components use `select()` / `dispatch()`. |
 | UI kit | **Spartan UI** (`@spartan-ng/brain` 1.9.0, Angular 22 OK). Helm components are generated into each app. |
 | Charts | **ECharts** through an Angular wrapper. |
-| Language / naming | **Spanish only:** identifiers, routes, domain names and copy. |
+| Language / naming | ~~Spanish only: identifiers, routes, domain names and copy~~ → **Code in English, copy in Spanish** (lead, 2026-11-20): no Spanish anywhere in code (identifiers, file and folder names, selectors, inputs/outputs, CSS utilities, data attributes, constants). UI copy stays Spanish (Mexico). Existing Spanish-named code isn't renamed yet (OPEN below). |
 | Modes | Dark + light + system toggle. |
 | Devices | (lead, 2026-11-16) **admin-webapp: desktop-only**, never used on a phone. Smallest screen it must fit: **1366×768**. The shell's existing small-screen layout stays as is. **cashier-webapp: desktop and tablets** (touch-sized controls), no phones. |
 | Whitelabel | Runtime branding + admin editor (onp admin-webapp model): name, logo, favicon, **primary + accent** colors. Each color expands from one base to an OKLCH 50–1000 scale. **Backgrounds and surfaces are not customizable.** |
@@ -127,6 +127,19 @@ This repo is a clean rebuild ("facewash") of `../../demos/centro-cambiario-demo/
   - nav groups (Operación, Control, Administración) collapse in place; the group holding the current page opens on its own; closed groups are `inert`
   - theme switch moved out of the sidebar into a dropdown in the pane's top bar; greeting and date removed; brand on one line
   - fits 1366×768 with room to spare (603 px nav, only overflows by 27 px with every group open)
+- **2026-11-16/17, ola 1 (admin-webapp, contract in `06`):**
+  - foundation: data table (helm + TanStack, server-side paging, URL-persisted filters), status pill, lead cell, field grid, filters popover, detail shell with Auditoría tab, sticky action bar; simulated API per module
+  - screens: operaciones, caja (cajas, cortes), movimientos (with dotación review), clientes (read-only), negocio (General · Legal · Sucursales · Auditoría, with editing)
+  - tables never wrap and scroll sideways with a right-edge fade; Spartan `hlm-select` everywhere (`05`)
+  - the writers' `[propuesto]` items were decided by the lead on 2026-11-17 (`06` P-1…P-62)
+- **2026-11-20, design critique pass (admin-webapp):** scored 23/40 before fixes. The lead decided (rules in `05`/`01`, screens in `02`/`03`/`04`, notes in `06`):
+  - code in English, copy in Spanish (Mexico) with usted; existing Spanish names wait for the lead's call
+  - every amount carries its ISO 4217 code (`MXN 1,234.50`), never `$`; rates read `TC 17.3511`
+  - wide tables pin the lead column left and the row actions right; Estatus right after the lead column; new column orders for operaciones (two-line Importe), movimientos, sucursales
+  - filter chips with «Limpiar filtros» (also in empty states), window-height popover, a live region for zero results
+  - one page error pattern (`app-error-notice`) and one not-found page (`app-record-not-found`); back links return to the exact list view
+  - the session persists in localStorage (key `sesion`, both apps); date inputs use `app-date-field` (Spartan date picker)
+  - neutral expediente level pills; cliente tab «Movimientos de efectivo»; dotación review: Rechazar in the action bar, amounts read back grouped
 
 ## Related plans
 - [`01-table-detail-rules.md`](01-table-detail-rules.md): table and detail-view styling rules, copied from manttio-whitelabeled/superadmin.
@@ -140,3 +153,5 @@ This repo is a clean rebuild ("facewash") of `../../demos/centro-cambiario-demo/
 ## OPEN: needs the lead's call
 
 `negocio` is drafted in `04-negocio.md`.
+
+- **Rename existing Spanish-named code** (lead, 2026-11-20: new code is English, the rename waits on the lead). Also to decide: whether routes (user-visible URLs) and persisted keys such as `sesion` count as code.

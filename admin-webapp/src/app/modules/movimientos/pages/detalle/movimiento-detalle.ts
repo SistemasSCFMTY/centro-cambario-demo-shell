@@ -1,3 +1,5 @@
+import { RecordNotFound } from '@components/record-not-found/record-not-found';
+import { ErrorNotice } from '@components/error-notice/error-notice';
 import { DesvanecidoDesplazamiento } from '@components/desvanecido-desplazamiento/desvanecido-desplazamiento';
 import {
   ChangeDetectionStrategy,
@@ -9,6 +11,7 @@ import {
   signal,
   untracked,
 } from '@angular/core';
+import { Location } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { CuadriculaCampos } from '@components/cuadricula-campos/cuadricula-campos';
 import { DetallePagina } from '@components/detalle-pagina/detalle-pagina';
@@ -23,8 +26,6 @@ import {
 } from '@data/constants/movimientos.constants';
 import { CampoDetalle } from '@data/interfaces/campo-detalle';
 import { PestanaDetalle } from '@data/interfaces/pestana-detalle';
-import { NgIcon, provideIcons } from '@ng-icons/core';
-import { lucideTruck } from '@ng-icons/lucide';
 import { select, Store } from '@ngxs/store';
 import { HlmButtonImports } from '@spartan-ng/helm/button';
 import { HlmTableImports } from '@spartan-ng/helm/table';
@@ -39,6 +40,7 @@ import { formatearFechaHora } from '@utils/fechas/fechas';
 @Component({
   selector: 'app-movimiento-detalle',
   imports: [
+    ErrorNotice,
     CuadriculaCampos,
     DesvanecidoDesplazamiento,
     DetallePagina,
@@ -46,17 +48,19 @@ import { formatearFechaHora } from '@utils/fechas/fechas';
     HlmButtonImports,
     HlmTableImports,
     MontoPipe,
-    NgIcon,
     PestanaAuditoria,
     PillEstatus,
+    RecordNotFound,
     RouterLink,
   ],
-  providers: [provideIcons({ lucideTruck })],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './movimiento-detalle.html',
 })
 export class MovimientoDetalle {
   private readonly store = inject(Store);
+
+  /** Passed on to the review page, so coming back here keeps the list's back link. */
+  protected readonly historyState = (inject(Location).getState() ?? {}) as Record<string, unknown>;
 
   /** The `:id` of the route. */
   readonly id = input.required<string>();
@@ -66,6 +70,7 @@ export class MovimientoDetalle {
   protected readonly detalle = select(MovimientosState.detalle);
   protected readonly cargando = select(MovimientosState.cargandoDetalle);
   protected readonly error = select(MovimientosState.errorDetalle);
+  protected readonly notFound = select(MovimientosState.notFound);
   protected readonly usuario = select(SesionState.usuario);
 
   protected readonly movimiento = computed(() => this.detalle()?.movimiento ?? null);
@@ -162,5 +167,9 @@ export class MovimientoDetalle {
       const id = this.id();
       untracked(() => this.store.dispatch(new CargarMovimiento(id)));
     });
+  }
+
+  protected retry(): void {
+    this.store.dispatch(new CargarMovimiento(this.id()));
   }
 }

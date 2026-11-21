@@ -8,6 +8,8 @@
           <input
             type="checkbox"
             class="size-4 accent-primary-700"
+            [attr.id]="$first ? idControl() : null"
+            [attr.aria-invalid]="mensaje() ? true : null"
             [checked]="divisa.marcada"
             (change)="alternarDivisa(divisa.clave, $any($event.target).checked)"
           />
@@ -17,7 +19,7 @@
       }
     </div>
     @if (mensaje(); as texto) {
-      <p [id]="idAyuda()" class="text-footnote text-danger-700 dark:text-danger-400" role="alert">
+      <p [id]="idAyuda()" class="text-footnote text-danger-700 dark:text-danger-400">
         {{ texto }}
       </p>
     }
@@ -51,14 +53,11 @@
         </hlm-select>
       }
       @case ('fecha') {
-        <input
-          hlmInput
-          type="date"
-          class="font-data bg-panel text-subheadline"
-          [id]="idControl()"
+        <app-date-field
+          [buttonId]="idControl()"
           [formControl]="control()"
-          [attr.aria-invalid]="mensaje() ? true : null"
-          [attr.aria-describedby]="describedBy()"
+          [invalid]="!!mensaje()"
+          [describedBy]="describedBy()"
         />
       }
       @default {
@@ -80,7 +79,7 @@
       }
     }
     @if (mensaje(); as texto) {
-      <p [id]="idAyuda()" class="text-footnote text-danger-700 dark:text-danger-400" role="alert">
+      <p [id]="idAyuda()" class="text-footnote text-danger-700 dark:text-danger-400">
         {{ texto }}
       </p>
     } @else if (c.ayuda) {

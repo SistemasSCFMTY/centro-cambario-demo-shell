@@ -31,7 +31,7 @@
 - **Tabular/feed data is always a table** (`<table>` via our table primitive). **Never** hand-rolled `<ol>`/`<div>` row lists.
 - **A list page's table sits flush in its panel section** (`05`): the section's hairline is its top edge and the table carries no radius, border or shadow of its own.
 - **Inside a padded section or card,** wrap it in `.card-flush-table`: `-mx-8` (section) or `-mx-6` (card) cancels the gutters, and the table sheds its radius, border and shadow, because what's around it already draws them.
-- The table container scrolls horizontally on its own (`overflow-x-auto`), with the right-edge fade (`05`, Horizontal overflow). Cells never wrap. **Never page-level horizontal scroll.**
+- The table container scrolls horizontally on its own (`overflow-x-auto`), with the right-edge fade (`05`, Horizontal overflow). Cells never wrap. The lead column is pinned left and the row actions pinned right (lead, 2026-11-20). **Never page-level horizontal scroll.**
 
 ### Density: "airy chrome, dense data"
 - Header cells: `px-4 py-3 text-left micro-label whitespace-nowrap`, on the card's own fill.
@@ -44,13 +44,14 @@
 | hover | `primary-0` | neutral `800` |
 | active (pressed) / selected | `primary-100` | neutral `700` |
 - `transition-colors duration-100`.
-- **The whole row is clickable into the detail view.** Per-row actions still exist as `.row-action` buttons on the trailing edge (the keyboard path).
+- **The whole row is clickable into the detail view.** Per-row actions still exist as `.row-action` buttons on the trailing edge (the keyboard path), in a column pinned at the right (lead, 2026-11-20).
 
 ### Sorting
 - Sortable header: `cursor-pointer select-none`, neutral hover tint.
 - Sort icon `size-3.5` in primary `600` (dark `400`). Multi-sort badge: a `size-4` round primary disc with a `text-primary-foreground` `text-caption-2` number.
 
 ### Numbers
+- **Money** always carries its ISO 4217 code, never `$` or a bare number (`05` Money and dates, lead, 2026-11-20).
 - **Every numeric column** gets `font-data` + `tabular-nums`. The stylesheet sets `tabular-nums` on any `th/td.font-data`, so a cell can't forget it.
 - **Directional numeric idiom:** only for a value that truly has a direction (vs last period, movement). It renders in the fixed semantic set with a `size-3` arrow ahead of it: emerald up, red down. **Never brand-colored.** Prices, totals, counts and folios have no direction and stay neutral.
 
@@ -58,11 +59,13 @@
 - **The first column is chosen by what the entity is:**
   - people and companies → `.lead-avatar` + name (canon: the customers list)
   - things → `.lead-thumb` or `.lead-thumb-fallback`
+- **Column order** (lead, 2026-11-20): the lead column first, pinned (`05` Horizontal overflow), then the deciding column (Estatus), then the rest. Per-screen orders: `02` (Column order) and `04` (Sucursales).
 - Lists whose rows carry a `size-9` lead or a two-line cell use the tall row height (see Paging).
 
 ### Loading, empty, refresh
 - **First load:** no spinner overlay. The body shows **8 rows of `.skeleton` bars**.
-- **Empty:** one row spanning all columns holding the flat empty state (`05`). No hover on it.
+- **Empty:** one row spanning all columns holding the flat empty state (`05`). No hover on it. With active filters it offers «Limpiar filtros» (built into the data table). Zero results are announced to screen readers through a live region that stays mounted (lead, 2026-11-20).
+- **Error:** the page's `app-error-notice` (`05`) replaces the empty state; the table shows none while it shows (lead, 2026-11-20).
 - **Page change / refresh:** keep the current rows at full brightness, **no opacity dip**, and swap the text when data lands. While a request is slow:
   - the body gets `pointer-events-none`
   - after a `400ms` delay, a `h-0.5` primary hairline sweeps the card's top edge (40% width, 1.1s linear, infinite)
@@ -92,7 +95,7 @@
 ### Page shape
 - **Every detail page is one `panel`** (`05`) that opens with the shared page header (`app-encabezado-pagina`, `px-8 pt-8 pb-6`):
   - the page's single `h1` (`text-large-title`, the `h1` default)
-  - a **back link** (`backLink`/`backLabel`, e.g. "Volver a clientes")
+  - a **back link** (`backLink`/`backLabel`, e.g. "Volver a clientes") that returns to the exact list view the user left (filters, page, sort): the list passes its path and query params as router history state (`ListaUrl.backState()`), and a deep link falls back to the plain list (lead, 2026-11-20)
   - a **`meta` slot** for the status pill beside the title
   - right-aligned actions: `btn-secondary` "Editar", plus the state change as `btn-primary`/`btn-danger`
   - the header owns its `pb-6`; **no breadcrumbs**
@@ -101,6 +104,9 @@
   - a header section with the name (`text-title-2`), status pill, tag chips (`rounded-full` neutral `px-2 py-0.5 text-caption-1 font-bold`), quick actions as bordered `.row-action size-10` circles, and secondary buttons
   - an optional `callout-danger` banner for blocking state
   - below it, **tabs** inside the same panel (the tab bar sits on a hairline), with the general data in the first tab
+
+### Not found (lead, 2026-11-20)
+- One not-found page for every detail, `app-record-not-found`: the page header with its back link, the flat empty state and a button back to the list.
 
 ### Field grid (key/value)
 - Use a semantic **`<dl class="mt-3 grid gap-x-6 gap-y-3 sm:grid-cols-2">`** with one `<div>` per field:
@@ -142,6 +148,8 @@
 - **Filters live in a popover.** The shared `filtros-popover` is a `Filtros` trigger (filter icon + active-count badge) placed **left of the page's primary action**, instead of an always-open filter grid. The table claims the reclaimed space.
   - The active count and "Limpiar" both derive from the URL params.
   - Overlay controls projected inside the popover keep their overlay inside the popover DOM (no portal to `body`).
+  - The popover's height follows the window (`popover-height` utility) (lead, 2026-11-20).
+  - **Active filters show as removable chips** under the view tabs (shared `app-filter-chips`, with «Limpiar filtros») (lead, 2026-11-20).
 
 ## Decisions (2026-11-13)
 | Topic | Decision |

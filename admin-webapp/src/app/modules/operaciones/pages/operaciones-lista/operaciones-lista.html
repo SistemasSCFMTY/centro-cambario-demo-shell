@@ -1,7 +1,7 @@
 <article class="panel animate-page-in">
   <app-encabezado-pagina
     titulo="Operaciones"
-    descripcion="Compras y ventas de divisas de todas las sucursales. Haz clic en una fila para ver su detalle."
+    descripcion="Compras y ventas de divisas de todas las sucursales. Abra una fila para ver su detalle."
   >
     <app-filtros-popover [filtros]="filtros()" />
   </app-encabezado-pagina>
@@ -18,16 +18,10 @@
     </hlm-tabs>
   </div>
 
-  @if (error()) {
-    <section class="border-t border-line px-8 py-4" aria-label="Error">
-      <div
-        class="callout callout-danger flex flex-wrap items-center justify-between gap-3"
-        role="alert"
-      >
-        <p>{{ error() }}</p>
-        <button hlmBtn variant="secondary" type="button" (click)="reintentar()">Reintentar</button>
-      </div>
-    </section>
+  <app-filter-chips [filters]="filtros()" />
+
+  @if (error(); as mensaje) {
+    <app-error-notice [message]="mensaje" (retry)="retry()" />
   }
 
   <section
@@ -45,6 +39,7 @@
       [filas]="filas()"
       [total]="pagina()?.total ?? 0"
       [cargando]="cargando()"
+      [error]="!!error()"
       [pagina]="lista.estado().pagina"
       [tamano]="lista.estado().tamano"
       [orden]="lista.estado().orden"
@@ -74,20 +69,11 @@
         <p class="text-caption-1 text-ink-muted">{{ etiquetaInstrumento[fila.instrumento] }}</p>
       </ng-template>
 
-      <ng-template appCeldaTabla="montoDivisa" [filas]="filas()" let-fila>
-        {{ fila.montoDivisa | appMonto: fila.divisa }}
-      </ng-template>
-
-      <ng-template appCeldaTabla="tipoCambio" [filas]="filas()" let-fila>
-        {{ fila.tipoCambio | appNumero: 4 }}
-      </ng-template>
-
       <ng-template appCeldaTabla="montoMxn" [filas]="filas()" let-fila>
-        {{ fila.montoMxn | appMonto: 'MXN' }}
-      </ng-template>
-
-      <ng-template appCeldaTabla="montoUsd" [filas]="filas()" let-fila>
-        {{ fila.montoUsd | appMonto: 'USD' }}
+        <p>{{ fila.montoDivisa | appMonto: fila.divisa }}</p>
+        <p class="text-caption-1 text-ink-muted">
+          TC {{ fila.tipoCambio | appNumero: 4 }} · {{ fila.montoMxn | appMonto: 'MXN' }}
+        </p>
       </ng-template>
 
       <ng-template appCeldaTabla="cliente" [filas]="filas()" let-fila>

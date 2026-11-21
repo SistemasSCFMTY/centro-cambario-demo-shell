@@ -78,11 +78,12 @@ export const ESQUEMA_LISTA_CLIENTES: EsquemaLista = {
 };
 
 /** Pill of the expediente level. */
+/** The expediente level is an attribute, not a judgment: one neutral tone for all (lead, 2026-11-20). */
 export const PILL_NIVEL_EXPEDIENTE: Record<NivelExpediente, AjustePill> = {
   0: { tono: 'neutral', etiqueta: 'Sin identificación' },
   1: { tono: 'neutral', etiqueta: 'Nivel 1' },
-  2: { tono: 'info', etiqueta: 'Nivel 2' },
-  3: { tono: 'success', etiqueta: 'Nivel 3' },
+  2: { tono: 'neutral', etiqueta: 'Nivel 2' },
+  3: { tono: 'neutral', etiqueta: 'Nivel 3' },
 };
 
 export const ETIQUETA_TIPO_PEP: Record<TipoPep, string> = {
@@ -103,7 +104,7 @@ export const PILL_REQUISITO_NIVEL: Record<'completo' | 'pendiente', AjustePill> 
 /** Tabs of the cliente detail (plans/03 D-11); the shell adds Auditoría after them. */
 export const PESTANAS_CLIENTE: readonly PestanaDetalle[] = [
   { id: 'general', etiqueta: 'General' },
-  { id: 'movimientos', etiqueta: 'Movimientos' },
+  { id: 'movimientos', etiqueta: 'Movimientos de efectivo' },
   { id: 'representantes', etiqueta: 'Representantes legales' },
   { id: 'beneficiarios', etiqueta: 'Beneficiarios' },
   { id: 'operaciones', etiqueta: 'Operaciones' },

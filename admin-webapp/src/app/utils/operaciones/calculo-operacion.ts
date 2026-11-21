@@ -3,7 +3,7 @@ import { REGLAS_OPERACION } from '@data/constants/reglas-operacion.constants';
 import { EntradaCalculoOperacion } from '@data/interfaces/entrada-calculo-operacion';
 import { ResultadoCalculoOperacion } from '@data/interfaces/resultado-calculo-operacion';
 import { NivelExpediente } from '@data/types/operacion.types';
-import { formatearNumero, redondear } from '@utils/dinero/formato-dinero';
+import { formatearMonto, redondear } from '@utils/dinero/formato-dinero';
 
 /** Required ID level for an operation of `usd` (the demo's `nivelPorMonto`). */
 export function nivelRequeridoPorMonto(usd: number): NivelExpediente {
@@ -33,7 +33,7 @@ export function calcularOperacion(entrada: EntradaCalculoOperacion): ResultadoCa
       : REGLAS_OPERACION.umbralEscalamientoPfUsd;
     if (montoUsd > umbral) {
       motivosAutorizacion.push(
-        `Operación en efectivo de persona ${moral ? 'moral' : 'física'} superior a ${formatearNumero(umbral, 0)} USD (9ª)`,
+        `Operación en efectivo de persona ${moral ? 'moral' : 'física'} superior a ${formatearMonto(umbral, 'USD', 0)} (9ª)`,
       );
     }
   }

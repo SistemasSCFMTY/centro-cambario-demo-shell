@@ -58,6 +58,7 @@ Before saying something is done, run `npm run build` and `npm test`. Check the s
   - Each app accepts only its own accounts.
 
 ## Code rules (summary; details in `plans/05-reglas-onp.md`)
+- **Code in English:** no Spanish anywhere in code (identifiers, file and folder names, selectors, inputs/outputs, CSS utilities, data attributes, constants). UI copy stays Spanish (Mexico). Existing Spanish-named code is not renamed yet (pending the lead's call).
 - Services only wrap HTTP. State and side effects live in NGXS states. Components read with `select()` and write with `dispatch`.
 - `data/constants` holds literals only, including state defaults (`*_INICIAL`). Interfaces go one per file in `data/interfaces/`, types in `data/types/`. Pure functions go in `utils/<topic>/` with a spec next to each.
 - Component members follow the fixed 16-group order in plan 05.
@@ -69,7 +70,7 @@ Before saying something is done, run `npm run build` and `npm test`. Check the s
 - **Look:** Neuro navy chrome, a silver pane gradient, no glow on the chrome. Charts may glow in dark mode.
 
 ## Copy
-All UI copy is **Spanish (Mexico)**, with correct accents and grammar. When copy someone types has mistakes, fix it and show the corrected version.
+All UI copy is **Spanish (Mexico)**, with correct accents and grammar, addressing the user as usted (never tú). When copy someone types has mistakes, fix it and show the corrected version.
 
 ## Tooling in `.claude/`
 - **Skills:**

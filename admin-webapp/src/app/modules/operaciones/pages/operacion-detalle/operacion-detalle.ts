@@ -1,3 +1,5 @@
+import { RecordNotFound } from '@components/record-not-found/record-not-found';
+import { ErrorNotice } from '@components/error-notice/error-notice';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -8,10 +10,9 @@ import {
   untracked,
 } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { CuadriculaCampos } from '@components/cuadricula-campos/cuadricula-campos';
 import { DetallePagina } from '@components/detalle-pagina/detalle-pagina';
-import { EncabezadoPagina } from '@components/encabezado-pagina/encabezado-pagina';
 import { PestanaAuditoria } from '@components/pestana-auditoria/pestana-auditoria';
 import { PillEstatus } from '@components/pill-estatus/pill-estatus';
 import {
@@ -24,8 +25,6 @@ import {
 import { PILL_ESTATUS_OPERACION, PILL_RELEVANTE } from '@data/constants/estatus.constants';
 import { OperacionListaDto } from '@data/dto/operaciones.dto';
 import { SeccionOperacion } from '@data/interfaces/seccion-operacion';
-import { NgIcon, provideIcons } from '@ng-icons/core';
-import { lucideSearchX } from '@ng-icons/lucide';
 import { select, Store } from '@ngxs/store';
 import { CargarOperacion } from '@store/operaciones/actions/operaciones.actions';
 import { OperacionesState } from '@store/operaciones/state/operaciones.state';
@@ -39,15 +38,13 @@ import { formatearFecha, formatearFechaHora } from '@utils/fechas/fechas';
 @Component({
   selector: 'app-operacion-detalle',
   imports: [
+    ErrorNotice,
     CuadriculaCampos,
     DetallePagina,
-    EncabezadoPagina,
-    NgIcon,
     PestanaAuditoria,
     PillEstatus,
-    RouterLink,
+    RecordNotFound,
   ],
-  providers: [provideIcons({ lucideSearchX })],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './operacion-detalle.html',
 })
@@ -196,7 +193,7 @@ export class OperacionDetalle {
     });
   }
 
-  protected reintentar(): void {
+  protected retry(): void {
     this.store.dispatch(new CargarOperacion(this.id()));
   }
 }

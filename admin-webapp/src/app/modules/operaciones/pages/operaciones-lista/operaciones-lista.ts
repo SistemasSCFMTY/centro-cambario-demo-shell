@@ -1,3 +1,5 @@
+import { FilterChips } from '@components/filter-chips/filter-chips';
+import { ErrorNotice } from '@components/error-notice/error-notice';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -36,7 +38,6 @@ import { EsquemaLista } from '@data/interfaces/esquema-lista';
 import { OrdenLista } from '@data/interfaces/orden-lista';
 import { VistaOperaciones } from '@data/types/vista-operaciones.types';
 import { select, Store } from '@ngxs/store';
-import { HlmButtonImports } from '@spartan-ng/helm/button';
 import { HlmTabsImports } from '@spartan-ng/helm/tabs';
 import { FechaHoraPipe } from '@pipes/fecha-hora.pipe';
 import { MontoPipe } from '@pipes/monto.pipe';
@@ -55,11 +56,12 @@ import { consultaDeEstado } from '@utils/lista/consulta-lista';
 @Component({
   selector: 'app-operaciones-lista',
   imports: [
+    ErrorNotice,
     CeldaTabla,
+    FilterChips,
     EncabezadoPagina,
     FechaHoraPipe,
     FiltrosPopover,
-    HlmButtonImports,
     HlmTabsImports,
     MontoPipe,
     NumeroPipe,
@@ -164,10 +166,10 @@ export class OperacionesLista {
   }
 
   protected abrir(fila: OperacionListaDto): void {
-    this.router.navigate(['/operaciones', fila.id]);
+    this.router.navigate(['/operaciones', fila.id], { state: this.lista.backState() });
   }
 
-  protected reintentar(): void {
+  protected retry(): void {
     this.cargar();
   }
 

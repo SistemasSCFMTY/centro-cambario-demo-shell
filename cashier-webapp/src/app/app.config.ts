@@ -10,6 +10,7 @@ import {
   provideBrowserGlobalErrorListeners,
 } from '@angular/core';
 import { provideRouter, TitleStrategy, withComponentInputBinding } from '@angular/router';
+import { SESSION_STORAGE_KEY } from '@data/constants/sesion.constants';
 import { CLAVE_ALMACEN_MODO } from '@data/constants/tema.constants';
 import { simulacionApiInterceptor } from '@interceptors/simulacion-api/simulacion-api.interceptor';
 import { provideStore, Store } from '@ngxs/store';
@@ -34,11 +35,11 @@ export const appConfig: ApplicationConfig = {
     { provide: TitleStrategy, useClass: EstrategiaTitulo },
     { provide: LOCALE_ID, useValue: 'es-MX' },
     provideSpartanHlm(),
-    // App state lives in NGXS (plans/00). Only the theme mode persists, in localStorage.
+    // App state lives in NGXS (plans/00). The theme mode and the session persist, in localStorage.
     provideStore(
       [TemaState, SesionState, AutenticacionState],
       { developmentMode: isDevMode() },
-      withNgxsStoragePlugin({ keys: [CLAVE_ALMACEN_MODO] }),
+      withNgxsStoragePlugin({ keys: [CLAVE_ALMACEN_MODO, SESSION_STORAGE_KEY] }),
     ),
     // Branding before first render, so the name and colors never flash the defaults.
     provideAppInitializer(() => inject(Store).dispatch(new CargarMarca())),

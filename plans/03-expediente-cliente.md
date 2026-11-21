@@ -19,7 +19,7 @@ These override the matching OPEN items below. OPEN items not listed here stay op
 
 | D-9 | **Rule 39ª (confirmed):** every admin-app role sees the real status and motive. The cashier app shows "En revisión" for any non-ACTIVO status. | O-10.2 |
 | D-10 | **Catalogs come from the official Banxico and CNBV catalogs**, loaded as fixtures **without risk grades** (D-3). Catalogs with no official source keep the demo's values. The risk pill and risk tab stay hidden for now. | O-0.4 |
-| D-11 | **Client detail tabs** (content per the lead's answers):<br>• **General:** completitud, datos, and for PM the **estructura accionaria** (accionistas)<br>• **Movimientos:** the client's **cash in/out ledger** (every amount per currency that entered or left for this client)<br>• **Representantes legales** (PM only): personas que pueden obligarla + quien comparece<br>• **Beneficiarios:** **propietarios reales** (PM: 25%+ or administrador; PF: the third party when acting on someone else's behalf)<br>• **Operaciones:** the compra/venta records<br>• **Documentos**<br>• **Declaración PEP**<br>• **Auditoría:** audit trail, mandatory on every detail view (`01`) | O-10.1 |
+| D-11 | **Client detail tabs** (content per the lead's answers):<br>• **General:** completitud, datos, and for PM the **estructura accionaria** (accionistas)<br>• **Movimientos de efectivo** (renamed 2026-11-20, D-21): the client's **cash in/out ledger** (every amount per currency that entered or left for this client)<br>• **Representantes legales** (PM only): personas que pueden obligarla + quien comparece<br>• **Beneficiarios:** **propietarios reales** (PM: 25%+ or administrador; PF: the third party when acting on someone else's behalf)<br>• **Operaciones:** the compra/venta records<br>• **Documentos**<br>• **Declaración PEP**<br>• **Auditoría:** audit trail, mandatory on every detail view (`01`) | O-10.1 |
 | D-13 | **Every detail view has an "Auditoría" tab** (rule in `01`). This brings **audit entries** back into scope, and they partly supersede D-5's "bitácora events out of scope": each record keeps its audit trail in NGXS (fixtures in Phase 1, written on every change made in the app). Alerts and "Aviso al Oficial" stay out of scope. | D-5 (partly) |
 | D-14 | **Catalog keys: official CNBV/Banxico keys, verbatim.** Legal compliance is a main selling point of the demo. This applies to country keys too (`UK`, `EL`, … as published). Files: `plans/catalogos/`. | `catalogos/README` Para decidir 1 |
 | D-15 | **Entidades (RENAPO letter keys for CURP):** the lead will provide the source later. Until then CURP's entidad check has no catalog. | Para decidir 2 |
@@ -28,6 +28,8 @@ These override the matching OPEN items below. OPEN items not listed here stay op
 | D-18 | **Currencies: ISO 4217 keys** (revised 2026-11-13; was "Banxico keys"). Catalog: `plans/catalogos/divisas.json` (CNBV DE1, ISO). Banxico JSONs kept as reference only. | Para decidir 5 |
 | D-19 | **Identification types: keep the demo's 13-item list** for now. The lead will review it with the product owner. | Para decidir 6 |
 | D-20 | **The 2019 CNBV package is accepted for the demo.** | Para decidir 7 |
+| D-21 | (lead, 2026-11-20) **Expediente level pills are neutral** for every level: the level is an attribute, not a judgment (replaces the demo's 1 neutral · 2 info · 3 ok, §10). The detail tab "Movimientos" is renamed **"Movimientos de efectivo"** so it doesn't clash with the Movimientos screen. | D-11, §10 |
+| D-22 | (lead, 2026-11-20) **Amounts in the demo strings below render code-first** (`05` Money and dates): "{monto} USD" → `USD 1,000.00`. A missing client shows the shared `app-record-not-found` page (`01`), not "Usuario inexistente.". | §2, §10 |
 | D-12 | **"Business" = the centro cambiario profile** (tenant config + branches), a new admin module. Tabs: **General · Legal · Auditoría** (audit trail). Branches live in this module too. See `00-master-plan.md`. | — |
 
 ## 0. How to read this spec
@@ -1211,7 +1213,7 @@ Data grid rows (`EXP:89-185`):
 - **List** (`LISTA html`):
   - label "Buscar usuario", placeholder "Nombre o denominación, número de usuario, CURP, RFC o identificación"
   - "+ Nuevo usuario" (`capturarClientes`)
-  - columns: Número (mono) · Nombre o denominación (bold; "Persona moral" neutral pill; "PEP" warn pill) · Nacimiento / constitución · CURP / RFC (mono, "—") · Expediente (Nivel N pill: 1 neutral, 2 info, 3 ok) · Riesgo · Estatus
+  - columns: Número (mono) · Nombre o denominación (bold; "Persona moral" neutral pill; "PEP" warn pill) · Nacimiento / constitución · CURP / RFC (mono, "—") · Expediente (Nivel N pill, neutral for every level per D-21; the demo colors 1 neutral, 2 info, 3 ok) · Riesgo · Estatus
   - footer: "{n} resultado(s)." while searching / "Últimos usuarios registrados."
   - empty: "Sin resultados" + "Revise lo escrito o registre al usuario." / "Aún no hay usuarios" + "Registre el primero con «Nuevo usuario»."
 - **Detail:** stacked cards in the order above.

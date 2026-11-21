@@ -1,0 +1,19 @@
+<article class="panel animate-page-in">
+  <app-encabezado-pagina [titulo]="title()" [volverA]="backTo()" [etiquetaVolver]="backLabel()" />
+  <section class="border-t border-line" [attr.aria-label]="message()">
+    <div class="flex min-h-60 flex-col items-center justify-center gap-3 p-8 text-center">
+      <ng-icon
+        name="lucideSearchX"
+        size="28"
+        [strokeWidth]="1.5"
+        class="text-ink-subtle"
+        aria-hidden="true"
+      />
+      <div>
+        <p class="text-headline">{{ message() }}</p>
+        <p class="text-callout text-ink-muted">{{ description() }}</p>
+      </div>
+      <a hlmBtn variant="outline" size="sm" [routerLink]="backTo()">{{ backLabel() }}</a>
+    </div>
+  </section>
+</article>

@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, computed, inject, input, signal } from '@angular/core';
+import { DateField } from '@components/date-field/date-field';
 import { ListaUrl } from '@components/lista-url/lista-url';
 import { DefinicionFiltro } from '@data/interfaces/definicion-filtro';
 import { NgIcon, provideIcons } from '@ng-icons/core';
@@ -12,11 +13,11 @@ import { HlmSelectImports } from '@spartan-ng/helm/select';
  * The `Filtros` trigger and its popover (plans/01 List behaviors): a filter icon with the count of
  * active filters, placed left of the page's primary action. The page provides `ListaUrl`; the
  * active count and `Limpiar` come from the URL, `Aplicar` writes the draft back to it. Selection
- * filters use Spartan's select; the rest are native inputs. `soloUrl` filters (view tabs) don't appear here.
+ * filters use Spartan's select, dates the shared date field; the rest are native inputs. `soloUrl` filters (view tabs) don't appear here.
  */
 @Component({
   selector: 'app-filtros-popover',
-  imports: [HlmButtonImports, HlmInput, HlmPopoverImports, HlmSelectImports, NgIcon],
+  imports: [DateField, HlmButtonImports, HlmInput, HlmPopoverImports, HlmSelectImports, NgIcon],
   providers: [provideIcons({ lucideListFilter })],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './filtros-popover.html',

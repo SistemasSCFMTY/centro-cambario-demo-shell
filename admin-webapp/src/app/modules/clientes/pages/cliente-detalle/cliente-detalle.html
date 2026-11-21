@@ -1,28 +1,11 @@
 @if (noEncontrado()) {
-  <article class="panel animate-page-in">
-    <app-encabezado-pagina
-      titulo="Cliente no encontrado"
-      [volverA]="['/clientes']"
-      etiquetaVolver="Volver a clientes"
-    />
-    <section class="border-t border-line">
-      <div class="flex min-h-60 flex-col items-center justify-center gap-3 p-8 text-center">
-        <ng-icon
-          name="lucideSearchX"
-          size="28"
-          [strokeWidth]="1.5"
-          class="text-ink-subtle"
-          aria-hidden="true"
-        />
-        <div>
-          <p class="text-headline">No encontramos este cliente</p>
-          <p class="text-callout text-ink-muted">
-            Puede que el expediente ya no exista. Regrese a la lista y búsquelo de nuevo.
-          </p>
-        </div>
-      </div>
-    </section>
-  </article>
+  <app-record-not-found
+    title="Cliente"
+    message="No encontramos este cliente"
+    description="Puede que el enlace sea incorrecto o que el expediente ya no exista."
+    [backTo]="['/clientes']"
+    backLabel="Volver a clientes"
+  />
 } @else {
   <app-detalle-pagina
     [titulo]="cliente()?.nombreCompleto ?? 'Cliente'"
@@ -67,22 +50,24 @@
       }
     </div>
 
-    @if (error() && !cliente()) {
-      <div class="px-8 py-8">
-        <p class="callout callout-danger" role="alert">{{ error() }}</p>
-      </div>
+    @if (!cliente() && error(); as mensaje) {
+      <app-error-notice [separated]="false" [message]="mensaje" (retry)="retry()" />
     } @else if (cliente(); as c) {
       @switch (pestana()) {
         @case ('movimientos') {
           <section aria-labelledby="cliente-movimientos">
             <header class="px-8 pt-8 pb-4">
-              <h2 id="cliente-movimientos">Movimientos</h2>
+              <h2 id="cliente-movimientos">Movimientos de efectivo</h2>
               <p class="max-w-prose text-callout text-ink-muted">
                 El efectivo que entró y salió por cada divisa en las operaciones completadas.
               </p>
             </header>
             @if (errorOperaciones()) {
-              <p class="callout callout-danger mx-8 mb-8" role="alert">{{ errorOperaciones() }}</p>
+              <app-error-notice
+                [separated]="false"
+                [message]="errorOperaciones()!"
+                (retry)="retryOperations()"
+              />
             } @else if (cargandoOperaciones()) {
               <div
                 class="flex flex-col gap-4 px-8 pb-8"
@@ -243,18 +228,23 @@
             <h2 id="cliente-resumen">Operado</h2>
             <p class="max-w-prose text-callout text-ink-muted">
               Lo que este cliente ha operado este mes y hoy, frente al límite diario de
-              {{ limiteDiarioUsd | appNumero: 0 }} USD.
+              {{ limiteDiarioUsd | appMonto: 'USD' : 0 }}.
             </p>
             @if (errorOperaciones()) {
-              <p class="callout callout-danger mt-6" role="alert">{{ errorOperaciones() }}</p>
+              <app-error-notice
+                [separated]="false"
+                [padded]="false"
+                [message]="errorOperaciones()!"
+                (retry)="retryOperations()"
+              />
             } @else if (operaciones(); as datos) {
               <dl
                 class="card mt-6 grid divide-y divide-line sm:grid-cols-2 sm:divide-x sm:divide-y-0 lg:grid-cols-4"
               >
                 <div class="px-6 py-4">
-                  <dt class="micro-label">Monto del mes (USD)</dt>
+                  <dt class="micro-label">Monto del mes</dt>
                   <dd class="font-data text-title-1 font-bold text-ink">
-                    {{ datos.resumen.montoUsdMes | appNumero }}
+                    {{ datos.resumen.montoUsdMes | appMonto: 'USD' }}
                   </dd>
                   <dd class="text-caption-1 text-ink-muted">Sin perfil declarado</dd>
                 </div>
@@ -273,12 +263,12 @@
                   <dd class="text-caption-1 text-ink-muted">Sin divisas declaradas</dd>
                 </div>
                 <div class="px-6 py-4">
-                  <dt class="micro-label">Operado hoy (USD)</dt>
+                  <dt class="micro-label">Operado hoy</dt>
                   <dd class="font-data text-title-1 font-bold text-ink">
-                    {{ datos.resumen.montoUsdHoy | appNumero }}
+                    {{ datos.resumen.montoUsdHoy | appMonto: 'USD' }}
                   </dd>
                   <dd class="font-data text-caption-1 text-ink-muted">
-                    Límite diario: {{ datos.resumen.limiteDiarioUsd | appNumero: 0 }} USD
+                    Límite diario: {{ datos.resumen.limiteDiarioUsd | appMonto: 'USD' : 0 }}
                   </dd>
                 </div>
               </dl>
@@ -316,7 +306,11 @@
                 }
               </div>
             } @else if (errorOperaciones()) {
-              <p class="callout callout-danger mx-8 mb-8" role="alert">{{ errorOperaciones() }}</p>
+              <app-error-notice
+                [separated]="false"
+                [message]="errorOperaciones()!"
+                (retry)="retryOperations()"
+              />
             } @else if ((operaciones()?.operaciones ?? []).length === 0) {
               <div class="flex min-h-60 flex-col items-center justify-center gap-3 p-8 text-center">
                 <ng-icon
@@ -385,7 +379,7 @@
                             {{ o.montoDivisa | appMonto: o.divisa }}
                           </td>
                           <td class="font-data px-4 py-2 text-end whitespace-nowrap">
-                            {{ o.montoUsd | appNumero }}
+                            {{ o.montoUsd | appMonto: 'USD' }}
                           </td>
                           <td class="px-4 py-2 whitespace-nowrap">
                             <app-pill-estatus [ajuste]="pillEstatusOperacion[o.estatus]" />

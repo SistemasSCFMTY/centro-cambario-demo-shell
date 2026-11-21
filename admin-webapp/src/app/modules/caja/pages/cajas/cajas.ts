@@ -1,3 +1,5 @@
+import { FilterChips } from '@components/filter-chips/filter-chips';
+import { ErrorNotice } from '@components/error-notice/error-notice';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -20,14 +22,14 @@ import { CajaFilaDto, TotalDivisaDto } from '@data/dto/caja-pagina.dto';
 import { EsquemaLista } from '@data/interfaces/esquema-lista';
 import { ColumnaTabla } from '@data/types/tabla.types';
 import { provideIcons } from '@ng-icons/core';
-import { lucideBanknote, lucideVault } from '@ng-icons/lucide';
+import { lucideBanknote, lucideLockKeyhole } from '@ng-icons/lucide';
 import { Store } from '@ngxs/store';
 import { HlmButtonImports } from '@spartan-ng/helm/button';
 import { FechaHoraPipe } from '@pipes/fecha-hora.pipe';
-import { NumeroPipe } from '@pipes/numero.pipe';
+import { MontoPipe } from '@pipes/monto.pipe';
 import { CargarCajas, CargarSucursalesCaja } from '@store/caja/actions/caja.actions';
 import { CajaState } from '@store/caja/state/caja.state';
-import { formatearNumero } from '@utils/dinero/formato-dinero';
+import { formatearMonto } from '@utils/dinero/formato-dinero';
 import { consultaDeEstado } from '@utils/lista/consulta-lista';
 
 /**
@@ -37,18 +39,20 @@ import { consultaDeEstado } from '@utils/lista/consulta-lista';
 @Component({
   selector: 'app-cajas',
   imports: [
+    ErrorNotice,
     CeldaPrincipal,
     CeldaTabla,
+    FilterChips,
     EncabezadoPagina,
     FechaHoraPipe,
     FiltrosPopover,
     HlmButtonImports,
-    NumeroPipe,
+    MontoPipe,
     PillEstatus,
     RouterLink,
     TablaDatos,
   ],
-  providers: [ListaUrl, provideIcons({ lucideBanknote, lucideVault })],
+  providers: [ListaUrl, provideIcons({ lucideBanknote, lucideLockKeyhole })],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './cajas.html',
   host: { class: 'block' },
@@ -93,12 +97,12 @@ export class Cajas {
   protected readonly columnas = computed<ColumnaTabla<CajaFilaDto>[]>(() => {
     const decimales = this.decimales();
     return [
-      { id: 'caja', header: 'Caja', accessorFn: (fila) => fila.nombre },
+      { id: 'caja', header: 'Caja', accessorFn: (fila) => fila.nombre, meta: { pinned: true } },
       { id: 'estatus', header: 'Estatus', accessorFn: (fila) => fila.estatus },
       ...DIVISAS_CAJA.map((divisa): ColumnaTabla<CajaFilaDto> => ({
         id: divisa,
         header: divisa,
-        accessorFn: (fila) => formatearNumero(fila.saldos[divisa], decimales[divisa] ?? 2),
+        accessorFn: (fila) => formatearMonto(fila.saldos[divisa], divisa, decimales[divisa]),
         meta: { numerica: true },
       })),
     ];
@@ -116,5 +120,9 @@ export class Cajas {
       const pagina = this.pagina();
       if (pagina && !this.cargando()) untracked(() => this.lista.ajustarPagina(pagina.total));
     });
+  }
+
+  protected retry(): void {
+    this.store.dispatch(new CargarCajas(this.consulta()));
   }
 }

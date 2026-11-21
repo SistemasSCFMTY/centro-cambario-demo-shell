@@ -112,13 +112,24 @@
 | `/clientes/nuevo`, `/clientes/:id/editar` | Full expediente form page | **superadmin capture** |
 | `/clientes/:id` | Expediente detail ("360") | read + superadmin actions (estatus, aviso) |
 | `/operaciones` | All operations, filters: fecha, sucursal, cajero, divisa, tipo, estatus, vista (hoy/pendientes/todas) | read |
-| `/operaciones/:id` | Operation detail (folio, calculation, client, classification, authorization trail) | read |
+| `/operaciones/:id` | Operation detail (folio, calculation, client, classification, authorization trail); the only place that shows the Equivalente en USD (lead, 2026-11-20) | read |
 | `/caja` | Drawers/vault per branch: status, responsable, balances | read |
 | `/caja/cortes` | Conteos history (apertura/arqueo/corte, system vs counted, difference) | read |
 | `/movimientos` | Cash logistics: traspasos (drawer↔drawer, branch↔branch), traslados de valores, replenishments; filters, totals pills, export | read |
 | `/movimientos/:id` | Movement detail (origin, destination, amounts per currency, status trail) | read |
 
 Every detail view above (`/clientes/:id`, `/operaciones/:id`, `/movimientos/:id`, and caja/corte details if added) carries the mandatory **Auditoría** tab (`01`).
+
+#### Column order (lead, 2026-11-20)
+The lead column is pinned left, Estatus comes right after it, and the row actions are pinned right (`01`, `05`).
+| Screen | Columns |
+|---|---|
+| `/operaciones` | Folio (pinned) · Estatus · Fecha · Sucursal · Operación · Importe · Cliente. **Importe** is one two-line cell: the amount in its currency, then `TC <rate> · MXN <pesos>`; it sorts by pesos. Replaces `06` P-15. |
+| `/movimientos` | Folio (pinned) · Estatus · Fecha (with «Registró: <name>» under it; no Registró column) · Origen · Destino · Montos · Resolvió. |
+| `/caja` | Caja pinned. |
+| `/caja/cortes` | Fecha pinned. |
+| `/clientes` | Cliente (pinned) · Estatus · Número · Nacimiento o constitución · CURP o RFC · Expediente · Alta. Replaces the order in `06` P-36. |
+| Sucursales | `04` (Tab: Sucursales). |
 
 ### Data
 - Typed mock fixtures loaded into NGXS states through `services/`. **Nothing persists outside NGXS.** A reload re-seeds from fixtures.
@@ -131,7 +142,7 @@ Every detail view above (`/clientes/:id`, `/operaciones/:id`, `/movimientos/:id`
 | Three modules | **Confirmed for the demo:** `operaciones`, `caja`, `movimientos`. The lead will check how the demo and other systems model cash logistics before the production design. |
 | Traslado de valores record | Transport company, guard + vehicle, seal/bag number (*marchamo*), pickup and delivery date/time, origin and destination (branch, bank), amounts per currency, status. |
 | Replenishments | **Need an approval step.** Source: **a bank or another branch**. **Only superadmins approve**, for now. |
-| `localStorage` | **Allowed** through the NGXS storage plugin (UI prefs such as theme mode). Domain data still comes from fixtures. |
+| `localStorage` | **Allowed** through the NGXS storage plugin (UI prefs such as theme mode, and the session since 2026-11-20). Domain data still comes from fixtures. |
 
 | Replenishment review | The approving superadmin has **two paths**: (a) **decline completely**, a final state that requires a motive, or (b) **correct and then approve**: edit the request (e.g. amounts per currency) and approve it in the same review, with the correction recorded in the status trail. |
 

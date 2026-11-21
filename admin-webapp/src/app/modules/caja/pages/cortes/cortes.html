@@ -8,10 +8,10 @@
     <app-filtros-popover [filtros]="esquema().filtros" />
   </app-encabezado-pagina>
 
-  @if (error()) {
-    <div class="border-t border-line px-8 py-4">
-      <div class="callout callout-danger" role="alert">{{ error() }}</div>
-    </div>
+  <app-filter-chips [filters]="esquema().filtros" />
+
+  @if (error(); as mensaje) {
+    <app-error-notice [message]="mensaje" (retry)="retry()" />
   }
 
   @if (pillsDiferencias().length > 0) {
@@ -19,7 +19,7 @@
       class="flex flex-wrap items-center gap-2 border-t border-line px-8 py-4"
       aria-labelledby="titulo-diferencias"
     >
-      <h2 id="titulo-diferencias" class="micro-label me-2">Diferencias en el filtro</h2>
+      <h2 id="titulo-diferencias" class="micro-label me-2">Diferencias en estos resultados</h2>
       @for (pill of pillsDiferencias(); track pill.etiqueta) {
         <app-pill-estatus [ajuste]="pill" />
       }
@@ -36,6 +36,7 @@
       [filas]="filas()"
       [total]="total()"
       [cargando]="cargando()"
+      [error]="!!error()"
       [pagina]="lista.estado().pagina"
       [tamano]="lista.estado().tamano"
       [tamanos]="esquema().tamanos"
@@ -60,7 +61,7 @@
       <ng-template appCeldaTabla="caja" [filas]="filas()" let-fila>
         <app-celda-principal
           tipo="cosa"
-          [icono]="fila.tipoCaja === 'BOVEDA' ? 'lucideVault' : 'lucideBanknote'"
+          [icono]="fila.tipoCaja === 'BOVEDA' ? 'lucideLockKeyhole' : 'lucideBanknote'"
           [nombre]="fila.caja"
           [detalle]="fila.sucursal"
         />
@@ -74,15 +75,15 @@
       <ng-template appCeldaTabla="conteo" [filas]="filas()" let-fila>
         @for (d of fila.detalle; track d.divisa) {
           <p class="font-data whitespace-nowrap">
-            <span class="font-bold">{{ d.divisa }}</span>
-            {{ d.sistema | appNumero: d.decimales }} → {{ d.contado | appNumero: d.decimales }}
+            {{ d.sistema | appMonto: d.divisa : d.decimales }} →
+            {{ d.contado | appMonto: d.divisa : d.decimales }}
             @if (d.diferencia < 0) {
               <span class="text-danger-700 dark:text-danger-400">
-                ({{ d.diferencia | appNumero: d.decimales }})
+                ({{ d.diferencia | appMonto: d.divisa : d.decimales }})
               </span>
             } @else if (d.diferencia > 0) {
               <span class="text-success-700 dark:text-success-400">
-                (+{{ d.diferencia | appNumero: d.decimales }})
+                (+{{ d.diferencia | appMonto: d.divisa : d.decimales }})
               </span>
             }
           </p>

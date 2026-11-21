@@ -1,3 +1,5 @@
+<p class="sr-only" aria-live="polite">{{ announcement() }}</p>
+
 <div class="relative" [style.min-height.rem]="alturaMinimaRem()">
   @if (refrescando()) {
     <span
@@ -21,6 +23,8 @@
             <th
               scope="col"
               class="micro-label px-4 py-3 whitespace-nowrap"
+              [class.pinned-start]="encabezado.pinned"
+              [class.bg-panel-muted]="encabezado.pinned"
               [class.text-start]="!encabezado.numerica"
               [class.text-end]="encabezado.numerica"
               [attr.aria-sort]="encabezado.ordenable ? encabezado.ariaOrden : null"
@@ -67,7 +71,9 @@
             </th>
           }
           @if (etiquetaAccion()) {
-            <th scope="col" class="w-px px-4 py-3"><span class="sr-only">Acciones</span></th>
+            <th scope="col" class="pinned-end w-px bg-panel-muted px-4 py-3">
+              <span class="sr-only">Acciones</span>
+            </th>
           }
         </tr>
       </thead>
@@ -100,7 +106,20 @@
                   <p class="text-headline">{{ vacioTitulo() }}</p>
                   <p class="text-callout text-ink-muted">{{ vacioDescripcion() }}</p>
                 </div>
-                <ng-content select="[vacio-accion]" />
+                <div class="flex flex-wrap justify-center gap-2 empty:hidden">
+                  @if (hasFilters()) {
+                    <button
+                      hlmBtn
+                      variant="outline"
+                      size="sm"
+                      type="button"
+                      (click)="clearFilters()"
+                    >
+                      Limpiar filtros
+                    </button>
+                  }
+                  <ng-content select="[vacio-accion]" />
+                </div>
               </div>
             </td>
           </tr>
@@ -116,6 +135,7 @@
               @for (celda of fila.celdas; track celda.id) {
                 <td
                   class="px-4 py-2 text-subheadline text-ink"
+                  [class]="celda.pinned ? 'pinned-start ' + pinnedCellClass() : ''"
                   [class.font-data]="celda.numerica"
                   [class.text-end]="celda.numerica"
                 >
@@ -129,7 +149,7 @@
                 </td>
               }
               @if (etiquetaAccion()) {
-                <td class="w-px px-4 py-2 text-end">
+                <td class="pinned-end w-px px-4 py-2 text-end" [class]="pinnedCellClass()">
                   <button
                     type="button"
                     class="row-action"
@@ -150,7 +170,7 @@
 
 @if (total() > 0) {
   <nav class="flex flex-wrap items-center justify-between gap-3 px-4 py-3" aria-label="Paginación">
-    <p class="font-data text-caption-1 text-ink-muted" aria-live="polite">{{ rango() }}</p>
+    <p class="font-data text-caption-1 text-ink-muted">{{ rango() }}</p>
 
     <div class="flex flex-wrap items-center gap-1.5">
       <div class="me-3 flex items-center gap-2">
@@ -181,7 +201,7 @@
 
       @for (boton of botonesPagina(); track $index) {
         @if (boton === null) {
-          <span class="px-1 text-ink-subtle" aria-hidden="true">…</span>
+          <span class="px-1 text-ink-muted" aria-hidden="true">…</span>
         } @else {
           <button
             type="button"

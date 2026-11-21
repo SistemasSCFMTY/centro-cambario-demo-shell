@@ -1,0 +1,27 @@
+@if (chips().length) {
+  <div
+    class="flex flex-wrap items-center gap-2 border-line px-8 py-3"
+    [class.border-t]="separated()"
+  >
+    <span class="micro-label">Filtros</span>
+    <ul class="contents">
+      @for (chip of chips(); track chip.id) {
+        <li
+          class="inline-flex h-8 items-center gap-1 rounded-full border border-line bg-panel-muted ps-3 pe-1 text-footnote text-ink"
+        >
+          <span class="text-ink-muted">{{ chip.label }}:</span>
+          <span class="max-w-48 truncate font-bold" [title]="chip.text">{{ chip.text }}</span>
+          <button
+            type="button"
+            class="inline-flex size-6 items-center justify-center rounded-full text-ink-muted hover:bg-line hover:text-ink"
+            [attr.aria-label]="'Quitar filtro ' + chip.label + ': ' + chip.text"
+            (click)="remove(chip.id)"
+          >
+            <ng-icon name="lucideX" size="14" aria-hidden="true" />
+          </button>
+        </li>
+      }
+    </ul>
+    <button type="button" class="link-action ms-1" (click)="clear()">Limpiar filtros</button>
+  </div>
+}

@@ -1,3 +1,5 @@
+import { FilterChips } from '@components/filter-chips/filter-chips';
+import { ErrorNotice } from '@components/error-notice/error-notice';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -41,8 +43,10 @@ import { consultaDeEstado } from '@utils/lista/consulta-lista';
 @Component({
   selector: 'app-negocio-sucursales',
   imports: [
+    ErrorNotice,
     CeldaPrincipal,
     CeldaTabla,
+    FilterChips,
     DomicilioPipe,
     HlmButtonImports,
     HlmDialogImports,
@@ -81,14 +85,14 @@ export class NegocioSucursales {
   protected readonly pillEstatus = PILL_ESTATUS_SUCURSAL;
   protected readonly pillFalta: AjustePill = { tono: 'warning', etiqueta: 'Falta' };
   protected readonly columnas: ColumnaTabla<SucursalResumen>[] = [
-    { accessorKey: 'clave', header: 'Clave' },
+    { accessorKey: 'clave', header: 'Clave', meta: { pinned: true } },
     { accessorKey: 'nombre', header: 'Nombre' },
+    { accessorKey: 'estatus', header: 'Estatus' },
+    { accessorKey: 'usuarios', header: 'Usuarios', meta: { numerica: true } },
+    { accessorKey: 'operaciones', header: 'Operaciones', meta: { numerica: true } },
     { accessorKey: 'codigoPostal', header: 'Código postal' },
     { accessorKey: 'localidad', header: 'Localidad' },
     { id: 'domicilio', header: 'Domicilio' },
-    { accessorKey: 'usuarios', header: 'Usuarios', meta: { numerica: true } },
-    { accessorKey: 'operaciones', header: 'Operaciones', meta: { numerica: true } },
-    { accessorKey: 'estatus', header: 'Estatus' },
     { id: 'acciones', header: 'Acciones', meta: { encabezadoOculto: true } },
   ];
 
@@ -103,8 +107,14 @@ export class NegocioSucursales {
     });
   }
 
+  protected retry(): void {
+    this.store.dispatch(new CargarSucursales(consultaDeEstado(this.lista.estado())));
+  }
+
   protected editar(sucursal: SucursalResumen): void {
-    this.router.navigate(['/negocio/sucursales', sucursal.id, 'editar']);
+    this.router.navigate(['/negocio/sucursales', sucursal.id, 'editar'], {
+      state: this.lista.backState(),
+    });
   }
 
   protected pedirConfirmacion(sucursal: SucursalResumen): void {

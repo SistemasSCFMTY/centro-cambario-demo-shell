@@ -27,7 +27,9 @@
   - constants go in `data/constants/`
   - One-off strings stay inline. A class-to-tone map used by one component may stay as a non-signal property of that component (onp's `dotClasses` rule).
 - Store layout: `store/<module>/{actions,state,types}`. Forms are pages.
-- **Spanish copy:** fix accents and grammar in copy the lead types, and show the corrected version.
+- **Persisted state** (localStorage through the NGXS storage plugin): the theme mode and, since 2026-11-20 (lead, both apps), the session (key `sesion`), so a reload keeps the user signed in. Domain data re-seeds from fixtures.
+- **Code in English** (lead, 2026-11-20): no Spanish anywhere in code: identifiers, file and folder names, selectors, inputs/outputs, CSS utilities, data attributes, constants. Existing Spanish-named code (`app-encabezado-pagina`, `despliegue`, `ListaUrl`…) isn't renamed until the lead decides (`00` OPEN).
+- **Spanish (Mexico) copy:** usted everywhere, never tú (lead, 2026-11-20). Hints don't assume a mouse: "Abra una fila para ver su detalle". Fix accents and grammar in copy the lead types, and show the corrected version.
 
 ## Components
 - Template in its own `templateUrl`; standalone; OnPush; `protected` for template-only members.
@@ -92,6 +94,11 @@
 - **Weights:** Zain has no 500/600, so onp's 600 roles take 700, and onp's 500 roles (labels, buttons, nav) take 400, or 700 when they need emphasis. Never synthesized weights.
 - `libs/ui/utils` `hlm()` registers these sizes with tailwind-merge. Without that, `text-body` would knock out a helm component's text color.
 
+## Money and dates (lead, 2026-11-20)
+- **Every amount carries its ISO 4217 code,** MXN included: `MXN 1,234.50`, `USD 900.00`, `JPY 15,000` (the currency's own decimals); negatives `-USD 10.00`. Never `$`, never a bare number, even under a column header that names the currency.
+- **Exchange rates are not amounts:** `TC 17.3511`.
+- **Date inputs** use Spartan's date picker through the shared `app-date-field`: Spanish month and weekday names, `dd/mm/aaaa`, weeks start on Monday, the value an ISO string. No native `type="date"` inputs.
+
 ## Shell
 - `h-dvh overflow-hidden`: exactly one screen tall. The sidebar is not sticky; it sits at `h-full` and its nav scrolls inside it.
 - The silver pane doesn't scroll (so its gradient and grain stay put). **Only the content inside it scrolls** (`#contenido`), and `Marco` resets it to the top on each navigation.
@@ -126,8 +133,9 @@
   <!-- one small action, if any -->
 </div>
 ```
+- **Errors:** one pattern, `app-error-notice`: a danger callout in its own section under the header (or the tabs), with «Reintentar». While it shows, the table shows no empty state (lead, 2026-11-20).
 - **Metrics:** one card with figures divided by hairlines, the first one leading. No rows of colored stat tiles.
-- **Horizontal overflow** (lead, 2026-11-17, onp's table rule): table cells never wrap (`whitespace-nowrap` on the `<table>`); a table wider than its panel scrolls sideways inside its container, and `appDesvanecidoDesplazamiento` (`components/desvanecido-desplazamiento/`, a port of onp's `appScrollFade`) draws a fade at the right edge while there is more to the right. The container's parent must be `relative`. Long free text in a cell (authorization notes) truncates within a max width, with the full text in `title`. The base `p`/heading rules use `text-wrap-style` (the longhand), because the `text-wrap` shorthand would turn wrapping back on inside the table.
+- **Horizontal overflow** (lead, 2026-11-17, onp's table rule): table cells never wrap (`whitespace-nowrap` on the `<table>`); a table wider than its panel scrolls sideways inside its container, and `appDesvanecidoDesplazamiento` (`components/desvanecido-desplazamiento/`, a port of onp's `appScrollFade`) draws a fade at the right edge while there is more to the right. The container's parent must be `relative`. **Pinned columns** (lead, 2026-11-20): the lead column is sticky at the left (`meta.pinned` on the column; utilities `pinned-start` / `pinned-end`) and the row-action column at the right, so tabbing to a row action never scrolls the table; each draws its edge hairline only while content scrolls under it. Long free text in a cell (authorization notes) truncates within a max width, with the full text in `title`. The base `p`/heading rules use `text-wrap-style` (the longhand), because the `text-wrap` shorthand would turn wrapping back on inside the table.
 - **Selects** (lead, 2026-11-17): Spartan's `hlm-select` everywhere (forms, filters, rows per page), never the native `<select>`. With reactive forms, put `[formControl]` on `hlm-select` and pass `[itemToString]` so the trigger shows the label of the stored key; `hlm-select-trigger` takes `buttonId` (for the `<label>`) and `aria-describedby` (the help or error line).
 - **Avoid:** gradient text, glass blur, icons in colored squares, rows of equal colored stat cards, uppercase tracking-wide eyebrows, centered hero layouts inside the app, arrow glyphs on CTAs, dead hover/focus states.
 

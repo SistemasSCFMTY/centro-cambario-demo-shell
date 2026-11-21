@@ -1,3 +1,6 @@
+import { RecordNotFound } from '@components/record-not-found/record-not-found';
+import { ErrorNotice } from '@components/error-notice/error-notice';
+import { Location } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -51,6 +54,7 @@ import { formatearFechaHora } from '@utils/fechas/fechas';
 @Component({
   selector: 'app-revision-dotacion',
   imports: [
+    ErrorNotice,
     BarraAcciones,
     CuadriculaCampos,
     EncabezadoPagina,
@@ -64,6 +68,7 @@ import { formatearFechaHora } from '@utils/fechas/fechas';
     NgIcon,
     PillEstatus,
     ReactiveFormsModule,
+    RecordNotFound,
     RouterLink,
   ],
   providers: [provideIcons({ lucideInbox })],
@@ -73,6 +78,9 @@ import { formatearFechaHora } from '@utils/fechas/fechas';
 export class RevisionDotacion {
   private readonly store = inject(Store);
   private readonly router = inject(Router);
+
+  /** The detail's history state, handed back so its back link still returns to the list view. */
+  protected readonly historyState = (inject(Location).getState() ?? {}) as Record<string, unknown>;
   private readonly fb = inject(NonNullableFormBuilder);
 
   /** The `:id` of the route. */
@@ -88,6 +96,7 @@ export class RevisionDotacion {
   protected readonly detalle = select(MovimientosState.detalle);
   protected readonly cargando = select(MovimientosState.cargandoDetalle);
   protected readonly error = select(MovimientosState.errorDetalle);
+  protected readonly notFound = select(MovimientosState.notFound);
   protected readonly guardando = select(MovimientosState.guardando);
   protected readonly errorRevision = select(MovimientosState.errorRevision);
   protected readonly usuario = select(SesionState.usuario);
@@ -182,8 +191,12 @@ export class RevisionDotacion {
     });
   }
 
+  protected retry(): void {
+    this.store.dispatch(new CargarMovimiento(this.id()));
+  }
+
   protected volver(): void {
-    this.router.navigate(['/movimientos', this.id()]);
+    this.router.navigate(['/movimientos', this.id()], { state: this.historyState });
   }
 
   protected pedirAprobacion(): void {

@@ -4,4 +4,6 @@ export interface MetaColumna {
   numerica?: boolean;
   /** The header text stays for screen readers only (an actions column). */
   encabezadoOculto?: boolean;
+  /** The lead column (the folio) stays pinned at the left while the rest scrolls under it. */
+  pinned?: boolean;
 }

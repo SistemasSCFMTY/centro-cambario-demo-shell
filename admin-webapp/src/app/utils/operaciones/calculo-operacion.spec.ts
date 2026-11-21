@@ -78,7 +78,7 @@ describe('calcularOperacion', () => {
     );
     expect(
       calcularOperacion({ ...base, montoDivisa: 5000.5, cliente }).motivosAutorizacion,
-    ).toEqual(['Operación en efectivo de persona física superior a 5,000 USD (9ª)']);
+    ).toEqual(['Operación en efectivo de persona física superior a USD 5,000 (9ª)']);
     expect(calcularOperacion({ ...base, montoDivisa: 6000 }).motivosAutorizacion).toEqual([]);
   });
 

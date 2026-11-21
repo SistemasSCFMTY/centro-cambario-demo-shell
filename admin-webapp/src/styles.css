@@ -303,9 +303,10 @@
   color-scheme: dark;
 
   --canvas: var(--color-chrome-pane);
-  --panel: var(--color-surface-900);
-  --panel-muted: var(--color-surface-800);
-  --line: color-mix(in oklch, var(--color-surface-700) 70%, var(--color-surface-900));
+  /* Panel sits a notch above surface-900 so its edge reads against the pane; muted and line keep their step above it. */
+  --panel: color-mix(in oklch, var(--color-surface-900) 50%, var(--color-surface-800));
+  --panel-muted: color-mix(in oklch, var(--color-surface-800) 75%, var(--color-surface-700));
+  --line: color-mix(in oklch, var(--color-surface-700) 80%, var(--color-surface-900));
   --line-strong: var(--color-surface-700);
   --ink: var(--color-surface-50);
   --ink-muted: var(--color-surface-400);
@@ -518,6 +519,37 @@
 
 @utility lead-thumb-fallback {
   @apply inline-flex size-9 shrink-0 items-center justify-center rounded-md bg-panel-muted text-ink-subtle;
+}
+
+/*
+ * plans/01: a pinned column in a scrolling table, the lead (folio) at the start and the row action
+ * at the end. Each cell brings its own fill (bg-panel / bg-panel-muted) so rows slide under it; the
+ * edge hairline shows only while something is under it: `data-scrolled` / `data-overflowing` on the
+ * scroll container come from appDesvanecidoDesplazamiento.
+ */
+@utility pinned-start {
+  position: sticky;
+  left: 0;
+  z-index: 1;
+
+  [data-scrolled] & {
+    box-shadow: inset -1px 0 0 var(--color-line-strong);
+  }
+}
+
+@utility pinned-end {
+  position: sticky;
+  right: 0;
+  z-index: 1;
+
+  [data-overflowing] & {
+    box-shadow: inset 1px 0 0 var(--color-line-strong);
+  }
+}
+
+/* A popover that scrolls inside the window at any height (the Filtros form at 768 px tall). */
+@utility popover-height {
+  max-height: min(36rem, calc(100dvh - 9rem));
 }
 
 /* A table inside a padded section: cancels the section's gutters so it sits flush. */

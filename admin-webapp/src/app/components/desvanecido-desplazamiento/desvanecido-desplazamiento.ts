@@ -18,6 +18,10 @@ import {
  * table (the header row keeps its own fill), and stops above the horizontal scrollbar. Both are
  * measured on every update, since the header follows the fonts and the scrollbar is zero-height on
  * overlay-scrollbar systems.
+ *
+ * It also marks the host for pinned columns (`pinned-start` / `pinned-end`):
+ * `data-scrolled` while scrolled away from the start and `data-overflowing` while more lies to the right,
+ * which draw their edge hairlines. With a pinned end column, the fade stops at that column's edge.
  */
 @Directive({ selector: '[appDesvanecidoDesplazamiento]' })
 export class DesvanecidoDesplazamiento {
@@ -34,18 +38,21 @@ export class DesvanecidoDesplazamiento {
     const padre = host.parentElement;
     if (!velo || !padre) return;
     const hayMas = host.scrollLeft + host.clientWidth < host.scrollWidth - 1;
+    this.setFlag(host, 'data-scrolled', host.scrollLeft > 0);
+    this.setFlag(host, 'data-overflowing', hayMas);
     if (!hayMas) {
       this.renderer.addClass(velo, 'hidden');
       return;
     }
     const encabezado = host.querySelector<HTMLElement>('thead')?.offsetHeight ?? 0;
     const finVisible = host.offsetTop + host.clientHeight;
+    const pinnedEndWidth = host.querySelector<HTMLElement>('thead .pinned-end')?.offsetWidth ?? 0;
     this.renderer.setStyle(velo, 'top', `${host.offsetTop + encabezado}px`);
     this.renderer.setStyle(velo, 'bottom', `${Math.max(0, padre.clientHeight - finVisible)}px`);
     this.renderer.setStyle(
       velo,
       'right',
-      `${Math.max(0, padre.clientWidth - host.offsetLeft - host.offsetWidth)}px`,
+      `${Math.max(0, padre.clientWidth - host.offsetLeft - host.offsetWidth) + pinnedEndWidth}px`,
     );
     this.renderer.removeClass(velo, 'hidden');
   };
@@ -71,6 +78,11 @@ export class DesvanecidoDesplazamiento {
     // The table grows and shrinks with its rows and columns while the host keeps its size.
     for (const hijo of Array.from(host.children)) this.observador.observe(hijo);
     this.actualizar();
+  }
+
+  private setFlag(host: HTMLElement, attribute: string, on: boolean): void {
+    if (on) this.renderer.setAttribute(host, attribute, '');
+    else this.renderer.removeAttribute(host, attribute);
   }
 
   private desmontar(): void {

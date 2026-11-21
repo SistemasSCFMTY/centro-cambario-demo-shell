@@ -27,14 +27,14 @@
       @if (perfil(); as datos) {
         <app-negocio-general [perfil]="datos" [opciones]="opciones()" />
       } @else if (error()) {
-        <p class="callout callout-danger m-8" role="alert">{{ error() }}</p>
+        <app-error-notice [separated]="false" [message]="error()!" (retry)="retry()" />
       }
     }
     @case ('legal') {
       @if (perfil(); as datos) {
         <app-negocio-legal [perfil]="datos" [opciones]="opciones()" />
       } @else if (error()) {
-        <p class="callout callout-danger m-8" role="alert">{{ error() }}</p>
+        <app-error-notice [separated]="false" [message]="error()!" (retry)="retry()" />
       }
     }
     @case ('sucursales') {
@@ -60,7 +60,7 @@
         }
       </div>
       @if (errorAuditoria(); as mensaje) {
-        <p class="callout callout-danger m-8" role="alert">{{ mensaje }}</p>
+        <app-error-notice [message]="mensaje" (retry)="retryAudit()" />
       }
       <app-pestana-auditoria [registros]="registrosAuditoria()" [cargando]="cargandoAuditoria()" />
     }

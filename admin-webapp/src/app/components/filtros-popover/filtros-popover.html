@@ -14,7 +14,7 @@
 
   <hlm-popover-content
     *hlmPopoverPortal="let ctx"
-    class="scrollbar-thin max-h-96 w-80 overflow-y-auto"
+    class="scrollbar-thin popover-height w-80 overflow-y-auto"
   >
     <form class="flex flex-col gap-4" (submit)="aplicar($event)">
       @for (filtro of visibles(); track filtro.id) {
@@ -44,13 +44,10 @@
               </hlm-select>
             }
             @case ('fecha') {
-              <input
-                hlmInput
-                type="date"
-                [id]="'filtro-' + filtro.id"
-                class="font-data text-subheadline"
+              <app-date-field
+                [buttonId]="'filtro-' + filtro.id"
                 [value]="borrador()[filtro.id] ?? ''"
-                (input)="escribir(filtro.id, $event)"
+                (valueChange)="escribirValor(filtro.id, $event)"
               />
             }
             @case ('numero') {

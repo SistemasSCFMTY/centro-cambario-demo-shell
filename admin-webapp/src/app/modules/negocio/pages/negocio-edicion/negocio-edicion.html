@@ -7,10 +7,8 @@
   />
 
   @if (!listo()) {
-    @if (error()) {
-      <div class="border-t border-line px-8 py-4">
-        <p class="callout callout-danger" role="alert">{{ error() }}</p>
-      </div>
+    @if (error(); as message) {
+      <app-error-notice [message]="message" (retry)="retryLoad()" />
     } @else {
       <div class="border-t border-line px-8 py-8" role="status" aria-label="Cargando negocio">
         <span class="skeleton max-w-24"></span>
@@ -25,17 +23,15 @@
       </div>
     }
   } @else {
-    @if (errorGuardado(); as mensaje) {
-      <div class="border-t border-line px-8 py-4">
-        <p class="callout callout-danger" role="alert">{{ mensaje }}</p>
-      </div>
+    @if (errorGuardado(); as message) {
+      <app-error-notice [message]="message" [showRetry]="false" />
     }
     @for (seccion of secciones; track seccion.id) {
       <app-seccion-negocio
         [seccion]="seccion"
         [grupo]="formulario"
         [opciones]="opciones()"
-        prefijo="negocio"
+        [prefijo]="fieldPrefix"
         [cargandoGeografia]="cargandoGeografia()"
         [errorGeografia]="errorGeografia()"
       >
@@ -58,8 +54,10 @@
     (cancelar)="cancelar()"
     (guardar)="guardar()"
   >
-    @if (intentado()) {
-      <span role="alert">Revise los campos marcados antes de guardar.</span>
+    @if (attentionMessage(); as message) {
+      <span role="alert">{{ message }}</span>
     }
   </app-barra-acciones>
+
+  <app-discard-changes-dialog [(open)]="discardOpen" (discard)="leave()" />
 </article>

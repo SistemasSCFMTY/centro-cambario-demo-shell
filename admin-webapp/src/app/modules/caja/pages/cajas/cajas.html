@@ -7,10 +7,10 @@
     <app-filtros-popover [filtros]="esquema().filtros" />
   </app-encabezado-pagina>
 
-  @if (error()) {
-    <div class="border-t border-line px-8 py-4">
-      <div class="callout callout-danger" role="alert">{{ error() }}</div>
-    </div>
+  <app-filter-chips [filters]="esquema().filtros" />
+
+  @if (error(); as mensaje) {
+    <app-error-notice [message]="mensaje" (retry)="retry()" />
   }
 
   <section class="border-t border-line px-8 py-6" aria-labelledby="titulo-existencia">
@@ -19,13 +19,13 @@
       <dl class="flex flex-wrap gap-y-4">
         @for (total of totales(); track total.divisa; let primero = $first) {
           <div class="min-w-0 border-line px-6 first:ps-0 not-first:border-s">
-            <dt class="micro-label">{{ total.divisa }}</dt>
+            <dt class="sr-only">Existencia en {{ total.divisa }}</dt>
             <dd
               class="font-data mt-0.5 truncate"
               [class.text-title-1]="primero"
               [class.text-title-3]="!primero"
             >
-              {{ total.saldo | appNumero: total.decimales }}
+              {{ total.saldo | appMonto: total.divisa : total.decimales }}
             </dd>
           </div>
         }
@@ -53,6 +53,7 @@
       [filas]="filas()"
       [total]="total()"
       [cargando]="cargando()"
+      [error]="!!error()"
       [pagina]="lista.estado().pagina"
       [tamano]="lista.estado().tamano"
       [tamanos]="esquema().tamanos"
@@ -71,7 +72,7 @@
       <ng-template appCeldaTabla="caja" [filas]="filas()" let-fila>
         <app-celda-principal
           tipo="cosa"
-          [icono]="fila.tipo === 'BOVEDA' ? 'lucideVault' : 'lucideBanknote'"
+          [icono]="fila.tipo === 'BOVEDA' ? 'lucideLockKeyhole' : 'lucideBanknote'"
           [nombre]="fila.nombre"
           [detalle]="fila.sucursal + ' · ' + fila.clave"
         />
@@ -90,7 +91,7 @@
       @for (divisa of divisas; track divisa) {
         <ng-template [appCeldaTabla]="divisa" [filas]="filas()" let-fila>
           <span [class.text-ink-subtle]="fila.estatus === 'INACTIVA' || fila.saldos[divisa] === 0">
-            {{ fila.saldos[divisa] | appNumero: decimales()[divisa] }}
+            {{ fila.saldos[divisa] | appMonto: divisa : decimales()[divisa] }}
           </span>
         </ng-template>
       }

@@ -1,0 +1,16 @@
+<hlm-dialog [state]="state()" (stateChanged)="onStateChange($event)">
+  <hlm-dialog-content *hlmDialogPortal="let ctx">
+    <hlm-dialog-header>
+      <h2 hlmDialogTitle class="text-title-3">¿Descartar los cambios?</h2>
+      <p hlmDialogDescription class="text-callout text-ink-muted">
+        Los cambios que hizo en este formulario no se guardarán.
+      </p>
+    </hlm-dialog-header>
+    <hlm-dialog-footer>
+      <button hlmBtn variant="secondary" type="button" hlmDialogClose>Seguir editando</button>
+      <button hlmBtn variant="destructive" type="button" (click)="confirm()">
+        Descartar cambios
+      </button>
+    </hlm-dialog-footer>
+  </hlm-dialog-content>
+</hlm-dialog>

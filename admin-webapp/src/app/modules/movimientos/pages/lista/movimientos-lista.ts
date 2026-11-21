@@ -1,3 +1,5 @@
+import { FilterChips } from '@components/filter-chips/filter-chips';
+import { ErrorNotice } from '@components/error-notice/error-notice';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -44,8 +46,10 @@ import { consultaDeEstado } from '@utils/lista/consulta-lista';
 @Component({
   selector: 'app-movimientos-lista',
   imports: [
+    ErrorNotice,
     CeldaPrincipal,
     CeldaTabla,
+    FilterChips,
     EncabezadoPagina,
     FechaHoraPipe,
     FiltrosPopover,
@@ -94,13 +98,12 @@ export class MovimientosLista {
   protected readonly iconoClase = ICONO_CLASE_MOVIMIENTO;
   protected readonly pillEstatus = PILL_ESTATUS_MOVIMIENTO;
   protected readonly columnas: ColumnaTabla<MovimientoListaDto>[] = [
-    { accessorKey: 'folio', header: 'Folio' },
+    { accessorKey: 'folio', header: 'Folio', meta: { pinned: true } },
+    { accessorKey: 'estatus', header: 'Estatus' },
     { accessorKey: 'fecha', header: 'Fecha' },
     { accessorKey: 'origen', header: 'Origen' },
     { accessorKey: 'destino', header: 'Destino' },
     { id: 'montos', header: 'Montos', meta: { numerica: true } },
-    { accessorKey: 'estatus', header: 'Estatus' },
-    { accessorKey: 'solicitadoPor', header: 'Registró' },
     { id: 'resolvio', header: 'Resolvió' },
   ];
 
@@ -123,10 +126,14 @@ export class MovimientosLista {
   }
 
   protected abrir(movimiento: MovimientoListaDto): void {
-    this.router.navigate(['/movimientos', movimiento.id]);
+    this.router.navigate(['/movimientos', movimiento.id], { state: this.lista.backState() });
   }
 
   protected exportar(): void {
     this.store.dispatch(new ExportarMovimientos(consultaDeEstado(this.lista.estado())));
+  }
+
+  protected retry(): void {
+    this.store.dispatch(new CargarMovimientos(consultaDeEstado(this.lista.estado())));
   }
 }

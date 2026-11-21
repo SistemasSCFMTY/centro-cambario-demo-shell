@@ -24,14 +24,20 @@ describe('formato de dinero', () => {
     expect(formatearMonto(null, 'USD')).toBe('—');
   });
 
-  it('formats MXN with a symbol and the others with their ISO key', () => {
-    expect(formatearMonto(1234.5, 'MXN')).toBe('$1,234.50');
-    expect(formatearMonto(1234.5, 'USD')).toMatch(/^USD\s1,234\.50$/);
+  it('writes every currency with its ISO key, MXN included', () => {
+    expect(formatearMonto(1234.5, 'MXN')).toBe('MXN 1,234.50');
+    expect(formatearMonto(1234.5, 'USD')).toBe('USD 1,234.50');
+    expect(formatearMonto(-10, 'EUR')).toBe('-EUR 10.00');
+    expect(formatearMonto(-0.001, 'USD')).toBe('USD 0.00');
   });
 
   it('shows no decimals for JPY and KRW', () => {
-    expect(formatearMonto(15000, 'JPY')).toMatch(/^JPY\s15,000$/);
-    expect(formatearMonto(250000, 'KRW')).toMatch(/^KRW\s250,000$/);
+    expect(formatearMonto(15000, 'JPY')).toBe('JPY 15,000');
+    expect(formatearMonto(250000, 'KRW')).toBe('KRW 250,000');
+  });
+
+  it('takes a decimals override', () => {
+    expect(formatearMonto(3000, 'USD', 0)).toBe('USD 3,000');
   });
 
   it('formats a rate with four decimals', () => {

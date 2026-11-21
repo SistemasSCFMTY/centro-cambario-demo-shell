@@ -1,3 +1,4 @@
+import { DateField } from '@components/date-field/date-field';
 import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 import { toObservable, toSignal } from '@angular/core/rxjs-interop';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -13,7 +14,7 @@ import { startWith, switchMap } from 'rxjs';
 /** One labelled control of a negocio form, drawn from its field definition, with its error line. */
 @Component({
   selector: 'app-campo-negocio',
-  imports: [ReactiveFormsModule, HlmFieldImports, HlmInputImports, HlmSelectImports],
+  imports: [DateField, ReactiveFormsModule, HlmFieldImports, HlmInputImports, HlmSelectImports],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './campo-negocio.html',
   host: { '[class]': "campo().completo ? 'block min-w-0 sm:col-span-2' : 'block min-w-0'" },

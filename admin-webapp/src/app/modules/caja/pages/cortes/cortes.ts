@@ -1,3 +1,5 @@
+import { FilterChips } from '@components/filter-chips/filter-chips';
+import { ErrorNotice } from '@components/error-notice/error-notice';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -19,14 +21,14 @@ import { AjustePill } from '@data/interfaces/ajuste-pill';
 import { EsquemaLista } from '@data/interfaces/esquema-lista';
 import { ColumnaTabla } from '@data/types/tabla.types';
 import { FechaHoraPipe } from '@pipes/fecha-hora.pipe';
-import { NumeroPipe } from '@pipes/numero.pipe';
+import { MontoPipe } from '@pipes/monto.pipe';
 import { provideIcons } from '@ng-icons/core';
-import { lucideVault } from '@ng-icons/lucide';
+import { lucideLockKeyhole } from '@ng-icons/lucide';
 import { Store } from '@ngxs/store';
 import { CargarConteos, CargarOpcionesCajas } from '@store/caja/actions/caja.actions';
 import { CajaState } from '@store/caja/state/caja.state';
 import { formatearFechaHora } from '@utils/fechas/fechas';
-import { formatearNumero } from '@utils/dinero/formato-dinero';
+import { formatearMonto } from '@utils/dinero/formato-dinero';
 import { consultaDeEstado } from '@utils/lista/consulta-lista';
 
 /**
@@ -37,16 +39,18 @@ import { consultaDeEstado } from '@utils/lista/consulta-lista';
 @Component({
   selector: 'app-cortes',
   imports: [
+    ErrorNotice,
     CeldaPrincipal,
     CeldaTabla,
+    FilterChips,
     EncabezadoPagina,
     FechaHoraPipe,
     FiltrosPopover,
-    NumeroPipe,
+    MontoPipe,
     PillEstatus,
     TablaDatos,
   ],
-  providers: [ListaUrl, provideIcons({ lucideVault })],
+  providers: [ListaUrl, provideIcons({ lucideLockKeyhole })],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './cortes.html',
   host: { class: 'block' },
@@ -78,13 +82,13 @@ export class Cortes {
       if (d.faltante) {
         pills.push({
           tono: 'danger',
-          etiqueta: `Faltante ${d.divisa} ${formatearNumero(d.faltante, d.decimales)}`,
+          etiqueta: `Faltante ${formatearMonto(d.faltante, d.divisa, d.decimales)}`,
         });
       }
       if (d.sobrante) {
         pills.push({
           tono: 'success',
-          etiqueta: `Sobrante ${d.divisa} ${formatearNumero(d.sobrante, d.decimales)}`,
+          etiqueta: `Sobrante ${formatearMonto(d.sobrante, d.divisa, d.decimales)}`,
         });
       }
     }
@@ -101,6 +105,7 @@ export class Cortes {
     {
       id: 'fecha',
       header: 'Fecha',
+      meta: { pinned: true },
       accessorFn: (fila) => formatearFechaHora(fila.realizadoEn),
     },
     { id: 'tipo', header: 'Tipo', accessorFn: (fila) => fila.tipo },
@@ -122,5 +127,9 @@ export class Cortes {
       const pagina = this.pagina();
       if (pagina && !this.cargando()) untracked(() => this.lista.ajustarPagina(pagina.total));
     });
+  }
+
+  protected retry(): void {
+    this.store.dispatch(new CargarConteos(this.consulta()));
   }
 }

@@ -102,16 +102,17 @@ A table (`.card-flush-table`) of the uploaded files, base64 in NGXS like the exp
 
 ## Tab: Sucursales
 List (TanStack, URL-persisted filters, `Filtros` popover with estatus and entidad; primary action "Nueva sucursal" → page).
+Column order (lead, 2026-11-20): Clave (pinned) · Nombre · Estatus · Usuarios · Operaciones · Código postal · Localidad · Domicilio.
 | Column | Notes | Tag |
 |---|---|---|
-| Clave | `font-data` | [demo] |
+| Clave | `font-data`; pinned left (`05` Horizontal overflow) | [demo] |
 | Nombre | lead cell `.lead-thumb-fallback` with a building glyph (a branch is a thing, `01`) | [demo] |
+| Estatus | Activa (ok) / Baja (neutral) | [demo] |
+| Usuarios | count of assigned staff, `font-data` | [demo] ("Empleados") |
+| Operaciones | count, `font-data` | [demo] |
 | Código postal | `font-data`; missing → warn pill "Falta" | [demo] |
 | Localidad | clave + descripción from the CNBV catalog; missing → "Falta" | [demo] |
 | Domicilio | | [demo] |
-| Usuarios | count of assigned staff, `font-data` | [demo] ("Empleados") |
-| Operaciones | count, `font-data` | [demo] |
-| Estatus | Activa (ok) / Baja (neutral) | [demo] |
 - Footnote [demo]: *"El código postal y la localidad de cada sucursal van en las columnas 7 y 6 de los reportes oficiales de las operaciones que se realizan en ella."*
 - Row actions (`.row-action`): Editar, Dar de baja / Reactivar (confirmation dialog). The row itself opens the branch detail.
 

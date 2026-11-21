@@ -1,0 +1,8 @@
+<div class="callout callout-danger flex flex-wrap items-center justify-between gap-3" role="alert">
+  <p>{{ message() }}</p>
+  @if (showRetry()) {
+    <button hlmBtn variant="secondary" size="sm" type="button" (click)="retry.emit()">
+      Reintentar
+    </button>
+  }
+</div>

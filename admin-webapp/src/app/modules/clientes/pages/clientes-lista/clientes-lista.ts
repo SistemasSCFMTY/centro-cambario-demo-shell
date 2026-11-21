@@ -1,3 +1,5 @@
+import { FilterChips } from '@components/filter-chips/filter-chips';
+import { ErrorNotice } from '@components/error-notice/error-notice';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -29,8 +31,10 @@ import { consultaDeEstado } from '@utils/lista/consulta-lista';
 @Component({
   selector: 'app-clientes-lista',
   imports: [
+    ErrorNotice,
     CeldaPrincipal,
     CeldaTabla,
+    FilterChips,
     EncabezadoPagina,
     FechaPipe,
     FiltrosPopover,
@@ -59,12 +63,12 @@ export class ClientesLista {
   protected readonly pillPep = PILL_PEP;
   protected readonly etiquetaPersona = ETIQUETA_TIPO_PERSONA;
   protected readonly columnas: ColumnaTabla<ClienteResumen>[] = [
-    { accessorKey: 'nombreCompleto', header: 'Cliente' },
+    { accessorKey: 'nombreCompleto', header: 'Cliente', meta: { pinned: true } },
+    { accessorKey: 'estatus', header: 'Estatus' },
     { accessorKey: 'numeroCliente', header: 'Número' },
     { accessorKey: 'fechaBase', header: 'Nacimiento o constitución' },
     { id: 'identificador', accessorFn: (c) => c.curp ?? c.rfc, header: 'CURP o RFC' },
     { accessorKey: 'nivelExpediente', header: 'Expediente' },
-    { accessorKey: 'estatus', header: 'Estatus' },
     { accessorKey: 'fechaAlta', header: 'Alta' },
   ];
 
@@ -80,7 +84,11 @@ export class ClientesLista {
     });
   }
 
+  protected retry(): void {
+    this.store.dispatch(new CargarClientes(consultaDeEstado(this.lista.estado())));
+  }
+
   protected abrir(cliente: ClienteResumen): void {
-    this.router.navigate(['/clientes', cliente.id]);
+    this.router.navigate(['/clientes', cliente.id], { state: this.lista.backState() });
   }
 }

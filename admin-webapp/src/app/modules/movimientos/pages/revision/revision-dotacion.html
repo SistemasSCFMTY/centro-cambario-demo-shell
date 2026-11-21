@@ -1,22 +1,41 @@
-<article class="panel animate-page-in">
-  <app-encabezado-pagina
-    etiquetaVolver="Volver al movimiento"
-    descripcion="Corrija los montos si hace falta y apruebe la dotación, o recházela por completo."
-    [titulo]="titulo()"
-    [volverA]="['/movimientos', id()]"
-  >
-    @if (pill(); as ajuste) {
-      <app-pill-estatus meta [ajuste]="ajuste" />
-    }
-    @if (revisable()) {
-      <button hlmBtn variant="destructive" type="button" (click)="pedirRechazo()">
-        Rechazar solicitud
-      </button>
-    }
-  </app-encabezado-pagina>
+@if (notFound()) {
+  <app-record-not-found
+    title="Revisar dotación"
+    message="No encontramos este movimiento"
+    [backTo]="['/movimientos']"
+    backLabel="Volver a movimientos"
+  />
+} @else {
+  <article class="panel animate-page-in">
+    <app-encabezado-pagina
+      etiquetaVolver="Volver al movimiento"
+      descripcion="Corrija los montos si hace falta y apruebe la dotación, o recházela por completo."
+      [titulo]="titulo()"
+      [volverA]="['/movimientos', id()]"
+      [backState]="historyState"
+    >
+      @if (pill(); as ajuste) {
+        <app-pill-estatus meta [ajuste]="ajuste" />
+      }
+    </app-encabezado-pagina>
 
-  @if (!movimiento()) {
-    @if (error()) {
+    @if (!movimiento()) {
+      @if (error(); as mensaje) {
+        <app-error-notice [message]="mensaje" (retry)="retry()" />
+      } @else if (cargando()) {
+        <div class="border-t border-line px-8 py-8" role="status" aria-label="Cargando solicitud">
+          <span class="skeleton max-w-24"></span>
+          <div class="mt-4 grid gap-x-6 gap-y-4 sm:grid-cols-2">
+            @for (campo of [1, 2, 3, 4]; track campo) {
+              <div>
+                <span class="skeleton max-w-24"></span>
+                <span class="skeleton mt-2 max-w-48"></span>
+              </div>
+            }
+          </div>
+        </div>
+      }
+    } @else if (!revisable()) {
       <div
         class="flex min-h-60 flex-col items-center justify-center gap-3 border-t border-line p-8 text-center"
       >
@@ -28,143 +47,128 @@
           aria-hidden="true"
         />
         <div>
-          <p class="text-headline">No encontramos este movimiento</p>
+          <p class="text-headline">Esta solicitud no se puede revisar</p>
           <p class="text-callout text-ink-muted">
-            Es posible que el folio no exista. Regrese a la lista para elegir otro.
+            Ya fue revisada, no es una dotación o su usuario no tiene permiso para aprobar
+            dotaciones.
           </p>
         </div>
-        <a hlmBtn variant="outline" size="sm" routerLink="/movimientos">Volver a movimientos</a>
+        <a
+          hlmBtn
+          variant="outline"
+          size="sm"
+          [routerLink]="['/movimientos', id()]"
+          [state]="historyState"
+        >
+          Ver el movimiento
+        </a>
       </div>
-    } @else if (cargando()) {
-      <div class="border-t border-line px-8 py-8" role="status" aria-label="Cargando solicitud">
-        <span class="skeleton max-w-24"></span>
-        <div class="mt-4 grid gap-x-6 gap-y-4 sm:grid-cols-2">
-          @for (campo of [1, 2, 3, 4]; track campo) {
-            <div>
-              <span class="skeleton max-w-24"></span>
-              <span class="skeleton mt-2 max-w-48"></span>
-            </div>
-          }
+    } @else {
+      <section
+        class="grid gap-x-6 gap-y-4 border-t border-line px-8 py-8 lg:grid-cols-3"
+        aria-labelledby="titulo-solicitud"
+      >
+        <header>
+          <h2 id="titulo-solicitud">Solicitud</h2>
+          <p class="max-w-prose text-callout text-ink-muted">
+            Lo que pidió la sucursal, tal como llegó.
+          </p>
+        </header>
+        <div class="lg:col-span-2">
+          <app-cuadricula-campos [campos]="camposSolicitud()" />
         </div>
-      </div>
-    }
-  } @else if (!revisable()) {
-    <div
-      class="flex min-h-60 flex-col items-center justify-center gap-3 border-t border-line p-8 text-center"
-    >
-      <ng-icon
-        name="lucideInbox"
-        size="28"
-        [strokeWidth]="1.5"
-        class="text-ink-subtle"
-        aria-hidden="true"
-      />
-      <div>
-        <p class="text-headline">Esta solicitud no se puede revisar</p>
-        <p class="text-callout text-ink-muted">
-          Ya fue revisada, no es una dotación o su usuario no puede aprobarla.
-        </p>
-      </div>
-      <a hlmBtn variant="outline" size="sm" [routerLink]="['/movimientos', id()]">
-        Ver el movimiento
-      </a>
-    </div>
-  } @else {
-    <section
-      class="grid gap-x-6 gap-y-4 border-t border-line px-8 py-8 lg:grid-cols-3"
-      aria-labelledby="titulo-solicitud"
-    >
-      <header>
-        <h2 id="titulo-solicitud">Solicitud</h2>
-        <p class="max-w-prose text-callout text-ink-muted">
-          Lo que pidió la sucursal, tal como llegó.
-        </p>
-      </header>
-      <div class="lg:col-span-2">
-        <app-cuadricula-campos [campos]="camposSolicitud()" />
-      </div>
-    </section>
+      </section>
 
-    <section
-      class="grid gap-x-6 gap-y-4 border-t border-line px-8 py-8 lg:grid-cols-3"
-      aria-labelledby="titulo-montos"
-    >
-      <header>
-        <h2 id="titulo-montos">Montos a autorizar</h2>
-        <p class="max-w-prose text-callout text-ink-muted">
-          Parten de lo solicitado. Cambie los que haga falta: la corrección queda en el seguimiento
-          de la dotación.
-        </p>
-      </header>
-      <div class="flex flex-col gap-4 lg:col-span-2">
-        <div class="grid gap-x-6 gap-y-4 sm:grid-cols-2">
-          @for (linea of lineas(); track linea.divisa; let i = $index) {
-            <div hlmField>
-              <label hlmFieldLabel [for]="'monto-' + linea.divisa"
-                >Monto en {{ linea.divisa }}</label
-              >
-              <input
-                hlmInput
-                type="number"
-                min="0"
-                inputmode="decimal"
-                [step]="linea.paso"
-                class="font-data text-body"
-                [id]="'monto-' + linea.divisa"
-                [formControl]="montos.controls[i]"
-              />
-              <p class="text-footnote text-ink-muted">
-                Solicitado:
-                <span class="font-data">{{ linea.solicitado | appMonto: linea.divisa }}</span>
-              </p>
-            </div>
-          }
-        </div>
-        @if (hayNegativos()) {
-          <p class="text-footnote text-danger-700 dark:text-danger-400" role="alert">
-            Los montos no pueden ser negativos.
+      <section
+        class="grid gap-x-6 gap-y-4 border-t border-line px-8 py-8 lg:grid-cols-3"
+        aria-labelledby="titulo-montos"
+      >
+        <header>
+          <h2 id="titulo-montos">Montos a autorizar</h2>
+          <p class="max-w-prose text-callout text-ink-muted">
+            Parten de lo solicitado. Cambie los que haga falta: la corrección queda en el
+            seguimiento de la dotación.
           </p>
-        } @else if (hayExcesoDecimales()) {
-          <p class="text-footnote text-danger-700 dark:text-danger-400" role="alert">
-            Un monto tiene más decimales de los que admite su divisa.
-          </p>
-        } @else if (!valido()) {
-          <p class="text-footnote text-danger-700 dark:text-danger-400" role="alert">
-            Capture un monto mayor a cero en al menos una divisa. Una divisa en cero se omite.
-          </p>
-        } @else if (hayCorreccion()) {
-          <div class="callout callout-info" role="status">
-            Está corrigiendo la solicitud. Al aprobar, el cambio de cada monto queda registrado.
+        </header>
+        <div class="flex flex-col gap-4 lg:col-span-2">
+          <div class="grid gap-x-6 gap-y-4 sm:grid-cols-2">
+            @for (linea of lineas(); track linea.divisa; let i = $index) {
+              <div hlmField>
+                <label hlmFieldLabel [for]="'monto-' + linea.divisa"
+                  >Monto en {{ linea.divisa }}</label
+                >
+                <input
+                  hlmInput
+                  type="number"
+                  min="0"
+                  inputmode="decimal"
+                  [step]="linea.paso"
+                  class="font-data text-body"
+                  [id]="'monto-' + linea.divisa"
+                  [formControl]="montos.controls[i]"
+                  [attr.aria-describedby]="'monto-lectura-' + linea.divisa"
+                />
+                <p class="text-footnote text-ink-muted" [id]="'monto-lectura-' + linea.divisa">
+                  Autoriza:
+                  <span class="font-data text-ink">{{
+                    linea.capturado | appMonto: linea.divisa
+                  }}</span>
+                  · Solicitado:
+                  <span class="font-data">{{ linea.solicitado | appMonto: linea.divisa }}</span>
+                </p>
+              </div>
+            }
           </div>
-        }
-      </div>
-    </section>
+          @if (hayNegativos()) {
+            <p class="text-footnote text-danger-700 dark:text-danger-400" role="alert">
+              Los montos no pueden ser negativos.
+            </p>
+          } @else if (hayExcesoDecimales()) {
+            <p class="text-footnote text-danger-700 dark:text-danger-400" role="alert">
+              Un monto tiene más decimales de los que admite su divisa.
+            </p>
+          } @else if (!valido()) {
+            <p class="text-footnote text-danger-700 dark:text-danger-400" role="alert">
+              Capture un monto mayor a cero en al menos una divisa. Una divisa en cero se omite.
+            </p>
+          } @else if (hayCorreccion()) {
+            <div class="callout callout-info" role="status">
+              Está corrigiendo la solicitud. Al aprobar, el cambio de cada monto queda registrado.
+            </div>
+          }
+        </div>
+      </section>
 
-    <section
-      class="grid gap-x-6 gap-y-4 border-t border-line px-8 py-8 lg:grid-cols-3"
-      aria-labelledby="titulo-comentario"
-    >
-      <header>
-        <h2 id="titulo-comentario">Comentario</h2>
-        <p class="max-w-prose text-callout text-ink-muted">
-          Opcional. Se guarda en el seguimiento junto con la aprobación.
-        </p>
-      </header>
-      <div class="lg:col-span-2" hlmField>
-        <label hlmFieldLabel for="comentario">Comentario de la revisión</label>
-        <textarea hlmTextarea id="comentario" rows="3" [formControl]="comentario"></textarea>
-      </div>
-    </section>
+      <section
+        class="grid gap-x-6 gap-y-4 border-t border-line px-8 py-8 lg:grid-cols-3"
+        aria-labelledby="titulo-comentario"
+      >
+        <header>
+          <h2 id="titulo-comentario">Comentario</h2>
+          <p class="max-w-prose text-callout text-ink-muted">
+            Opcional. Se guarda en el seguimiento junto con la aprobación.
+          </p>
+        </header>
+        <div class="lg:col-span-2" hlmField>
+          <label hlmFieldLabel for="comentario">Comentario de la revisión</label>
+          <textarea hlmTextarea id="comentario" rows="3" [formControl]="comentario"></textarea>
+        </div>
+      </section>
 
-    <app-barra-acciones
-      [etiquetaGuardar]="etiquetaAprobar()"
-      [guardando]="guardando()"
-      [guardarDeshabilitado]="!valido()"
-      (cancelar)="volver()"
-      (guardar)="pedirAprobacion()"
-    />
-  }
-</article>
+      <app-barra-acciones
+        [etiquetaGuardar]="etiquetaAprobar()"
+        [guardando]="guardando()"
+        [guardarDeshabilitado]="!valido()"
+        (cancelar)="volver()"
+        (guardar)="pedirAprobacion()"
+      >
+        <button hlmBtn variant="destructive" type="button" (click)="pedirRechazo()">
+          Rechazar solicitud
+        </button>
+      </app-barra-acciones>
+    }
+  </article>
+}
 
 <hlm-dialog [state]="dialogoAprobacion()" (stateChanged)="dialogoAprobacion.set($event)">
   <hlm-dialog-content *hlmDialogPortal="let ctx" closeLabel="Cerrar">

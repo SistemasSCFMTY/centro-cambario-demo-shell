@@ -45,10 +45,7 @@ export const ORDENABLES_OPERACIONES: readonly string[] = [
   'folio',
   'sucursal',
   'tipo',
-  'montoDivisa',
-  'tipoCambio',
   'montoMxn',
-  'montoUsd',
   'estatus',
 ];
 
@@ -104,17 +101,19 @@ export const FILTROS_FINALES_OPERACIONES: readonly DefinicionFiltro[] = [
 ];
 
 /** Columns of the list. Cells with a format are templates in the page (`appCeldaTabla`). */
+/**
+ * Folio is pinned and Estatus comes right after it, so the hold and its motivo are on screen at
+ * 1366 px; Importe carries the amount, the rate and the pesos in one two-line cell (sorted by pesos).
+ * The USD equivalent lives on the detail (lead, 2026-11-20).
+ */
 export const COLUMNAS_OPERACIONES: ColumnaTabla<OperacionListaDto>[] = [
-  { accessorKey: 'folio', header: 'Folio', meta: { numerica: false } },
+  { accessorKey: 'folio', header: 'Folio', meta: { numerica: false, pinned: true } },
+  { accessorKey: 'estatus', header: 'Estatus', meta: { numerica: false } },
   { accessorKey: 'fechaOperacion', header: 'Fecha', meta: { numerica: false } },
   { accessorKey: 'sucursal', header: 'Sucursal', meta: { numerica: false } },
   { accessorKey: 'tipo', header: 'Operación', meta: { numerica: false } },
-  { accessorKey: 'montoDivisa', header: 'Monto', meta: { numerica: true } },
-  { accessorKey: 'tipoCambio', header: 'Tipo de cambio', meta: { numerica: true } },
-  { accessorKey: 'montoMxn', header: 'Pesos', meta: { numerica: true } },
-  { accessorKey: 'montoUsd', header: 'Equiv. USD', meta: { numerica: true } },
+  { accessorKey: 'montoMxn', header: 'Importe', meta: { numerica: true } },
   { accessorKey: 'cliente', header: 'Cliente', meta: { numerica: false }, enableSorting: false },
-  { accessorKey: 'estatus', header: 'Estatus', meta: { numerica: false } },
 ];
 
 export const TEXTO_VACIO_OPERACIONES: Record<VistaOperaciones, string> = {

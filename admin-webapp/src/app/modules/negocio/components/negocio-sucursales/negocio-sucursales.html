@@ -1,7 +1,7 @@
-@if (error() && filas().length === 0) {
-  <div class="px-8 py-4">
-    <p class="callout callout-danger" role="alert">{{ error() }}</p>
-  </div>
+<app-filter-chips [separated]="false" [filters]="esquema.filtros" />
+
+@if (error(); as mensaje) {
+  <app-error-notice [separated]="false" [message]="mensaje" (retry)="retry()" />
 }
 <app-tabla-datos
   titulo="Sucursales"
@@ -12,6 +12,7 @@
   [filas]="filas()"
   [total]="pagina()?.total ?? 0"
   [cargando]="cargando()"
+  [error]="!!error()"
   [pagina]="lista.estado().pagina"
   [tamano]="lista.estado().tamano"
   [tamanos]="esquema.tamanos"

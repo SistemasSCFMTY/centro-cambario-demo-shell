@@ -32,6 +32,7 @@ export const MOVIMIENTOS_INICIAL: MovimientosStateModel = {
   guardando: false,
   errorLista: null,
   errorDetalle: null,
+  notFound: false,
   errorRevision: null,
 };
 
